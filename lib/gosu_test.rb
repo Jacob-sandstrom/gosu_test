@@ -8,7 +8,7 @@ class Player
         @direction = 0
         @speed = 3
         
-        @grav = 1
+        @grav = 1.5
         @default_jump_speed = 20
         @jump_speed = @default_jump_speed
         @in_air = false
@@ -38,11 +38,39 @@ class Player
       @jump_speed = @default_jump_speed
 
     end
+
+    def in_the_air
+        return @in_air
+    end
+
+    def going_to_collide
+
+        if @y >= 568 and @y != 568
+            @in_air = false
+            @jump_speed = 0
+            @y = 568
+            # @y += 1 until @y >= 568 
+
+
+        end
+        
+
+    end
+
+    def update
+
+        
+
+        
+    end
     
     def move
+
+        
+
+
       @x += @direction * @speed
       @x %= 800
-    #   @y %= 600
       
       if @in_air
         @y -= @jump_speed    
@@ -67,8 +95,6 @@ class Gosu_test < Gosu::Window
         super width, height
         self.caption = "Gosu test"
 
-        
-        @height_minus_char_height = 568
 
         @player = Player.new
         @player.warp(400, 568)
@@ -93,18 +119,13 @@ class Gosu_test < Gosu::Window
         #
         #   Jumping
         #
-        if (Gosu.button_down? Gosu::KB_UP or Gosu::button_down? Gosu::GP_BUTTON_0) and !@in_air
+        if (Gosu.button_down? Gosu::KB_UP or Gosu::button_down? Gosu::GP_BUTTON_0) and !@player.in_the_air
             @player.jump
         end
 
-        # if @y >= @height_minus_char_height
-        #     @in_air = false
-        #     @jump_speed = 0
-        #     @y = @height_minus_char_height
-
-        # end
         
-
+        
+            @player.going_to_collide
             @player.move
     end
 
