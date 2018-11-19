@@ -1,6 +1,14 @@
 require 'gosu'
 
 
+class projectile
+    def initialize
+        @image = Gosu::Image.new("../img/shipTransparent")
+
+    end
+
+end
+
 class Player
     def initialize
         @image = Gosu::Image.new("../img/CharacterSquare.png")
@@ -121,8 +129,6 @@ class Gosu_test < Gosu::Window
             @player.jump
         end
 
-        
-        
             @player.going_to_collide
             @player.move
     end
@@ -132,6 +138,15 @@ class Gosu_test < Gosu::Window
         @player.draw
 
     end
+
+
+    def button_down(id)
+        if id == Gosu::KB_ESCAPE
+          close
+        else
+          super
+        end
+      end
 
     
 end
