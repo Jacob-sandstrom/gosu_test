@@ -49,8 +49,6 @@ class Player
             @in_air = false
             @jump_speed = 0
             @y = 568
-            # @y += 1 until @y >= 568 
-
 
         end
         
