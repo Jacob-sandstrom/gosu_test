@@ -94,6 +94,7 @@ class Projectile
         @image = Gosu::Image.new("../img/shipTransparent.png")
         $projectile_x = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         $projectile_y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        @max_shots = 20
         @shot_speed = 20
         @i = 0
 
@@ -110,7 +111,19 @@ class Projectile
 
     end
 
+    def decrease_cooldown
+        if $shot_on_cooldown
+
+        end
+
+    end
+
     def move
+        #
+        #   loop instead
+        #
+
+
         $projectile_x[0] += @shot_speed
         $projectile_x[1] += @shot_speed
         $projectile_x[2] += @shot_speed
@@ -135,6 +148,10 @@ class Projectile
 
     def draw
 
+        #
+        #   loop instead
+        #
+        
         @image.draw($projectile_x[0], $projectile_y[0], 0)
         @image.draw($projectile_x[1], $projectile_y[1], 0)
         @image.draw($projectile_x[2], $projectile_y[2], 0)
@@ -208,6 +225,7 @@ class Gosu_test < Gosu::Window
 
             @player.going_to_collide
             @player.move
+            @Projectile.decrease_cooldown
             @Projectile.move
     end
 
