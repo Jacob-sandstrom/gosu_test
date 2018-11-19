@@ -1,13 +1,7 @@
 require 'gosu'
 
 
-class projectile
-    def initialize
-        @image = Gosu::Image.new("../img/shipTransparent")
 
-    end
-
-end
 
 class Player
     def initialize
@@ -20,7 +14,7 @@ class Player
         @default_jump_speed = 20
         @jump_speed = @default_jump_speed
         @in_air = false
-        @x = @y = 0.0
+        # @x = @y = 0.0
         
 
     end
@@ -51,12 +45,20 @@ class Player
         return @in_air
     end
 
+    def x_location
+        return @x
+    end
+
+    def y_location
+        return @y
+    end
+
     def going_to_collide
 
-        if @y >= 568 and @y != 568
+        if $player_y >= 568 and $player_y != 568
             @in_air = false
             @jump_speed = 0
-            @y = 568
+            $player_y = 568
 
         end
         
@@ -75,11 +77,11 @@ class Player
         
 
 
-      @x += @direction * @speed
-      @x %= 800
+      $player_x += @direction * @speed
+      $player_x %= 800
       
       if @in_air
-        @y -= @jump_speed    
+        $player_y -= @jump_speed    
         @jump_speed -= @grav
       end
 
@@ -87,23 +89,48 @@ class Player
     end
   
     def draw
-      @image.draw(@x, @y, 1)
+      @image.draw($player_x, $player_y, 1)
     end
 
   end
 
+class Projectile
+    def initialize
+        @image = Gosu::Image.new("../img/shipTransparent.png")
+        $projectile_x = 0
+        $projectile_y = 0
 
+
+    end
+
+
+    def shoot
+        $projectile_x = $player_x
+        $projectile_y = $player_y
+    end
+
+    def move
+        $projectile_x += 10
+    end
+
+    def draw
+        @image.draw($projectile_x, $projectile_y, 0)
+        
+    end
+
+end
 
 class Gosu_test < Gosu::Window
     def initialize
         width = 800
         height = 600
+        $player_x = width / 2
+        $player_y = 568
         super width, height
         self.caption = "Gosu test"
 
-
+        @Projectile = Projectile.new
         @player = Player.new
-        @player.warp(400, 568)
 
     end
 
@@ -129,13 +156,22 @@ class Gosu_test < Gosu::Window
             @player.jump
         end
 
+        #
+        #   shoot
+        #
+        if Gosu.button_down? Gosu::KB_SPACE
+            @Projectile.shoot
+        end
+
             @player.going_to_collide
             @player.move
+            @Projectile.move
     end
 
     def draw
 
         @player.draw
+        @Projectile.draw
 
     end
 
