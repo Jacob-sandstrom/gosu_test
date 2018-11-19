@@ -6,7 +6,7 @@ class Player
         @image = Gosu::Image.new("../img/CharacterSquare.png")
         
         @direction = 0
-        @speed = 3
+        @speed = 4
         
         @grav = 1.5
         @default_jump_speed = 20
