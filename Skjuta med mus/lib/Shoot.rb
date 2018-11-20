@@ -64,6 +64,7 @@ class Player
 class Projectile
     def initialize
         @image = Gosu::Image.new("../img/shipTransparent.png")
+        @pew = Gosu::Sample.new("../sound/Pew.wav")
 
 
         @max_shots = 20
@@ -101,7 +102,7 @@ class Projectile
         @shot_iterations += 1
         @shot_iterations %= @max_shots
         $shot_on_cooldown = true
-
+        @pew.play
     end
 
     def decrease_cooldown
