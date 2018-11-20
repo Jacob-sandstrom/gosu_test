@@ -13,7 +13,6 @@ class Player
         @grav = 1.5
         @default_jump_speed = 20
         @jump_speed = @default_jump_speed
-        # @x = @y = 0.0
         
 
     end
@@ -93,9 +92,9 @@ class Projectile
     def initialize
         @image = Gosu::Image.new("../img/shipTransparent.png")
         $projectile_x = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        $projectile_y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        $projectile_y = [-50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50, -50]
         @max_shots = 20
-        @shot_speed = 20
+        @shot_speed = 10
         @shot_iterations = 0
         @cooldown_timer = 0
         @cooldown = 15
@@ -238,6 +237,13 @@ class Gosu_test < Gosu::Window
             @player.jump
         end
 
+
+
+        #
+        #   collision before shooting to stop projectile from spawning in the ground
+        #
+        @player.going_to_collide
+
         #
         #   shoot
         #
@@ -245,7 +251,7 @@ class Gosu_test < Gosu::Window
             @Projectile.shoot
         end
 
-            @player.going_to_collide
+            
             @player.move
             @Projectile.decrease_cooldown
             @Projectile.move
