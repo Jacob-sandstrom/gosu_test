@@ -3,6 +3,7 @@ require 'gosu'
 
 
 
+
 class Player
     def initialize
         @image = Gosu::Image.new("../img/CharacterSquare.png")
