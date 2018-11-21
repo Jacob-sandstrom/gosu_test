@@ -26,8 +26,8 @@ class Player
         @direction = 0
         @speed = 4
         
-        @grav = 1.5
-        @default_jump_speed = 20
+        @grav = 0.15
+        @default_jump_speed = 5
         @jump_speed = @default_jump_speed
         
     end
@@ -57,7 +57,7 @@ class Player
             @jump_speed = 0
             $player_y = 568
 
-        elsif $player_x + 32 >= $platform_x && $player_x <= $platform_x + 96 && $player_y<= $platform_y && $player_y + 32 >= $platform_y
+        elsif $player_x + 32 >= $platform_x && $player_x <= $platform_x + 96 && $player_y <= $platform_y && $player_y + 32 >= $platform_y
 
             if (@jump_speed.abs) == @jump_speed && @jump_speed != 0
                 $player_y = $platform_y + 32
