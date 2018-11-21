@@ -76,22 +76,13 @@ class Projectile
         @shot_speed = 20
         @shot_iterations = 0
         @cooldown_timer = 0
-        @cooldown = 15
-
-
-
-
-        # @draw_iterations = 0
-        # @move_iterations = 0
+        @cooldown = 10
 
     end
 
     def angle
 
         @current_angle = (Math.atan2(($player_y - $mouse_y), ($player_x - $mouse_x)) * 180 / Math::PI - 90)
-        # $player_y - @window.mouse_y
-        # $player_x - @window.mouse_x
-
 
     end
 
@@ -122,56 +113,15 @@ class Projectile
         #
         #   loop instead        Not working
         #
-        # @move_iterations = 0
-        # while @move_iterations <= @max_shots
-        #     $projectile_x[@move_iterations] += Gosu.offset_x(@angle[@move_iterations], @shot_speed)
-        #     $projectile_x[@move_iterations] += Gosu.offset_x(@angle[@move_iterations], @shot_speed)
-        #     @move_iterations += 1
-        # end
+        @move_iterations = 0
+        while @move_iterations < @max_shots
+            angle = @angle[@move_iterations]
+            $projectile_x[@move_iterations] += Gosu.offset_x(angle, @shot_speed)
+            $projectile_y[@move_iterations] += Gosu.offset_y(angle, @shot_speed)
+            @move_iterations += 1
+        end
 
-        $projectile_x[0] += Gosu.offset_x(@angle[0], @shot_speed)
-        $projectile_x[1] += Gosu.offset_x(@angle[1], @shot_speed)
-        $projectile_x[2] += Gosu.offset_x(@angle[2], @shot_speed)
-        $projectile_x[3] += Gosu.offset_x(@angle[3], @shot_speed)
-        $projectile_x[4] += Gosu.offset_x(@angle[4], @shot_speed)
-        $projectile_x[5] += Gosu.offset_x(@angle[5], @shot_speed)
-        $projectile_x[6] += Gosu.offset_x(@angle[6], @shot_speed)
-        $projectile_x[7] += Gosu.offset_x(@angle[7], @shot_speed)
-        $projectile_x[8] += Gosu.offset_x(@angle[8], @shot_speed)
-        $projectile_x[9] += Gosu.offset_x(@angle[9], @shot_speed)
-        $projectile_x[10] += Gosu.offset_x(@angle[10], @shot_speed)
-        $projectile_x[11] += Gosu.offset_x(@angle[11], @shot_speed)
-        $projectile_x[12] += Gosu.offset_x(@angle[12], @shot_speed)
-        $projectile_x[13] += Gosu.offset_x(@angle[13], @shot_speed)
-        $projectile_x[14] += Gosu.offset_x(@angle[14], @shot_speed)
-        $projectile_x[15] += Gosu.offset_x(@angle[15], @shot_speed)
-        $projectile_x[16] += Gosu.offset_x(@angle[16], @shot_speed)
-        $projectile_x[17] += Gosu.offset_x(@angle[17], @shot_speed)
-        $projectile_x[18] += Gosu.offset_x(@angle[18], @shot_speed)
-        $projectile_x[19] += Gosu.offset_x(@angle[19], @shot_speed)
-
-
-        $projectile_y[0] += Gosu.offset_y(@angle[0], @shot_speed)
-        $projectile_y[1] += Gosu.offset_y(@angle[1], @shot_speed)
-        $projectile_y[2] += Gosu.offset_y(@angle[2], @shot_speed)
-        $projectile_y[3] += Gosu.offset_y(@angle[3], @shot_speed)
-        $projectile_y[4] += Gosu.offset_y(@angle[4], @shot_speed)
-        $projectile_y[5] += Gosu.offset_y(@angle[5], @shot_speed)
-        $projectile_y[6] += Gosu.offset_y(@angle[6], @shot_speed)
-        $projectile_y[7] += Gosu.offset_y(@angle[7], @shot_speed)
-        $projectile_y[8] += Gosu.offset_y(@angle[8], @shot_speed)
-        $projectile_y[9] += Gosu.offset_y(@angle[9], @shot_speed)
-        $projectile_y[10] += Gosu.offset_y(@angle[10], @shot_speed)
-        $projectile_y[11] += Gosu.offset_y(@angle[11], @shot_speed)
-        $projectile_y[12] += Gosu.offset_y(@angle[12], @shot_speed)
-        $projectile_y[13] += Gosu.offset_y(@angle[13], @shot_speed)
-        $projectile_y[14] += Gosu.offset_y(@angle[14], @shot_speed)
-        $projectile_y[15] += Gosu.offset_y(@angle[15], @shot_speed)
-        $projectile_y[16] += Gosu.offset_y(@angle[16], @shot_speed)
-        $projectile_y[17] += Gosu.offset_y(@angle[17], @shot_speed)
-        $projectile_y[18] += Gosu.offset_y(@angle[18], @shot_speed)
-        $projectile_y[19] += Gosu.offset_y(@angle[19], @shot_speed)
-
+        
     end
 
     def draw
@@ -179,34 +129,12 @@ class Projectile
         #
         #   loop instead        Not working
         #
-        # @draw_iterations = 0
-        # while @draw_iterations <= @max_shots
-        #     @image.draw($projectile_x[@draw_iterations], $projectile_y[@draw_iterations], 0)
-        #     @draw_iterations += 1
-        # end
+        @draw_iterations = 0
+        while @draw_iterations < @max_shots
+            @image.draw_rot($projectile_x[@draw_iterations] + 16, $projectile_y[@draw_iterations] + 16, 0, @angle[@draw_iterations], center_x = 0.5, center_y = 0.5)
+            @draw_iterations += 1
+        end
 
-
-        @image.draw_rot($projectile_x[0] + 16, $projectile_y[0] + 16, 0, @angle[0], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[1] + 16, $projectile_y[1] + 16, 0, @angle[1], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[2] + 16, $projectile_y[2] + 16, 0, @angle[2], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[3] + 16, $projectile_y[3] + 16, 0, @angle[3], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[4] + 16, $projectile_y[4] + 16, 0, @angle[4], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[5] + 16, $projectile_y[5] + 16, 0, @angle[5], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[6] + 16, $projectile_y[6] + 16, 0, @angle[6], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[7] + 16, $projectile_y[7] + 16, 0, @angle[7], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[8] + 16, $projectile_y[8] + 16, 0, @angle[8], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[9] + 16, $projectile_y[9] + 16, 0, @angle[9], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[10] + 16, $projectile_y[10] + 16, 0, @angle[10], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[11] + 16, $projectile_y[11] + 16, 0, @angle[11], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[12] + 16, $projectile_y[12] + 16, 0, @angle[12], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[13] + 16, $projectile_y[13] + 16, 0, @angle[13], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[14] + 16, $projectile_y[14] + 16, 0, @angle[14], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[15] + 16, $projectile_y[15] + 16, 0, @angle[15], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[16] + 16, $projectile_y[16] + 16, 0, @angle[16], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[17] + 16, $projectile_y[17] + 16, 0, @angle[17], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[18] + 16, $projectile_y[18] + 16, 0, @angle[18], center_x = 0.5, center_y = 0.5)
-        @image.draw_rot($projectile_x[19] + 16, $projectile_y[19] + 16, 0, @angle[19], center_x = 0.5, center_y = 0.5)
-        
     end
 
 end

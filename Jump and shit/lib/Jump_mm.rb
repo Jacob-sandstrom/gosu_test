@@ -57,11 +57,19 @@ class Player
             @jump_speed = 0
             $player_y = 568
 
-        end
-        
-        # if $player_x <= $platform_x && $player_x + 32 >= $platform_x + 96 && $player_y <= $platform_y && $player_y + 32 >= $platform_y + 32
+        elsif $player_x + 32 >= $platform_x && $player_x <= $platform_x + 96 && $player_y<= $platform_y && $player_y + 32 >= $platform_y
 
-        # end
+            if (@jump_speed.abs) == @jump_speed && @jump_speed != 0
+                $player_y = $platform_y + 32
+            else     
+                $player_in_air = false
+                $player_y = $platform_y - 32
+            end
+
+            @jump_speed = 0
+        else
+            $player_in_air = true
+        end
 
     end
 
@@ -122,9 +130,9 @@ class Gosu_test < Gosu::Window
         end
 
 
-        @player.going_to_collide
+        
         @player.move
-
+        @player.going_to_collide
     end
 
     def draw
