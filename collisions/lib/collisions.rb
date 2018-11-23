@@ -216,16 +216,36 @@ end
 class Object
     def initialize
         @image = Gosu::Image.new("../img/platform.png")
+        @wall_image = Gosu::Image.new("../img/Wall.png")
+        @floor_image = Gosu::Image.new("../img/Floor.png")
 
-        $platform_x = 100
-        $platform_y = 500
+        # $platform_x = 100
+        # $platform_y = 500
 
+
+        $wall_x = [100, 100, 100, 100, 575, 575, 575, 575]
+        $wall_y = [100, 200, 350, 450, 100, 200, 350, 450]
+
+        $floor_x = [125, 225, 375, 475, 125, 225, 375, 475]
+        $floor_y = [100, 100, 100, 100, 525, 525, 525, 525]
     end
 
 
 
     def draw
-        @image.draw($platform_x, $platform_y, 0)
+        i = 0
+        while i < 8
+            @wall_image.draw($wall_x[i], $wall_y[i], 0)
+            i += 1
+        end
+
+        i = 0
+        while i < 8
+            @floor_image.draw($floor_x[i], $floor_y[i], 0)
+            i += 1
+        end
+        
+        # @image.draw($platform_x, $platform_y, 0)
 
     end
 
@@ -283,6 +303,18 @@ class Player
       $player_y += @y_direction * @speed
       $player_y %= $height
 
+
+    end
+
+    def project(collision, axis, projection)
+
+        if collision
+            if axis == "x"
+                $player_x -= projection
+            else
+                $player_y -= projection
+            end
+        end
 
     end
   
@@ -426,32 +458,29 @@ class Gosu_test < Gosu::Window
         $mouse_y = mouse_y
 
 
-        #
         #   Move before checking collisions
-        #
         @player.move
 
+        #   Collision
+        # collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $platform_x, $platform_y, 96, 32)
+        # @player.project(collision, axis, projection)
 
-        #
-        #   PUT IN FUNCTION*********************************************************************************************************
-        #
-        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $platform_x, $platform_y, 96, 32)
-        
-        if collision
-            if axis == "x"
-                $player_x -= projection
-            else
-                $player_y -= projection
-            end
+        i = 0
+        while i < 8
+        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $wall_x[i], $wall_y[i], 25, 100)
+        @player.project(collision, axis, projection)
+        i += 1
         end
-        #
-        #   PUT IN FUNCTION*********************************************************************************************************
-        #
+        i = 0
+        while i < 8
+        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $floor_x[i], $floor_y[i], 100, 25)
+        @player.project(collision, axis, projection)
+        i += 1
+        end
 
 
-        #
-        #   call functions
-        #
+
+        #   Projectile
         @Projectile.angle
         @Projectile.decrease_cooldown
         @Projectile.move
