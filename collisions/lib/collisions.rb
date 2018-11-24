@@ -205,9 +205,84 @@ class Collision_detection
             collision = false
         end
         
-        #   Returns is a collision has happened, on which axis it should be projected and how much is should be projected
+        #   Returns if a collision has happened, on which axis it should be projected and how much is should be projected
         return collision, x_or_y, projection
         
+    end
+
+    def up_left_adjacent(object1_right_x, object1_bottom_y, object2_x, object2_y)
+        if object1_right_x == object2_x && object1_bottom_y > object2_y
+            up_adjacent = true
+        elsif object1_right_x < object2_x && object1_bottom_y > object2_y
+            up_left_collision = false
+        end
+        return up_left_collision
+    end
+    def up_right_adjacent(object1_x, object1_bottom_y, object2_right_x, object2_y)
+        if object1_x < object2_right_x && object1_bottom_y > object2_y
+            up_right_collision = true
+        else 
+            up_right_collision = false
+        end
+        return up_right_collision
+    end
+    def down_left_adjacent(object1_right_x, object1_y, object2_x, object2_bottom_y)
+        if object1_right_x > object2_x && object1_y < object2_bottom_y
+            down_left_collision = true
+        else 
+            down_left_collision = false
+        end
+        return down_left_collision
+    end
+    def down_right_adjacent(object1_x, object1_y, object2_right_x, object2_bottom_y)
+        if object1_x < object2_right_x && object1_y < object2_bottom_y
+            down_right_collision = true
+        else 
+            down_right_collision = false
+        end
+        return down_right_collision
+    end
+
+    def is_adjacent(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+
+    #   intermediate storage
+    object1_center_x = object1_x + object1_width / 2
+    object1_center_y = object1_y + object1_height / 2
+    object2_center_x = object2_x + object2_width / 2
+    object2_center_y = object2_y + object2_height / 2
+
+    #   intermediate storage
+    object1_right_x = object1_x + object1_width
+    object1_bottom_y = object1_y + object1_height
+    object2_right_x = object2_x + object2_width
+    object2_bottom_y = object2_y + object2_height
+
+
+    to_left = to_left?(object1_center_x, object2_center_x)
+    above = above?(object1_center_y, object2_center_y)
+
+    #   Is object1 to the topleft, topright, bottomleft och bottomright of object2? And check for collision there.
+    case above
+    when true
+        case to_left
+        when true
+            up_left_adjacent = up_left_adjacent(object1_right_x, object1_bottom_y, object2_x, object2_y)
+            # collision = up_left_collision
+        when false
+            up_right_adjacent = up_right_adjacent(object1_x, object1_bottom_y, object2_right_x, object2_y)
+            # collision = up_right_collision
+        end
+    when false
+        case to_left
+        when true
+            down_left_adjacent = down_left_adjacent(object1_right_x, object1_y, object2_x, object2_bottom_y)
+            # collision = down_left_collision
+        when false
+            down_right_adjacent = down_right_adjacent(object1_x, object1_y, object2_right_x, object2_bottom_y)
+            # collision = down_right_collision
+        end
+    end
+
     end
 
 end
@@ -218,9 +293,7 @@ class Object
         @image = Gosu::Image.new("../img/platform.png")
         @wall_image = Gosu::Image.new("../img/Wall.png")
         @floor_image = Gosu::Image.new("../img/Floor.png")
-
-        # $platform_x = 100
-        # $platform_y = 500
+        @block_image = Gosu::Image.new("../img/Block.png")
 
 
         $wall_x = [100, 100, 100, 100, 575, 575, 575, 575]
@@ -228,6 +301,8 @@ class Object
 
         $floor_x = [125, 225, 375, 475, 125, 225, 375, 475]
         $floor_y = [100, 100, 100, 100, 525, 525, 525, 525]
+
+
     end
 
 
@@ -244,8 +319,6 @@ class Object
             @floor_image.draw($floor_x[i], $floor_y[i], 0)
             i += 1
         end
-        
-        # @image.draw($platform_x, $platform_y, 0)
 
     end
 
@@ -322,7 +395,7 @@ class Player
       @image.draw($player_x, $player_y, 1)
     end
 
-  end
+end
 
 class Projectile
     def initialize
@@ -400,7 +473,7 @@ end
 class Gosu_test < Gosu::Window
     def initialize
         $width = 800
-        $height = 600
+        $height = 608
         super $width, $height
         self.caption = "Shoot stuff"
 
@@ -462,8 +535,6 @@ class Gosu_test < Gosu::Window
         @player.move
 
         #   Collision
-        # collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $platform_x, $platform_y, 96, 32)
-        # @player.project(collision, axis, projection)
 
         i = 0
         while i < 8
