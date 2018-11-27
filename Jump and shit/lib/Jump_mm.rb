@@ -1,27 +1,12 @@
 require 'gosu'
+require_relative 'collision_detection.rb'
+require_relative 'map.rb'
 
-
-class Object
-    def initialize
-        @image = Gosu::Image.new("../img/platform.png")
-
-        $platform_x = 100
-        $platform_y = 500
-
-    end
-
-
-
-    def draw
-        @image.draw($platform_x, $platform_y, 0)
-
-    end
-
-end
 
 class Player
     def initialize
         @image = Gosu::Image.new("../img/CharacterSquare.png")
+        
         
         @direction = 0
         @speed = 4
@@ -29,6 +14,7 @@ class Player
         @grav = 0.5
         @default_jump_speed = 10
         @jump_speed = @default_jump_speed
+        $player_in_air = false
         
     end
 
@@ -50,29 +36,13 @@ class Player
 
     end
 
-    def going_to_collide
-
-        if $player_y >= 568 and $player_y != 568
-            $player_in_air = false
-            @jump_speed = 0
-            $player_y = 568
-
-        elsif $player_x + 32 >= $platform_x && $player_x <= $platform_x + 96 && $player_y <= $platform_y + 31.99 && $player_y + 32 >= $platform_y
-
-            if (@jump_speed.abs) == @jump_speed && @jump_speed != 0
-                $player_y = $platform_y + 32
-            else     
-                $player_in_air = false
-                $player_y = $platform_y - 32
-            end
-
-            @jump_speed = 0
-        else
-            $player_in_air = true
+    def restrict_movement(adjacent)
+        if (adjacent == "left_adjacent" && @direction == -1) || (adjacent == "right_adjacent" && @direction == 1) 
+            @direction = 0        
         end
-
     end
 
+   
     def move
 
       $player_x += @direction * @speed
@@ -84,26 +54,50 @@ class Player
       end
 
     end
+
+    def on_ground?(adjacent)      
+        if adjacent == "down_adjacent"
+            @jump_speed = 0
+            $player_in_air = false
+            return true
+        else
+            $player_in_air = true
+            return false
+        end
+    end
+
+    def project(collision, axis, projection)
+
+        if collision
+            if axis == "x"
+                $player_x -= projection
+            else
+                $player_y -= projection
+            end
+        end
+
+    end
   
     def draw
       @image.draw($player_x, $player_y, 1)
     end
 
-  end
+end
 
 class Gosu_test < Gosu::Window
     def initialize
         width = 800
-        height = 600
+        height = 608
         super width, height
         self.caption = "Gosu test"
 
-
-        $player_x = width / 2
+        $player_size = 32
+        $player_x = width / 2 - $player_size
         $player_y = 568
-        $player_in_air = false
+        
         @player = Player.new
-        @object = Object.new
+        @map = Map.new
+        @collision_detection = Collision_detection.new
 
     end
 
@@ -130,15 +124,60 @@ class Gosu_test < Gosu::Window
         end
 
 
+        i = 0
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                @player.restrict_movement(adjacent)
+                end
+                j += 1
+            end
+            i += 1
+        end
+
         
         @player.move
-        @player.going_to_collide
+        
+        i = 0
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                @player.on_ground?(adjacent)
+                if @player.on_ground?(adjacent)
+                    break
+                end
+                end
+                j += 1
+            end
+            i += 1
+        end
+
+        i = 0
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
+                @player.project(collision, axis, projection)
+                end
+                j += 1
+            end
+            i += 1
+        end
+
+
+
     end
 
     def draw
 
+        @map.draw
         @player.draw
-        @object.draw
+
 
     end
 

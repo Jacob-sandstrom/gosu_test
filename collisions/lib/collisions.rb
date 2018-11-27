@@ -1,44 +1,7 @@
 require 'gosu'
 require_relative 'collision_detection.rb'
+require_relative 'map.rb'
 
-
-
-
-class Object
-    def initialize
-        @image = Gosu::Image.new("../img/platform.png")
-        @wall_image = Gosu::Image.new("../img/Wall.png")
-        @floor_image = Gosu::Image.new("../img/Floor.png")
-        @block_image = Gosu::Image.new("../img/Block.png")
-
-
-        $wall_x = [100, 100, 100, 100, 575, 575, 575, 575]
-        $wall_y = [100, 200, 350, 450, 100, 200, 350, 450]
-
-        $floor_x = [125, 225, 375, 475, 125, 225, 375, 475]
-        $floor_y = [100, 100, 100, 100, 525, 525, 525, 525]
-
-
-    end
-
-
-
-    def draw
-        i = 0
-        while i < 8
-            @wall_image.draw($wall_x[i], $wall_y[i], 0)
-            i += 1
-        end
-
-        i = 0
-        while i < 8
-            @floor_image.draw($floor_x[i], $floor_y[i], 0)
-            i += 1
-        end
-
-    end
-
-end
 
 class Player
     def initialize
@@ -82,17 +45,22 @@ class Player
     def dont_move_y
         @y_direction = 0
     end
+
+    def restrict_movement(adjacent)
+        if (adjacent == "left_adjacent" && @x_direction == -1) || (adjacent == "right_adjacent" && @x_direction == 1) 
+            @x_direction = 0        
+        elsif (adjacent == "up_adjacent" && @y_direction == -1) || (adjacent == "down_adjacent" && @y_direction == 1)
+            @y_direction = 0
+        end
+    end
     
     def move
 
-        
       $player_x += @x_direction * @speed
       $player_x %= $width
 
       $player_y += @y_direction * @speed
       $player_y %= $height
-
-
     end
 
     def project(collision, axis, projection)
@@ -188,12 +156,12 @@ end
 
 class Gosu_test < Gosu::Window
     def initialize
-        $width = 800
-        $height = 608
+        $width = 800    # 25 tiles of 32
+        $height = 608   # 19 tiles of 32
         super $width, $height
         self.caption = "Shoot stuff"
 
-        
+        @map = Map.new
         @Projectile = Projectile.new
         @player = Player.new
         @object = Object.new
@@ -247,24 +215,36 @@ class Gosu_test < Gosu::Window
         $mouse_y = mouse_y
 
 
+        #   
+        i = 0
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
+                @player.restrict_movement(adjacent)
+                end
+                j += 1
+            end
+            i += 1
+        end
+
         #   Move before checking collisions
         @player.move
 
         #   Collision
-
         i = 0
-        while i < 8
-        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $wall_x[i], $wall_y[i], 25, 100)
-        @player.project(collision, axis, projection)
-        i += 1
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
+                @player.project(collision, axis, projection)
+                end
+                j += 1
+            end
+            i += 1
         end
-        i = 0
-        while i < 8
-        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, $floor_x[i], $floor_y[i], 100, 25)
-        @player.project(collision, axis, projection)
-        i += 1
-        end
-
 
 
         #   Projectile
@@ -275,7 +255,7 @@ class Gosu_test < Gosu::Window
 
     def draw
 
-        @object.draw
+        @map.draw
         @Projectile.draw
         @player.draw
         
