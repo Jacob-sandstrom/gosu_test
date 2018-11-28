@@ -14,7 +14,7 @@ class Player
         @grav = 0.5
         @default_jump_speed = 10
         @jump_speed = @default_jump_speed
-        $player_in_air = false
+        $player_in_air = true
         
     end
 
@@ -49,7 +49,7 @@ class Player
     def move
 
       $player_x += @direction * @speed
-      $player_x %= 800
+      $player_x %= $width_in_blocks * 32
       
       if $player_in_air
         $player_y -= @jump_speed    
@@ -89,14 +89,19 @@ end
 
 class Gosu_test < Gosu::Window
     def initialize
-        width = 800
-        height = 608
-        super width, height
+        $width_in_blocks = 60
+        $height_in_blocks = 34
+        width = $width_in_blocks * 32
+        height = $height_in_blocks * 32
+        # width = 1920
+        # height = 1080
+
+        super width, height, fullscreen: true
         self.caption = "Gosu test"
 
         $player_size = 32
         $player_x = width / 2 - $player_size
-        $player_y = 568 - 450
+        $player_y = 568 
         
         @player = Player.new
         @map = Map.new
@@ -120,10 +125,10 @@ class Gosu_test < Gosu::Window
         end 
         
         i = 0
-        while i < 19
+        while i < $height_in_blocks
             j = 0
-            while j < 25
-                if $map_string[j + i*25] == "#"
+            while j < $width_in_blocks
+                if $map_string[j + i*$width_in_blocks] == "#"
                 adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
                 @player.on_ground?(adjacent)
                 on_ground = @player.on_ground?(adjacent)
@@ -149,10 +154,10 @@ class Gosu_test < Gosu::Window
 
 
         i = 0
-        while i < 19
+        while i < $height_in_blocks
             j = 0
-            while j < 25
-                if $map_string[j + i*25] == "#"
+            while j < $width_in_blocks
+                if $map_string[j + i*$width_in_blocks] == "#"
                 adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
                 @player.restrict_movement(adjacent)
                 end
@@ -166,10 +171,10 @@ class Gosu_test < Gosu::Window
         
         
         i = 0
-        while i < 19
+        while i < $height_in_blocks
             j = 0
-            while j < 25
-                if $map_string[j + i*25] == "#"
+            while j < $width_in_blocks
+                if $map_string[j + i*$width_in_blocks] == "#"
                     collision, axis, projection = @collision_detection.collide?($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
                     @player.project(collision, axis, projection)
                 end
