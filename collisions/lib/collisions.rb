@@ -102,7 +102,7 @@ class Projectile
 
     def angle
 
-        @current_angle = (Math.atan2(($player_y - $mouse_y), ($player_x - $mouse_x)) * 180 / Math::PI - 90)
+        @current_angle = (Math.atan2(($player_y + 16 - $mouse_y), ($player_x + 16 - $mouse_x)) * 180 / Math::PI - 90)
 
     end
 
@@ -150,6 +150,13 @@ class Projectile
             @draw_iterations += 1
         end
 
+    end
+
+    def update_shot
+
+        angle
+        decrease_cooldown
+        move
     end
 
 end
@@ -248,9 +255,7 @@ class Gosu_test < Gosu::Window
 
 
         #   Projectile
-        @Projectile.angle
-        @Projectile.decrease_cooldown
-        @Projectile.move
+        @Projectile.update_shot
     end
 
     def draw

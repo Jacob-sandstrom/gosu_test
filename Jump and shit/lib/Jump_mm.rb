@@ -1,6 +1,14 @@
 require 'gosu'
 require_relative 'collision_detection.rb'
 require_relative 'map.rb'
+require_relative 'projectile.rb'
+
+
+#   ***TODO***
+#
+#   MAKE COLLISION FOR PROJECTILE
+#
+#   ***TODO***
 
 
 class Player
@@ -87,6 +95,10 @@ class Player
 
 end
 
+
+
+
+
 class Gosu_test < Gosu::Window
     def initialize
         $width_in_blocks = 60
@@ -105,8 +117,13 @@ class Gosu_test < Gosu::Window
         
         @player = Player.new
         @map = Map.new
+        @projectile = Projectile.new
         @collision_detection = Collision_detection.new
 
+    end
+
+    def needs_cursor?
+        true
     end
 
     def update
@@ -123,6 +140,19 @@ class Gosu_test < Gosu::Window
         elsif  !(Gosu.button_down? Gosu::KB_A or Gosu::button_down? Gosu::GP_LEFT) and !(Gosu.button_down? Gosu::KB_D or Gosu::button_down? Gosu::GP_RIGHT)
             @player.dont_move
         end 
+
+        #
+        #   Shoot
+        #
+        if Gosu.button_down? Gosu::MS_LEFT and !$shot_on_cooldown
+            @projectile.shoot
+        end
+
+        #
+        #   get mouse location
+        #
+        $mouse_x = mouse_x
+        $mouse_y = mouse_y
         
         i = 0
         while i < $height_in_blocks
@@ -185,11 +215,13 @@ class Gosu_test < Gosu::Window
         
 
 
+        @projectile.update_shot
     end
 
     def draw
 
         @map.draw
+        @projectile.draw
         @player.draw
 
 
