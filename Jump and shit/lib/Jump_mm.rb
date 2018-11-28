@@ -9,7 +9,7 @@ class Player
         
         
         @direction = 0
-        @speed = 4
+        @speed = 5
         
         @grav = 0.5
         @default_jump_speed = 10
@@ -39,6 +39,9 @@ class Player
     def restrict_movement(adjacent)
         if (adjacent == "left_adjacent" && @direction == -1) || (adjacent == "right_adjacent" && @direction == 1) 
             @direction = 0        
+        end
+        if adjacent == "up_adjacent"
+            @jump_speed = -0.000001
         end
     end
 
@@ -93,7 +96,7 @@ class Gosu_test < Gosu::Window
 
         $player_size = 32
         $player_x = width / 2 - $player_size
-        $player_y = 568
+        $player_y = 568 - 450
         
         @player = Player.new
         @map = Map.new
@@ -116,6 +119,27 @@ class Gosu_test < Gosu::Window
             @player.dont_move
         end 
         
+        i = 0
+        while i < 19
+            j = 0
+            while j < 25
+                if $map_string[j + i*25] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                @player.on_ground?(adjacent)
+                on_ground = @player.on_ground?(adjacent)
+                if on_ground
+                    break
+                end
+                end
+                j += 1
+            end
+
+            if on_ground
+                break
+            end
+            i += 1
+        end
+
         #
         #   Jumping
         #
@@ -140,35 +164,20 @@ class Gosu_test < Gosu::Window
         
         @player.move
         
+        
         i = 0
         while i < 19
             j = 0
             while j < 25
                 if $map_string[j + i*25] == "#"
-                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                @player.on_ground?(adjacent)
-                if @player.on_ground?(adjacent)
-                    break
-                end
+                    collision, axis, projection = @collision_detection.collide?($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                    @player.project(collision, axis, projection)
                 end
                 j += 1
             end
             i += 1
         end
-
-        i = 0
-        while i < 19
-            j = 0
-            while j < 25
-                if $map_string[j + i*25] == "#"
-                collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
-                @player.project(collision, axis, projection)
-                end
-                j += 1
-            end
-            i += 1
-        end
-
+        
 
 
     end
