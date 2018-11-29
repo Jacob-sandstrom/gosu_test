@@ -6,6 +6,8 @@ require_relative 'projectile.rb'
 
 #   ***TODO***
 #
+#   Make more maps
+#
 #   MAKE COLLISION FOR PROJECTILE
 #
 #   create new floor block that is 24px in height 
