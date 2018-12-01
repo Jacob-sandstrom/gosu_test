@@ -59,17 +59,30 @@ class Player
 
    
     def move
-
-      $player_x += @direction * @speed
-      if $player_x >= $width_in_blocks * 32 && $current_map == "map1"
-        $current_map = "map2"
+        #   Move in x
+        $player_x += @direction * @speed
+        
+        #   Change map and go around screen y
+      if $player_x >= $width_in_blocks * $block_size
+        $map_x += 1
+      elsif $player_x <= 0 
+        $map_x -= 1
       end
-      if $player_x <= 0 && $current_map == "map2"
-        $current_map = "map1"
+      if $player_y > $height_in_blocks * $block_size
+        $map_y += 1
+        $player_y = 0
+      elsif $player_y < 0
+        $map_y -= 1
+        $player_y = $height_in_blocks * $block_size
+        @jump_speed = @default_jump_speed
       end
         
-      $player_x %= $width_in_blocks * 32
+      # Go around screen x
+      $player_x %= $width_in_blocks * $block_size
+      # For some reason the commented line below does not work as intended but the assigning of values to $player_y above works
+    #   $player_y %= $height_in_blocks * $block_size
       
+      # Fall if in the air
       if $player_in_air
         $player_y -= @jump_speed    
         @jump_speed -= @grav
@@ -108,12 +121,10 @@ end
 
 
 
-
-
 class Gosu_test < Gosu::Window
     def initialize
-        $width_in_blocks = 60
-        $height_in_blocks = 34
+        $width_in_blocks = 30
+        $height_in_blocks = 17
         width = $width_in_blocks * 32
         height = $height_in_blocks * 32
         # width = 1920
@@ -124,7 +135,7 @@ class Gosu_test < Gosu::Window
 
         $player_size = 32
         $player_x = width / 2 - $player_size
-        $player_y = 568 
+        $player_y = height / 2
         
         @player = Player.new
         @map = Map.new
@@ -136,8 +147,96 @@ class Gosu_test < Gosu::Window
     def needs_cursor?
         true
     end
+    
+    def draw_on_map
+        if Gosu.button_down? Gosu::MS_LEFT and !$shot_on_cooldown
+            i = 0
+            while i < $height_in_blocks
+                j = 0
+                while j < $width_in_blocks
+                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 1, 1, j*$block_size, i*$block_size, $block_size, $block_size)
+                    if collision
+                        if $current_map[j + i*$width_in_blocks] == "#"
+                            $current_map[j + i*$width_in_blocks] ="."
+                        elsif $current_map[j + i*$width_in_blocks] == "."
+                            $current_map[j + i*$width_in_blocks] = "#"
+                        end
+                    end
+                    j += 1
+                end
+                i += 1
+            end
+        end
+    end
+    
+    
+    def on_the_ground
+        
+        i = 0
+        while i < $height_in_blocks
+            j = 0
+            while j < $width_in_blocks
+                if $current_map[j + i*$width_in_blocks] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                @player.on_ground?(adjacent)
+                on_ground = @player.on_ground?(adjacent)
+                if on_ground
+                    break
+                end
+                end
+                j += 1
+            end
+    
+            if on_ground
+                break
+            end
+            i += 1
+        end
+    end
+
+    def stop_x_movement
+        i = 0
+        while i < $height_in_blocks
+            j = 0
+            while j < $width_in_blocks
+                if $current_map[j + i*$width_in_blocks] == "#"
+                adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                @player.restrict_movement(adjacent)
+                end
+                j += 1
+            end
+            i += 1
+        end
+
+    end
+
+    def check_collison
+        i = 0
+        while i < $height_in_blocks
+            j = 0
+            while j < $width_in_blocks
+                if $current_map[j + i*$width_in_blocks] == "#"
+                    collision, axis, projection = @collision_detection.collide?($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
+                    @player.project(collision, axis, projection)
+                end
+                j += 1
+            end
+            i += 1
+        end
+
+    end
 
     def update
+        #
+        #   get mouse location
+        #
+        $mouse_x = mouse_x
+        $mouse_y = mouse_y
+
+        #   Draw on map with mouse
+        draw_on_map
+        
+        
         #
         #   Movement
         #
@@ -159,55 +258,11 @@ class Gosu_test < Gosu::Window
             @projectile.shoot
         end
 
-        #
-        #   get mouse location
-        #
-        $mouse_x = mouse_x
-        $mouse_y = mouse_y
-        case $current_map
-        when "map1"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map1_string[j + i*$width_in_blocks] == "#"
-                    adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                    @player.on_ground?(adjacent)
-                    on_ground = @player.on_ground?(adjacent)
-                    if on_ground
-                        break
-                    end
-                    end
-                    j += 1
-                end
+        
 
-                if on_ground
-                    break
-                end
-                i += 1
-            end
-        when "map2"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map2_string[j + i*$width_in_blocks] == "#"
-                    adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                    @player.on_ground?(adjacent)
-                    on_ground = @player.on_ground?(adjacent)
-                    if on_ground
-                        break
-                    end
-                    end
-                    j += 1
-                end
 
-                if on_ground
-                    break
-                end
-                i += 1
-            end
-        end
+        #   Check if player is on the ground
+        on_the_ground
 
         #
         #   Jumping
@@ -216,68 +271,16 @@ class Gosu_test < Gosu::Window
             @player.jump
         end
 
-        case $current_map
-        when "map1"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map1_string[j + i*$width_in_blocks] == "#"
-                    adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                    @player.restrict_movement(adjacent)
-                    end
-                    j += 1
-                end
-                i += 1
-            end
-        when "map2"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map2_string[j + i*$width_in_blocks] == "#"
-                    adjacent = @collision_detection.is_adjacent($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                    @player.restrict_movement(adjacent)
-                    end
-                    j += 1
-                end
-                i += 1
-            end
-        end
+        #   stop x movement if adjacent to wall
+        stop_x_movement
 
-
-        
+        #   move
         @player.move
-        
-        case $current_map
-        when "map1"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map1_string[j + i*$width_in_blocks] == "#"
-                        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                        @player.project(collision, axis, projection)
-                    end
-                    j += 1
-                end
-                i += 1
-            end
-        when "map2"
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $map2_string[j + i*$width_in_blocks] == "#"
-                        collision, axis, projection = @collision_detection.collide?($player_x, $player_y, $player_size, $player_size, j*$block_size, i*$block_size, $block_size, $block_size)
-                        @player.project(collision, axis, projection)
-                    end
-                    j += 1
-                end
-                i += 1
-            end
-        end
 
+        #   Check collision against all blocks on map
+        check_collison
+
+        #   calculate angle, decrease cooldown and move projectile
         @projectile.update_shot
     end
 
@@ -299,7 +302,6 @@ class Gosu_test < Gosu::Window
         end
       end
 
-    
 end
 
 Gosu_test.new.show
