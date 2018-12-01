@@ -6,7 +6,6 @@ require_relative 'projectile.rb'
 
 #   ***TODO***
 #
-#   Make more maps
 #
 #   MAKE COLLISION FOR PROJECTILE
 #
@@ -24,8 +23,8 @@ class Player
         @speed = 5
         
         @grav = 0.5
-        @default_jump_speed = 10
-        @jump_speed = @default_jump_speed
+        $default_jump_speed = 10
+        $jump_speed = $default_jump_speed
         $player_in_air = true
         
     end
@@ -44,7 +43,7 @@ class Player
 
     def jump
       $player_in_air = true
-      @jump_speed = @default_jump_speed
+      $jump_speed = $default_jump_speed
 
     end
 
@@ -53,7 +52,7 @@ class Player
             @direction = 0        
         end
         if adjacent == "up_adjacent"
-            @jump_speed = -0.000001
+            $jump_speed = -0.000001
         end
     end
 
@@ -61,38 +60,18 @@ class Player
     def move
         #   Move in x
         $player_x += @direction * @speed
-        
-        #   Change map and go around screen y
-      if $player_x >= $width_in_blocks * $block_size
-        $map_x += 1
-      elsif $player_x <= 0 
-        $map_x -= 1
-      end
-      if $player_y > $height_in_blocks * $block_size
-        $map_y += 1
-        $player_y = 0
-      elsif $player_y < 0
-        $map_y -= 1
-        $player_y = $height_in_blocks * $block_size
-        @jump_speed = @default_jump_speed
-      end
-        
-      # Go around screen x
-      $player_x %= $width_in_blocks * $block_size
-      # For some reason the commented line below does not work as intended but the assigning of values to $player_y above works
-    #   $player_y %= $height_in_blocks * $block_size
       
       # Fall if in the air
       if $player_in_air
-        $player_y -= @jump_speed    
-        @jump_speed -= @grav
+        $player_y -= $jump_speed    
+        $jump_speed -= @grav
       end
 
     end
 
     def on_ground?(adjacent)      
         if adjacent == "down_adjacent"
-            @jump_speed = 0
+            $jump_speed = 0
             $player_in_air = false
             return true
         else
@@ -146,6 +125,24 @@ class Gosu_test < Gosu::Window
 
     def needs_cursor?
         true
+    end
+
+    def update_map
+        if $player_x >= $width_in_blocks * $block_size - $player_size / 2
+            $player_x = 0
+            $map_x += 1
+          elsif $player_x <= -$player_size / 2
+            $player_x = $width_in_blocks * $block_size - $player_size
+            $map_x -= 1
+          end
+          if $player_y >= $height_in_blocks * $block_size
+            $map_y += 1
+            $player_y = 0
+          elsif $player_y <= -$player_size / 2
+            $map_y -= 1
+            $player_y = $height_in_blocks * $player_size 
+            $jump_speed = $default_jump_speed
+          end
     end
     
     def draw_on_map
@@ -282,6 +279,8 @@ class Gosu_test < Gosu::Window
 
         #   calculate angle, decrease cooldown and move projectile
         @projectile.update_shot
+
+        update_map
     end
 
     def draw
