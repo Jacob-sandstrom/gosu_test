@@ -25,7 +25,6 @@ class Player
         $default_jump_speed = 10
         $jump_speed = $default_jump_speed
         $player_in_air = true
-        
     end
 
     def go_left
@@ -137,33 +136,48 @@ class Gosu_test < Gosu::Window
         if $player_x >= $width_in_blocks * $block_size - $player_size / 2
             $player_x = 0
             $map_x += 1
-          elsif $player_x <= -$player_size / 2
+            @projectile.destroy_all_shots
+        elsif $player_x <= -$player_size / 2
             $player_x = $width_in_blocks * $block_size - $player_size
             $map_x -= 1
-          end
-          if $player_y >= $height_in_blocks * $block_size
-            $map_y += 1
+            @projectile.destroy_all_shots
+        end
+        if $player_y >= $height_in_blocks * $block_size - $player_size / 2
             $player_y = 0
-          elsif $player_y <= -$player_size / 2
+            $map_y += 1
+            @projectile.destroy_all_shots
+        elsif $player_y <= -$player_size / 2
+            $player_y = $height_in_blocks * $player_size - $player_size
             $map_y -= 1
-            $player_y = $height_in_blocks * $player_size 
             $jump_speed = $default_jump_speed
-          end
+            @projectile.destroy_all_shots
+        end
     end
     
     def draw_on_map
-        if Gosu.button_down? Gosu::MS_LEFT and !$shot_on_cooldown
+        if Gosu.button_down? Gosu::MS_LEFT 
             i = 0
             while i < $height_in_blocks
                 j = 0
                 while j < $width_in_blocks
                     collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                     if collision
-                        if $current_map[j + i*$width_in_blocks] == "#"
-                            $current_map[j + i*$width_in_blocks] ="."
-                        elsif $current_map[j + i*$width_in_blocks] == "."
                             $current_map[j + i*$width_in_blocks] = "#"
-                        end
+                        @map.update_existing_map($map_x, $map_y)
+                    end
+                    j += 1
+                end
+                i += 1
+            end
+        end
+        if Gosu.button_down? Gosu::MS_RIGHT
+            i = 0
+            while i < $height_in_blocks
+                j = 0
+                while j < $width_in_blocks
+                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                    if collision
+                            $current_map[j + i*$width_in_blocks] ="."
                         @map.update_existing_map($map_x, $map_y)
                     end
                     j += 1
@@ -172,7 +186,6 @@ class Gosu_test < Gosu::Window
             end
         end
     end
-    
     
     def on_the_ground
         
@@ -230,6 +243,30 @@ class Gosu_test < Gosu::Window
 
     end
 
+    def is_projectile_colliding?
+        i = 0
+        while i < $height_in_blocks
+            j = 0
+            while j < $width_in_blocks
+                if $current_map[j + i*$width_in_blocks] == "#"
+                    shot_num = 0
+                    while shot_num < $max_shots
+                        unless $projectile_x[shot_num] == nil || $projectile_y[shot_num] == nil
+                            collision, axis, projection = @collision_detection.collide?($projectile_x[shot_num], $projectile_y[shot_num], $projectile_width, $projectile_height, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+                                @projectile.destroy_shot(shot_num)
+                            end
+                        end
+                        shot_num += 1
+                    end
+                end
+                j += 1
+            end
+            i += 1
+        end
+
+    end
+
     def update
         #
         #   get mouse location
@@ -249,7 +286,6 @@ class Gosu_test < Gosu::Window
             @player.dont_move
         elsif Gosu.button_down? Gosu::KB_A or Gosu::button_down? Gosu::GP_LEFT
             @player.go_left
-        
         elsif Gosu.button_down? Gosu::KB_D or Gosu::button_down? Gosu::GP_RIGHT
             @player.go_right
         elsif  !(Gosu.button_down? Gosu::KB_A or Gosu::button_down? Gosu::GP_LEFT) and !(Gosu.button_down? Gosu::KB_D or Gosu::button_down? Gosu::GP_RIGHT)
@@ -288,6 +324,10 @@ class Gosu_test < Gosu::Window
         #   calculate angle, decrease cooldown and move projectile
         @projectile.update_shot
 
+        #   projectile collision
+        is_projectile_colliding?
+
+        #   switching maps
         update_map
     end
 
