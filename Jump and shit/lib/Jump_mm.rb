@@ -9,7 +9,6 @@ require_relative 'projectile.rb'
 #
 #   MAKE COLLISION FOR PROJECTILE
 #
-#   create new floor block that is 24px in height 
 #
 #   ***TODO***
 
@@ -112,6 +111,13 @@ class Gosu_test < Gosu::Window
         super width, height, fullscreen: true
         self.caption = "Gosu test"
 
+
+        #   Enable to edit map
+        @map_editing_enabled = false
+
+
+
+
         $player_size = 32
         $player_x = width / 2 - $player_size
         $player_y = height / 2
@@ -151,13 +157,14 @@ class Gosu_test < Gosu::Window
             while i < $height_in_blocks
                 j = 0
                 while j < $width_in_blocks
-                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 1, 1, j*$block_size, i*$block_size, $block_size, $block_size)
+                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                     if collision
                         if $current_map[j + i*$width_in_blocks] == "#"
                             $current_map[j + i*$width_in_blocks] ="."
                         elsif $current_map[j + i*$width_in_blocks] == "."
                             $current_map[j + i*$width_in_blocks] = "#"
                         end
+                        @map.update_existing_map($map_x, $map_y)
                     end
                     j += 1
                 end
@@ -231,8 +238,9 @@ class Gosu_test < Gosu::Window
         $mouse_y = mouse_y
 
         #   Draw on map with mouse
-        draw_on_map
-        
+        if @map_editing_enabled
+            draw_on_map
+        end
         
         #
         #   Movement
