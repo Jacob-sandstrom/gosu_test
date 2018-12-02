@@ -37,16 +37,6 @@ class Map
 
 
     def draw
-
-        # File.open('maps/map_0_0.txt', 'w') { |file| file.write(@map_0_0_string)}
-        # File.open('maps/map_0_1.txt', 'w') { |file| file.write(@map_0_1_string)}
-        # File.open('maps/map_0_2.txt', 'w') { |file| file.write(@map_0_2_string)}
-        # File.open('maps/map_1_0.txt', 'w') { |file| file.write(@map_1_0_string)}
-        # File.open('maps/map_1_1.txt', 'w') { |file| file.write(@map_1_1_string)}
-        # File.open('maps/map_1_2.txt', 'w') { |file| file.write(@map_1_2_string)}
-        # File.open('maps/map_2_0.txt', 'w') { |file| file.write(@map_2_0_string)}
-        # File.open('maps/map_2_1.txt', 'w') { |file| file.write(@map_2_1_string)}
-        # File.open('maps/map_2_2.txt', 'w') { |file| file.write(@map_2_2_string)}
         
         $current_map = $maps[$map_x][$map_y]
 
