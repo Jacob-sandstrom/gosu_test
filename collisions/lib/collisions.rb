@@ -55,12 +55,27 @@ class Player
     end
     
     def move
+        if @x_direction == -1 && @y_direction == 1
+            $player_x += Gosu.offset_x(225, @speed)
+            $player_y += Gosu.offset_y(225, @speed)
+        elsif @x_direction == 1 && @y_direction == 1
+            $player_x += Gosu.offset_x(135, @speed)
+            $player_y += Gosu.offset_y(135, @speed)
+        elsif @x_direction == 1 && @y_direction == -1
+            $player_x += Gosu.offset_x(45, @speed)
+            $player_y += Gosu.offset_y(45, @speed)
+        elsif @x_direction == -1 && @y_direction == -1
+            $player_x += Gosu.offset_x(315, @speed)
+            $player_y += Gosu.offset_y(315, @speed)
+        else
+            $player_x += @x_direction * @speed
+            $player_y += @y_direction * @speed
+        end
+        
+        $player_x %= $width
+        $player_y %= $height
 
-      $player_x += @x_direction * @speed
-      $player_x %= $width
 
-      $player_y += @y_direction * @speed
-      $player_y %= $height
     end
 
     def project(collision, axis, projection)
