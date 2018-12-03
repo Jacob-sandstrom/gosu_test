@@ -112,7 +112,7 @@ class Gosu_test < Gosu::Window
 
 
         #   Enable to edit map
-        @map_editing_enabled = false
+        @map_editing_enabled = true
 
 
 

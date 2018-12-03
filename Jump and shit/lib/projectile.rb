@@ -34,7 +34,7 @@ class Projectile
         @angle        = Array.new($max_shots, 0)
         
         $shot_on_cooldown = false
-        @shot_speed = 20
+        @shot_speed = 10
         @shot_iterations = 0
         @cooldown_timer = 0
         @cooldown = 10

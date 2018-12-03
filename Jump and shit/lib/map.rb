@@ -10,21 +10,24 @@ class Map
 
         
 
-        @map_0_0_string =  File.read('maps/map_0_0.txt')
-        @map_0_1_string =  File.read('maps/map_0_1.txt')
-        @map_0_2_string =  File.read('maps/map_0_2.txt')
-        @map_1_0_string =  File.read('maps/map_1_0.txt')
-        @map_1_1_string =  File.read('maps/map_1_1.txt')
-        @map_1_2_string =  File.read('maps/map_1_2.txt')
-        @map_2_0_string =  File.read('maps/map_2_0.txt')
-        @map_2_1_string =  File.read('maps/map_2_1.txt')
-        @map_2_2_string =  File.read('maps/map_2_2.txt')
+        @map_0_0 =  File.read('maps/map_0_0.txt')
+        @map_0_1 =  File.read('maps/map_0_1.txt')
+        @map_0_2 =  File.read('maps/map_0_2.txt')
+        @map_1_0 =  File.read('maps/map_1_0.txt')
+        @map_1_1 =  File.read('maps/map_1_1.txt')
+        @map_1_2 =  File.read('maps/map_1_2.txt')
+        @map_2_0 =  File.read('maps/map_2_0.txt')
+        @map_2_1 =  File.read('maps/map_2_1.txt')
+        @map_2_2 =  File.read('maps/map_2_2.txt')
+        @map_3_0 =  File.read('maps/map_3_0.txt')
+        @map_3_1 =  File.read('maps/map_3_1.txt')
+        @map_3_2 =  File.read('maps/map_3_2.txt')
 
    
         
 
         
-        $maps = [[@map_0_0_string, @map_0_1_string, @map_0_2_string], [@map_1_0_string, @map_1_1_string, @map_1_2_string], [@map_2_0_string, @map_2_1_string, @map_2_2_string]]
+        $maps = [[@map_0_0, @map_0_1, @map_0_2], [@map_1_0, @map_1_1, @map_1_2], [@map_2_0, @map_2_1, @map_2_2], [@map_3_0, @map_3_1, @map_3_2]]
         
         $current_map = $maps[$map_x][$map_y]
     end
