@@ -5,7 +5,7 @@ require_relative 'map.rb'
 
 class Player
     def initialize
-        @image = Gosu::Image.new("../img/CharacterSquare.png")
+        @image = Gosu::Image.new("../img/circle.png")
 
         $player_x = $width / 2
         $player_y = 568
@@ -13,11 +13,7 @@ class Player
         @x_direction = 0
         @y_direction = 0
         @speed = 4
-        
-        @grav = 1.5
-        @default_jump_speed = 20
-        @jump_speed = @default_jump_speed
-        
+
 
     end
  
@@ -74,10 +70,15 @@ class Player
         
         $player_x %= $width
         $player_y %= $height
-
-
     end
-
+    
+    def project_circle(collision, projection_distance, angle)
+        if collision
+            $player_x += Gosu.offset_x(angle, projection_distance)
+            $player_y += Gosu.offset_y(angle, projection_distance)
+        end
+    end
+    
     def project(collision, axis, projection)
 
         if collision
@@ -238,18 +239,18 @@ class Gosu_test < Gosu::Window
 
 
         #   
-        i = 0
-        while i < 19
-            j = 0
-            while j < 25
-                if $map_string[j + i*25] == "#"
-                adjacent = @collision_detection.is_adjacent($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
-                @player.restrict_movement(adjacent)
-                end
-                j += 1
-            end
-            i += 1
-        end
+        # i = 0
+        # while i < 19
+        #     j = 0
+        #     while j < 25
+        #         if $map_string[j + i*25] == "#"
+        #         adjacent = @collision_detection.is_adjacent($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
+        #         @player.restrict_movement(adjacent)
+        #         end
+        #         j += 1
+        #     end
+        #     i += 1
+        # end
 
         #   Move before checking collisions
         @player.move
@@ -260,8 +261,8 @@ class Gosu_test < Gosu::Window
             j = 0
             while j < 25
                 if $map_string[j + i*25] == "#"
-                collision, axis, projection = @collision_detection.collide?($player_x, $player_y, 32, 32, j*32, i*32, $block_size, $block_size)
-                @player.project(collision, axis, projection)
+                collision, projection_distance, angle =  @collision_detection.circle_with_box_collison($player_x, $player_y, 16, j*32, i*32, $block_size, $block_size) 
+                @player.project_circle(collision, projection_distance, angle)
                 end
                 j += 1
             end
@@ -278,7 +279,7 @@ class Gosu_test < Gosu::Window
         @map.draw
         @Projectile.draw
         @player.draw
-        
+
 
     end
 
@@ -289,7 +290,7 @@ class Gosu_test < Gosu::Window
         else
           super
         end
-      end
+    end
 
     
 end
