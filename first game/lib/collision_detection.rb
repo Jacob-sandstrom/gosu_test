@@ -208,10 +208,31 @@ class Collision_detection
     end
 
     def up_left_circle_box_collision(object1_center_x, object1_center_y, object1_radius, object2_x, object2_y)
-        if object1_center_x >= object2_x && object1_bottom_y > object2_y
-            up_left_collision = true
-        else 
-            up_left_collision = false
+        if object1_center_x < object2_x && object1_center_y < object2_y
+            #   calculate angle and distance
+            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_y)) * 180 / Math::PI - 90)
+            distance_to_center = ((object1_center_x - object2_x)**2 + (object1_center_y - object2_y)**2)**0.5
+            if distance_to_center - object1_radius < 0
+                collision = true
+                projection_distance = distance_to_center - object1_radius
+                return collision angle projection_distance
+            else 
+                collision = false
+            end
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius >= object2_y && object1_center_y < object2_y
+            collsion = true
+            projection_distance = object1_center_y + object1_radius - object2_y
+            angle = 0
+
+        elsif object1_center_x + object1_radius >= object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
+            collsion = true
+            projection_distance = object1_center_x + object1_radius - object2_x
+            
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius >= object2_y && object1_center_y < object2_y
+            collsion = true
+            projection_distance = object1_center_y + object1_radius - object2_y
+        else
+            collision = false
         end
         return up_left_collision
     end
