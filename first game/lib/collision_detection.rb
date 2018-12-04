@@ -210,7 +210,7 @@ class Collision_detection
     def up_left_circle_box_collision(object1_center_x, object1_center_y, object1_radius, object2_x, object2_y)
         if object1_center_x < object2_x && object1_center_y < object2_y
             #   calculate angle and distance
-            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_y)) * 180 / Math::PI - 90)
+            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_x)) * 180 / Math::PI - 90)
             distance_to_center = ((object1_center_x - object2_x)**2 + (object1_center_y - object2_y)**2)**0.5
             if distance_to_center - object1_radius < 0
                 collision = true
@@ -219,46 +219,137 @@ class Collision_detection
             else 
                 collision = false
             end
-        elsif object1_center_x >= object2_x && object1_center_y + object1_radius >= object2_y && object1_center_y < object2_y
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius > object2_y && object1_center_y < object2_y
             collsion = true
             projection_distance = object1_center_y + object1_radius - object2_y
             angle = 0
-
-        elsif object1_center_x + object1_radius >= object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
+        elsif object1_center_x + object1_radius > object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
             collsion = true
             projection_distance = object1_center_x + object1_radius - object2_x
-            
-        elsif object1_center_x >= object2_x && object1_center_y + object1_radius >= object2_y && object1_center_y < object2_y
+            angle = 270
+        elsif object1_center_x > object2_x && object1_center_y > object2_y
             collsion = true
-            projection_distance = object1_center_y + object1_radius - object2_y
+            if object1_center_y + object1_radius - object2_y < object1_center_x + object1_radius - object2_x
+                projection_distance = object1_center_y + object1_radius - object2_y
+                angle = 0
+            else 
+                object1_center_x + object1_radius - object2_x
+                angle = 270
+            end
         else
             collision = false
+            projection_distance = nil
+            angle = nil
         end
-        return up_left_collision
+        return collision projection_distance angle
     end
     def up_right_circle_box_collision(object1_center_x, object1_center_y, object1_radius, object2_right_x, object2_y)
-        if object1_x < object2_right_x && object1_bottom_y > object2_y
-            up_right_collision = true
-        else 
-            up_right_collision = false
+        if object1_center_x > object2_right_x && object1_center_y < object2_y
+            #   calculate angle and distance
+            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_right_x)) * 180 / Math::PI - 90)
+            distance_to_center = ((object1_center_x - object2_right_x)**2 + (object1_center_y - object2_y)**2)**0.5
+            if distance_to_center - object1_radius < 0
+                collision = true
+                projection_distance = distance_to_center - object1_radius
+                return collision angle projection_distance
+            else 
+                collision = false
+            end
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius > object2_y && object1_center_y < object2_y
+            collsion = true
+            projection_distance = object1_center_y + object1_radius - object2_y
+            angle = 0
+        elsif object1_center_x + object1_radius > object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
+            collsion = true
+            projection_distance = object1_center_x + object1_radius - object2_x
+            angle = 270
+        elsif object1_center_x > object2_x && object1_center_y > object2_y
+            collsion = true
+            if object1_center_y + object1_radius - object2_y < object1_center_x + object1_radius - object2_x
+                projection_distance = object1_center_y + object1_radius - object2_y
+                angle = 0
+            else 
+                object1_center_x + object1_radius - object2_x
+                angle = 270
+            end
+        else
+            collision = false
+            projection_distance = nil
+            angle = nil
         end
-        return up_right_collision
+        return collision projection_distance angle
     end
     def down_left_circle_box_collision(object1_center_x, object1_center_y, object1_radius, object2_x, object2_bottom_y)
-        if object1_right_x > object2_x && object1_y < object2_bottom_y
-            down_left_collision = true
-        else 
-            down_left_collision = false
+        if object1_center_x < object2_x && object1_center_y < object2_y
+            #   calculate angle and distance
+            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_x)) * 180 / Math::PI - 90)
+            distance_to_center = ((object1_center_x - object2_x)**2 + (object1_center_y - object2_y)**2)**0.5
+            if distance_to_center - object1_radius < 0
+                collision = true
+                projection_distance = distance_to_center - object1_radius
+                return collision angle projection_distance
+            else 
+                collision = false
+            end
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius > object2_y && object1_center_y < object2_y
+            collsion = true
+            projection_distance = object1_center_y + object1_radius - object2_y
+            angle = 0
+        elsif object1_center_x + object1_radius > object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
+            collsion = true
+            projection_distance = object1_center_x + object1_radius - object2_x
+            angle = 270
+        elsif object1_center_x > object2_x && object1_center_y > object2_y
+            collsion = true
+            if object1_center_y + object1_radius - object2_y < object1_center_x + object1_radius - object2_x
+                projection_distance = object1_center_y + object1_radius - object2_y
+                angle = 0
+            else 
+                object1_center_x + object1_radius - object2_x
+                angle = 270
+            end
+        else
+            collision = false
+            projection_distance = nil
+            angle = nil
         end
-        return down_left_collision
+        return collision projection_distance angle
     end
     def down_right_circle_box_collision(object1_center_x, object1_center_y, object1_radius, object2_right_x, object2_bottom_y)
-        if object1_x < object2_right_x && object1_y < object2_bottom_y
-            down_right_collision = true
-        else 
-            down_right_collision = false
+        if object1_center_x < object2_x && object1_center_y < object2_y
+            #   calculate angle and distance
+            angle = (Math.atan2((object1_center_y - object2_y), (object1_center_x - object2_x)) * 180 / Math::PI - 90)
+            distance_to_center = ((object1_center_x - object2_x)**2 + (object1_center_y - object2_y)**2)**0.5
+            if distance_to_center - object1_radius < 0
+                collision = true
+                projection_distance = distance_to_center - object1_radius
+                return collision angle projection_distance
+            else 
+                collision = false
+            end
+        elsif object1_center_x >= object2_x && object1_center_y + object1_radius > object2_y && object1_center_y < object2_y
+            collsion = true
+            projection_distance = object1_center_y + object1_radius - object2_y
+            angle = 0
+        elsif object1_center_x + object1_radius > object2_x && object1_center_y >= object2_y && object1_center_x < object2_x
+            collsion = true
+            projection_distance = object1_center_x + object1_radius - object2_x
+            angle = 270
+        elsif object1_center_x > object2_x && object1_center_y > object2_y
+            collsion = true
+            if object1_center_y + object1_radius - object2_y < object1_center_x + object1_radius - object2_x
+                projection_distance = object1_center_y + object1_radius - object2_y
+                angle = 0
+            else 
+                object1_center_x + object1_radius - object2_x
+                angle = 270
+            end
+        else
+            collision = false
+            projection_distance = nil
+            angle = nil
         end
-        return down_right_collision
+        return collision projection_distance angle
     end
 
     def circle_with_box_collison(object1_x, object1_y, object1_radius, object2_x, object2_y, object2_width, object2_height)
