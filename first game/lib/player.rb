@@ -11,7 +11,6 @@ class Player
         $attack_on_cooldown = false
         @attack_cooldown = 2
         @attack_display_time = 0.00001
-
         @cooldown_start_time = Gosu.milliseconds
 
         @x_direction = 0
