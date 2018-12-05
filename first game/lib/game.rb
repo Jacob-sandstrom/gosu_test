@@ -5,6 +5,21 @@ require_relative 'enemy.rb'
 
 
 
+# class Test_box
+#     def initialize
+#         @image = Gosu::Image.new("../img/testbox.png")
+
+#     end
+
+#     def draw
+
+#         @image.draw($player_x - 16, $player_y - 32, 5)
+#         @image.draw($player_x, $player_y - 16, 5)
+#         @image.draw($player_x - 16, $player_y, 5)
+#         @image.draw($player_x - 32, $player_y - 16, 5)
+#     end
+# end
+
 class Game < Gosu::Window
     def initialize 
         width = 1000
@@ -21,6 +36,8 @@ class Game < Gosu::Window
         @player = Player.new
         @enemy = Enemy.new
         @enemies =[]
+
+        # @testbox = Test_box.new
 
         $font = Gosu::Font.new(self, "Futura", 20)
 
@@ -96,6 +113,9 @@ class Game < Gosu::Window
         draw_rect(0, 0, 1000, 700, Gosu::Color.argb(0xff_f0f0f0))
         @player.draw
         @enemy.draw
+
+
+        # @testbox.draw
     end
 
 
