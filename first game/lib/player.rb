@@ -9,9 +9,9 @@ class Player
         @attack_dir = @face_dir_angle
         
         $attack_on_cooldown = false
-        @attack_cooldown = 2
-        @attack_display_time = 0.00001
-        @cooldown_start_time = Gosu.milliseconds
+        @attack_cooldown = 500
+        @attack_display_time = 100
+        @cooldown_start_time = 0.0
 
         @x_direction = 0
         @y_direction = 0
@@ -65,7 +65,7 @@ class Player
     end
 
     def display_attack
-        if @attack_display_time >= Gosu.milliseconds / 1000 - @cooldown_start_time
+        if @attack_display_time >= Gosu.milliseconds  - @cooldown_start_time
             return true
         else 
             return false
@@ -73,12 +73,15 @@ class Player
     end
     
     def attack
-        @cooldown_start_time = Gosu.milliseconds / 1000
+        @cooldown_start_time = Gosu.milliseconds
         $attack_on_cooldown = true
 
         @attack_dir = @face_dir_angle
     end
 
+    def attack_collision
+        return @attack_display_time, @attack_dir
+    end
 
 
     def move
@@ -108,11 +111,9 @@ class Player
         @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1, color = 0x9f_ffffff)
         
         
-        if Gosu.milliseconds / 1000 - @cooldown_start_time >= @attack_cooldown
+        if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
             $attack_on_cooldown = false
         end
-
-        
         
         facing_direction
         if display_attack

@@ -303,23 +303,23 @@ class Gosu_test < Gosu::Window
 
 
         #   Check if player is on the ground
-        on_the_ground
-
+        
         #
         #   Jumping
         #
         if (Gosu.button_down? Gosu::KB_W or Gosu::button_down? Gosu::GP_BUTTON_0) and !$player_in_air
             @player.jump
         end
-
+        
         #   stop x movement if adjacent to wall
         stop_x_movement
-
+        
         #   move
         @player.move
-
+        
         #   Check collision against all blocks on map
         check_collison
+        on_the_ground
 
         #   calculate angle, decrease cooldown and move projectile
         @projectile.update_shot

@@ -20,6 +20,7 @@ class Game < Gosu::Window
         @collision_detection = Collision_detection.new 
         @player = Player.new
         @enemy = Enemy.new
+        @enemies =[]
 
 
     end
@@ -60,7 +61,7 @@ class Game < Gosu::Window
             @player.attack
         end
 
-
+        
 
         @player.move
     end
