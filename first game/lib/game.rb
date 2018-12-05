@@ -22,12 +22,32 @@ class Game < Gosu::Window
         @enemy = Enemy.new
         @enemies =[]
 
+        $font = Gosu::Font.new(self, "Futura", 20)
 
     end
 
     def needs_cursor?
         true
     end
+
+    def attack
+        display_attack, attack_dir = @player.attack_collision
+        case attack_dir
+        when 0
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y - 32, 32, $enemy_x, $enemy_y, 64, 64)
+        when 90
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y + 16, 32, $enemy_x, $enemy_y, 64, 64)
+        when 180
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y, 32, $enemy_x, $enemy_y, 64, 64)
+        when 270
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x + 32, $player_y + 16, 32, $enemy_x, $enemy_y, 64, 64)
+        end
+        if collision
+            @enemy.damage
+        end
+
+    end
+    
 
     def update
         #
@@ -59,11 +79,16 @@ class Game < Gosu::Window
         #   attack
         if (Gosu.button_down? Gosu::KB_SPACE) && !$attack_on_cooldown
             @player.attack
+            attack
         end
 
-        
+
 
         @player.move
+        @enemy.update
+        
+
+
     end
 
 

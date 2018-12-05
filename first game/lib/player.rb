@@ -80,7 +80,7 @@ class Player
     end
 
     def attack_collision
-        return @attack_display_time, @attack_dir
+        return display_attack, @attack_dir
     end
 
 
