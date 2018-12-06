@@ -8,7 +8,7 @@ class Enemy
         @attack_img = Gosu::Image.new("../img/block.png")
 
         $enemy_x, $enemy_y = $enemy_spawn
-        @health = 2
+        @health = 5
 
         @x_direction = 0
         @y_direction = 0
@@ -18,6 +18,10 @@ class Enemy
         @attack_charge_start = 0
         @attack_range = 32
         @cooldown_after_attacking = 500
+
+        @knockback_angle = 0
+        @knockback_distance = 20
+        @knockback = @knockback_distance
 
         @attack_lifetime = 300
         @display_attack = false
@@ -30,6 +34,20 @@ class Enemy
 
     def damage
         @health -= 1
+    end
+
+    def knocked_back
+        $enemy_x += Gosu::offset_x(@knockback_angle, @knockback)
+        $enemy_y += Gosu::offset_y(@knockback_angle, @knockback)
+
+        @knockback *= 0.8
+    end
+
+
+    def hit(angle)
+        damage
+        @knockback_angle = angle
+        @knockback = @knockback_distance
     end
 
     def closest_angle(angle)
@@ -130,6 +148,8 @@ class Enemy
             if @charging_attack
                 charge_attack
             end
+
+            knocked_back
 
             stop_displaying_attack
         end
