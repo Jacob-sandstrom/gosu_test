@@ -54,13 +54,13 @@ class Game < Gosu::Window
             collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y - 32, 32, $enemy_x, $enemy_y, 64, 64)
             angle = 0
         when 90
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y + 16, 32, $enemy_x, $enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y - 16, 32, $enemy_x, $enemy_y, 64, 64)
             angle = 90
         when 180
             collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y, 32, $enemy_x, $enemy_y, 64, 64)
             angle = 180
         when 270
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x + 32, $player_y + 16, 32, $enemy_x, $enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 32, $player_y - 16, 32, $enemy_x, $enemy_y, 64, 64)
             angle = 270
         end
         if collision

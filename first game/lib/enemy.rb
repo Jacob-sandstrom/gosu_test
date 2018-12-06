@@ -4,7 +4,7 @@ require_relative 'collision_detection.rb'
 class Enemy
     def initialize
         @collision_detection = Collision_detection.new
-        @image = Gosu::Image.new("../img/enemy.png")
+        @image = Gosu::Image.new("../img/enemy2.png")
         @attack_img = Gosu::Image.new("../img/block.png")
 
         $enemy_x, $enemy_y = $enemy_spawn
