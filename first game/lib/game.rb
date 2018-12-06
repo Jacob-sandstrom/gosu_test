@@ -68,6 +68,15 @@ class Game < Gosu::Window
         end
 
     end
+
+    def has_player_been_hit
+        if $player_hit
+            @player.hit($absolute_angle)
+            $player_hit = false
+
+
+        end
+    end
     
 
     def update
@@ -98,7 +107,7 @@ class Game < Gosu::Window
         end
 
         #   attack
-        if (Gosu.button_down? Gosu::KB_SPACE) && !$attack_on_cooldown
+        if (Gosu.button_down? Gosu::KB_SPACE or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
             @player.attack
             attack
         end
@@ -108,6 +117,7 @@ class Game < Gosu::Window
         @player.move
         @enemy.update
         
+        has_player_been_hit
 
 
     end

@@ -29,7 +29,7 @@ class Enemy
         @charging_attack = false
         
 
-        @absolute_angle = 0
+        $absolute_angle = 0
     end
 
     def damage
@@ -94,11 +94,20 @@ class Enemy
 
 
     end
+    
+    def player_hit?
+        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, 16, ($enemy_x + 16 + Gosu::offset_x($absolute_angle, 64)), ($enemy_y + 16 + Gosu::offset_y($absolute_angle, 64)), 32, 32)
+
+        if collision
+            $player_hit = true
+        end
+    end
 
     def execute_attack
         @attack_start_life = Gosu.milliseconds
         @display_attack = true
         @charging_attack = false
+        player_hit?
     end
 
     def charge_attack
@@ -109,9 +118,10 @@ class Enemy
 
     end
 
+
     def attack(angle)
         @charging_attack = true
-        @absolute_angle = closest_angle(angle)
+        $absolute_angle = closest_angle(angle)
         @attack_start_charge = Gosu.milliseconds
         
     end
@@ -160,7 +170,7 @@ class Enemy
             @image.draw($enemy_x, $enemy_y, 8)
             
             if @display_attack
-                @attack_img.draw($enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64), $enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64), 8)
+                @attack_img.draw($enemy_x + 16 + Gosu::offset_x($absolute_angle, 64), $enemy_y + 16 + Gosu::offset_y($absolute_angle, 64), 8)
             end
             
         end

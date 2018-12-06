@@ -16,6 +16,14 @@ class Player
         @x_direction = 0
         @y_direction = 0
         @speed = 4
+
+
+        @knockback_angle = 0
+        @knockback_distance = 20
+        @knockback = @knockback_distance
+
+
+        @health = 5
     end
 
 
@@ -84,40 +92,66 @@ class Player
     end
 
 
+
+    def damage
+        @health -= 1
+    end
+
+    def knocked_back
+        $player_x += Gosu::offset_x(@knockback_angle, @knockback)
+        $player_y += Gosu::offset_y(@knockback_angle, @knockback)
+
+        @knockback *= 0.8
+    end
+
+
+    def hit(angle)
+        damage
+        @knockback_angle = angle
+        @knockback = @knockback_distance
+    end
+
+
     def move
-        if @x_direction == -1 && @y_direction == 1
-            $player_x += Gosu.offset_x(225, @speed)
-            $player_y += Gosu.offset_y(225, @speed)
-        elsif @x_direction == 1 && @y_direction == 1
-            $player_x += Gosu.offset_x(135, @speed)
-            $player_y += Gosu.offset_y(135, @speed)
-        elsif @x_direction == 1 && @y_direction == -1
-            $player_x += Gosu.offset_x(45, @speed)
-            $player_y += Gosu.offset_y(45, @speed)
-        elsif @x_direction == -1 && @y_direction == -1
-            $player_x += Gosu.offset_x(315, @speed)
-            $player_y += Gosu.offset_y(315, @speed)
-        else
-            $player_x += @x_direction * @speed
-            $player_y += @y_direction * @speed
+        unless @health <= 0
+            if @x_direction == -1 && @y_direction == 1
+                $player_x += Gosu.offset_x(225, @speed)
+                $player_y += Gosu.offset_y(225, @speed)
+            elsif @x_direction == 1 && @y_direction == 1
+                $player_x += Gosu.offset_x(135, @speed)
+                $player_y += Gosu.offset_y(135, @speed)
+            elsif @x_direction == 1 && @y_direction == -1
+                $player_x += Gosu.offset_x(45, @speed)
+                $player_y += Gosu.offset_y(45, @speed)
+            elsif @x_direction == -1 && @y_direction == -1
+                $player_x += Gosu.offset_x(315, @speed)
+                $player_y += Gosu.offset_y(315, @speed)
+            else
+                $player_x += @x_direction * @speed
+                $player_y += @y_direction * @speed
+            end
+            
+            $player_x %= 1000
+            $player_y %= 700
+
+            knocked_back
         end
-        
-        $player_x %= 1000
-        $player_y %= 700
     end
 
 
     def draw
-        @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1, color = 0x9f_ffffff)
-        
-        
-        if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
-            $attack_on_cooldown = false
-        end
-        
-        facing_direction
-        if display_attack
-            @basic_atk.draw_rot($player_x + 16, $player_y + 16, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
+        unless @health <= 0
+            @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1, color = 0x9f_ffffff)
+            
+            
+            if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
+                $attack_on_cooldown = false
+            end
+            
+            facing_direction
+            if display_attack
+                @basic_atk.draw_rot($player_x + 16, $player_y + 16, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
+            end
         end
     end
 
