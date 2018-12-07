@@ -22,6 +22,9 @@ class Player
         @knockback_distance = 20
         @knockback = @knockback_distance
 
+        @shielding = false
+        @perfect_shielding_duration = 200
+        @shield_start_time = 0
 
         @health = 5
     end
@@ -91,10 +94,30 @@ class Player
         return display_attack, @attack_dir
     end
 
+    def is_shielding
 
+        if (@perfect_shielding_duration >= Gosu::milliseconds -  @shield_start_time) && @shielding
+            @perfect_shielding = true
+        else
+            @perfect_shielding = false
+        end 
 
-    def damage
-        @health -= 1
+    end
+
+    def shield
+        unless @shielding
+            @shield_start_time = Gosu::milliseconds
+        end
+
+        @shielding = true
+        
+    end
+    def dont_shield
+        @shielding = false
+    end
+
+    def damage(multiplier)
+        @health -= 1 * multiplier
     end
 
     def knocked_back
@@ -106,9 +129,20 @@ class Player
 
 
     def hit(angle)
-        damage
-        @knockback_angle = angle
-        @knockback = @knockback_distance
+        if @perfect_shielding
+            damage(0)
+            @knockback_angle = angle
+            @knockback = 0
+        elsif @shielding
+            damage(0.5)
+            @knockback_angle = angle
+            @knockback = @knockback_distance / 2
+        else
+            damage(1)
+            @knockback_angle = angle
+            @knockback = @knockback_distance
+
+        end
     end
 
 
@@ -135,6 +169,7 @@ class Player
             $player_y %= 700
 
             knocked_back
+            is_shielding
         end
     end
 
@@ -153,6 +188,9 @@ class Player
                 @basic_atk.draw_rot($player_x + 16, $player_y + 16, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
             end
         end
+
+        $font.draw(@perfect_shielding, 200, 200, 0, scale_x = 2, scale_y = 2, color = 0xff_00ff00)
+        
     end
 
 

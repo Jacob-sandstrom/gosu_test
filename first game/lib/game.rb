@@ -107,9 +107,14 @@ class Game < Gosu::Window
         end
 
         #   attack
-        if (Gosu.button_down? Gosu::KB_SPACE or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
+        if (Gosu.button_down? Gosu::KB_J or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
             @player.attack
             attack
+        end
+        if (Gosu.button_down? Gosu::KB_K or Gosu::button_down? Gosu::GP_BUTTON_1)
+            @player.shield
+        else
+            @player.dont_shield
         end
 
 
@@ -127,6 +132,8 @@ class Game < Gosu::Window
         draw_rect(0, 0, 1000, 700, Gosu::Color.argb(0xff_f0f0f0))
         @player.draw
         @enemy.draw
+
+        # $font.draw($player_x, 200, 200, 0, scale_x = 2, scale_y = 2, color = 0xff_00ff00)
 
 
         # @testbox.draw
