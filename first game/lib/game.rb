@@ -105,7 +105,8 @@ class Game < Gosu::Window
         else 
             @player.dont_move_y
         end
-
+        
+        has_player_been_hit
         #   attack
         if (Gosu.button_down? Gosu::KB_J or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
             @player.attack
@@ -122,7 +123,6 @@ class Game < Gosu::Window
         @player.move
         @enemy.update
         
-        has_player_been_hit
 
 
     end

@@ -4,6 +4,9 @@ class Player
     def initialize
         @character = Gosu::Image.new("../img/circle.png")
         @basic_atk = Gosu::Image.new("../img/slash.png")
+        @shield_img = Gosu::Image.new("../img/shield.png")
+
+
         $player_x, $player_y = $spawnpoint
         @face_dir_angle = 0
         @attack_dir = @face_dir_angle
@@ -78,6 +81,7 @@ class Player
     def display_attack
         if @attack_display_time >= Gosu.milliseconds  - @cooldown_start_time
             return true
+            @shielding = false
         else 
             return false
         end
@@ -88,6 +92,7 @@ class Player
         $attack_on_cooldown = true
 
         @attack_dir = @face_dir_angle
+
     end
 
     def attack_collision
@@ -107,6 +112,7 @@ class Player
     def shield
         unless @shielding
             @shield_start_time = Gosu::milliseconds
+            @sheild_dir = @face_dir_angle
         end
 
         @shielding = true
@@ -129,17 +135,19 @@ class Player
 
 
     def hit(angle)
-        if @perfect_shielding
+
+        @knockback_angle = angle
+        needed_blocking_angle = angle - 180
+        needed_blocking_angle %= 360
+        
+        if @perfect_shielding && needed_blocking_angle == @sheild_dir
             damage(0)
-            @knockback_angle = angle
             @knockback = 0
-        elsif @shielding
+        elsif @shielding && needed_blocking_angle == @sheild_dir
             damage(0.5)
-            @knockback_angle = angle
             @knockback = @knockback_distance / 2
         else
             damage(1)
-            @knockback_angle = angle
             @knockback = @knockback_distance
 
         end
@@ -170,6 +178,12 @@ class Player
 
             knocked_back
             is_shielding
+            facing_direction
+
+
+            if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
+                $attack_on_cooldown = false
+            end
         end
     end
 
@@ -179,17 +193,17 @@ class Player
             @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1, color = 0x9f_ffffff)
             
             
-            if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
-                $attack_on_cooldown = false
-            end
-            
-            facing_direction
             if display_attack
                 @basic_atk.draw_rot($player_x + 16, $player_y + 16, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
             end
+
+            if @shielding
+                @shield_img.draw_rot($player_x + 16, $player_y + 16, 11, @sheild_dir, center_x = 0.5, center_y = 0.5)
+            end
+
         end
 
-        $font.draw(@perfect_shielding, 200, 200, 0, scale_x = 2, scale_y = 2, color = 0xff_00ff00)
+        # $font.draw(@perfect_shielding, 200, 200, 0, scale_x = 2, scale_y = 2, color = 0xff_00ff00)
         
     end
 
