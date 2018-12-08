@@ -106,24 +106,24 @@ class Game < Gosu::Window
             @player.dont_move_y
         end
         
-        has_player_been_hit
         #   attack
-        if (Gosu.button_down? Gosu::KB_J or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
-            @player.attack
-            attack
-        end
         if (Gosu.button_down? Gosu::KB_K or Gosu::button_down? Gosu::GP_BUTTON_1)
             @player.shield
         else
             @player.dont_shield
         end
-
-
-
+        if (Gosu.button_down? Gosu::KB_J or Gosu::button_down? Gosu::GP_BUTTON_0) && !$attack_on_cooldown
+            @player.attack
+            attack
+        end
+        
+        
+        
         @player.move
         @enemy.update
+        has_player_been_hit
         
-
+        
 
     end
 

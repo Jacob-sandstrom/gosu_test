@@ -81,7 +81,6 @@ class Player
     def display_attack
         if @attack_display_time >= Gosu.milliseconds  - @cooldown_start_time
             return true
-            @shielding = false
         else 
             return false
         end
@@ -153,6 +152,12 @@ class Player
         end
     end
 
+    def dont_shield_if_attacking
+        if display_attack
+            @shielding = false
+        end
+    end
+
 
     def move
         unless @health <= 0
@@ -184,6 +189,8 @@ class Player
             if Gosu.milliseconds - @cooldown_start_time >= @attack_cooldown
                 $attack_on_cooldown = false
             end
+
+            dont_shield_if_attacking
         end
     end
 
