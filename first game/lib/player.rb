@@ -148,7 +148,6 @@ class Player
         else
             damage(1)
             @knockback = @knockback_distance
-
         end
     end
 
