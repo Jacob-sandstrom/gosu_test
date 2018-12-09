@@ -112,7 +112,7 @@ class Gosu_test < Gosu::Window
 
 
         #   Enable to edit map
-        @map_editing_enabled = false
+        @map_editing_enabled = true
 
 
 
@@ -170,6 +170,7 @@ class Gosu_test < Gosu::Window
                 i += 1
             end
         end
+
         if Gosu.button_down? Gosu::MS_RIGHT
             i = 0
             while i < $height_in_blocks
@@ -302,7 +303,6 @@ class Gosu_test < Gosu::Window
         
 
 
-        #   Check if player is on the ground
         
         #
         #   Jumping
@@ -319,6 +319,7 @@ class Gosu_test < Gosu::Window
         
         #   Check collision against all blocks on map
         check_collison
+        #   Check if player is on the ground
         on_the_ground
 
         #   calculate angle, decrease cooldown and move projectile

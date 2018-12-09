@@ -23,7 +23,7 @@ class Enemy
         @knockback_distance = 20
         @knockback = @knockback_distance
 
-        @attack_lifetime = 300
+        @attack_lifetime = 200
         @display_attack = false
         @attack_start_life = 0
         @charging_attack = false

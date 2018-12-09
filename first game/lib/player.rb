@@ -177,8 +177,8 @@ class Player
                 $player_y += @y_direction * @speed
             end
             
-            $player_x %= 1000
-            $player_y %= 700
+            # $player_x %= 1000
+            # $player_y %= 700
 
             knocked_back
             is_shielding
@@ -196,7 +196,7 @@ class Player
 
     def draw
         unless @health <= 0
-            @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1, color = 0x9f_ffffff)
+            @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1)
             
             
             if display_attack

@@ -2,6 +2,8 @@ require 'gosu'
 require_relative 'collision_detection.rb'
 require_relative 'player.rb'
 require_relative 'enemy.rb'
+require_relative 'map_editor.rb'
+
 
 
 
@@ -22,9 +24,11 @@ require_relative 'enemy.rb'
 
 class Game < Gosu::Window
     def initialize 
-        width = 1000
-        height = 700
-        super width, height
+        $width_in_blocks = 60
+        $height_in_blocks = 40
+        width = 1920
+        height = 1080
+        super width, height, fullscreen:true
         self.caption = "Game"
 
 
@@ -36,6 +40,8 @@ class Game < Gosu::Window
         @player = Player.new
         @enemy = Enemy.new
         @enemies =[]
+
+        @map_editor = Map_editor.new
 
         # @testbox = Test_box.new
 
@@ -77,9 +83,16 @@ class Game < Gosu::Window
 
         end
     end
-    
+
 
     def update
+        #
+        #   get mouse location
+        #
+        $mouse_x = mouse_x
+        $mouse_y = mouse_y
+
+        
         #
         #   Movement    X
         #
@@ -123,17 +136,18 @@ class Game < Gosu::Window
         @enemy.update
         has_player_been_hit
         
-        
+        @map_editor.update
 
     end
 
 
     def draw
-        draw_rect(0, 0, 1000, 700, Gosu::Color.argb(0xff_f0f0f0))
+        # draw_rect(0, 0, 1000, 700, Gosu::Color.argb(0xff_f0f0f0))
         @player.draw
         @enemy.draw
 
-        # $font.draw($player_x, 200, 200, 0, scale_x = 2, scale_y = 2, color = 0xff_00ff00)
+        @map_editor.draw
+
 
 
         # @testbox.draw

@@ -43,21 +43,18 @@ class Map
         
         $current_map = $maps[$map_x][$map_y]
 
-            i = 0
-            while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    if $current_map[j + i*$width_in_blocks] == "#"
-                    @block_img.draw(j*$block_size, i*$block_size, 0)
-                    end
-                    j += 1
+        i = 0
+        while i < $height_in_blocks
+            j = 0
+            while j < $width_in_blocks
+                if $current_map[j + i*$width_in_blocks] == "#"
+                @block_img.draw(j*$block_size, i*$block_size, 0)
                 end
-                i += 1
+                j += 1
             end
-            
-            
+            i += 1
+        end    
+        
     end
-
-
 
 end
