@@ -12,7 +12,7 @@ class Enemy
 
         @x_direction = 0
         @y_direction = 0
-        @speed = 5
+        @speed = 10
         # @wait_between_moves = 2000
         @attack_charge_time = 500
         @attack_charge_start = 0

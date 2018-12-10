@@ -234,11 +234,11 @@ class Map_editor
 
                         id = $tile_id.index($floortiles[j + i*$width_in_blocks])
 
-                        unless $floortiles[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
+                        unless $floortiles[j + i*$width_in_blocks] == "." 
                             $tiles[id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
                         end
                         
-                        unless $object_map[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
+                        unless $object_map[j + i*$width_in_blocks] == "." 
                             @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
                         end
                     end

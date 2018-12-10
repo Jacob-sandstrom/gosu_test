@@ -25,8 +25,8 @@ require_relative 'camera.rb'
 
 class Game < Gosu::Window
     def initialize 
-        $width_in_blocks = 3200
-        $height_in_blocks = 400
+        $width_in_blocks = 600
+        $height_in_blocks = 340
         width = 1920
         height = 1080
         super width, height, fullscreen:true
@@ -34,7 +34,7 @@ class Game < Gosu::Window
 
 
 
-        $spawnpoint = [width/4, height/2]
+        $spawnpoint = [$width_in_blocks * 32 /2, $height_in_blocks * 32 /2]
         $enemy_spawn = [width/1.5, height/2]
 
         @camera = Camera.new
