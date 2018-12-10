@@ -25,7 +25,7 @@ require_relative 'camera.rb'
 
 class Game < Gosu::Window
     def initialize 
-        $width_in_blocks = 800
+        $width_in_blocks = 3200
         $height_in_blocks = 400
         width = 1920
         height = 1080

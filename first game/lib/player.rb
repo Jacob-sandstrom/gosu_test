@@ -18,7 +18,7 @@ class Player
 
         @x_direction = 0
         @y_direction = 0
-        @speed = 4
+        @speed = 10
 
 
         @knockback_angle = 0
