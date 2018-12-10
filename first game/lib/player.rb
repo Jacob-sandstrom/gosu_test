@@ -196,15 +196,15 @@ class Player
 
     def draw
         unless @health <= 0
-            @character.draw($player_x, $player_y, 10, scale_x = 1, scale_y = 1)
+            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
             
             if display_attack
-                @basic_atk.draw_rot($player_x + 16, $player_y + 16, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
+                @basic_atk.draw_rot($player_x + 16 - $cam_x, $player_y + 16 - $cam_y, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
             end
 
             if @shielding
-                @shield_img.draw_rot($player_x + 16, $player_y + 16, 11, @sheild_dir, center_x = 0.5, center_y = 0.5)
+                @shield_img.draw_rot($player_x + 16 - $cam_x, $player_y + 16 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5)
             end
 
         end

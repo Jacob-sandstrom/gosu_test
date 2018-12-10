@@ -8,7 +8,7 @@ class Enemy
         @attack_img = Gosu::Image.new("../img/block.png")
 
         $enemy_x, $enemy_y = $enemy_spawn
-        @health = 5
+        @health = 0
 
         @x_direction = 0
         @y_direction = 0
@@ -167,10 +167,10 @@ class Enemy
 
     def draw
         unless @health <= 0
-            @image.draw($enemy_x, $enemy_y, 8)
+            @image.draw($enemy_x - $cam_x, $enemy_y - $cam_y, 8)
             
             if @display_attack
-                @attack_img.draw($enemy_x + 16 + Gosu::offset_x($absolute_angle, 64), $enemy_y + 16 + Gosu::offset_y($absolute_angle, 64), 8)
+                @attack_img.draw($enemy_x + 16 + Gosu::offset_x($absolute_angle, 64) - $cam_x, $enemy_y + 16 + Gosu::offset_y($absolute_angle, 64) - $cam_y, 8)
             end
             
         end

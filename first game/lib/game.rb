@@ -3,6 +3,7 @@ require_relative 'collision_detection.rb'
 require_relative 'player.rb'
 require_relative 'enemy.rb'
 require_relative 'map_editor.rb'
+require_relative 'camera.rb'
 
 
 
@@ -24,8 +25,8 @@ require_relative 'map_editor.rb'
 
 class Game < Gosu::Window
     def initialize 
-        $width_in_blocks = 60
-        $height_in_blocks = 40
+        $width_in_blocks = 800
+        $height_in_blocks = 400
         width = 1920
         height = 1080
         super width, height, fullscreen:true
@@ -35,6 +36,8 @@ class Game < Gosu::Window
 
         $spawnpoint = [width/4, height/2]
         $enemy_spawn = [width/1.5, height/2]
+
+        @camera = Camera.new
 
         @collision_detection = Collision_detection.new 
         @player = Player.new
@@ -138,6 +141,7 @@ class Game < Gosu::Window
         
         @map_editor.update
 
+        @camera.update
     end
 
 
@@ -148,7 +152,7 @@ class Game < Gosu::Window
 
         @map_editor.draw
 
-
+        @camera.draw
 
         # @testbox.draw
     end

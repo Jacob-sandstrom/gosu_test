@@ -46,24 +46,28 @@ class Map_editor
         if Gosu.button_down? Gosu::MS_LEFT 
             i = 0
             while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
-                    if collision
-                        begin
-                            $floortiles[j + i*$width_in_blocks] = $current_tile_id
-                        rescue
-                            length = $floortiles.length
-                            iterations = 0
-                            index_of_change = j + i*$width_in_blocks
-                            while length + iterations < index_of_change
-                                $floortiles += "."
-                                iterations += 1
+                if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                    j = 0
+                    while j < $width_in_blocks
+                        if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+                                begin
+                                    $floortiles[j + i*$width_in_blocks] = $current_tile_id
+                                rescue
+                                    length = $floortiles.length
+                                    iterations = 0
+                                    index_of_change = j + i*$width_in_blocks
+                                    while length + iterations < index_of_change
+                                        $floortiles += "."
+                                        iterations += 1
+                                    end
+                                end
+                                update_existing_floor
                             end
                         end
-                        update_existing_floor
+                        j += 1
                     end
-                    j += 1
                 end
                 i += 1
             end
@@ -72,24 +76,28 @@ class Map_editor
         if Gosu.button_down? Gosu::MS_RIGHT
             i = 0
             while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
-                    if collision
-                        begin
-                            $floortiles[j + i*$width_in_blocks] = "."
-                        rescue
-                            length = $floortiles.length
-                            iterations = 0
-                            index_of_change = j + i*$width_in_blocks
-                            while length + iterations < index_of_change
-                                $floortiles += "."
-                                iterations += 1
+                if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                    j = 0
+                    while j < $width_in_blocks
+                        if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+                                begin
+                                    $floortiles[j + i*$width_in_blocks] = "."
+                                rescue
+                                    length = $floortiles.length
+                                    iterations = 0
+                                    index_of_change = j + i*$width_in_blocks
+                                    while length + iterations < index_of_change
+                                        $floortiles += "."
+                                        iterations += 1
+                                    end
+                                end
+                                update_existing_floor
                             end
                         end
-                        update_existing_floor
+                        j += 1
                     end
-                    j += 1
                 end
                 i += 1
             end
@@ -107,24 +115,28 @@ class Map_editor
         if Gosu.button_down? Gosu::MS_LEFT 
             i = 0
             while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
-                    if collision
-                        begin
-                            $object_map[j + i*$width_in_blocks] = "#"
-                        rescue
-                            length = $object_map.length
-                            iterations = -1
-                            index_of_change = j + i*$width_in_blocks
-                            while length + iterations < index_of_change
-                                $object_map += "."
-                                iterations += 1
+                if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                    j = 0
+                    while j < $width_in_blocks
+                        if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+                                begin
+                                    $object_map[j + i*$width_in_blocks] = "#"
+                                rescue
+                                    length = $object_map.length
+                                    iterations = -1
+                                    index_of_change = j + i*$width_in_blocks
+                                    while length + iterations < index_of_change
+                                        $object_map += "."
+                                        iterations += 1
+                                    end
+                                end
+                                update_existing_objects
                             end
                         end
-                        update_existing_objects
+                        j += 1
                     end
-                    j += 1
                 end
                 i += 1
             end
@@ -133,24 +145,28 @@ class Map_editor
         if Gosu.button_down? Gosu::MS_RIGHT
             i = 0
             while i < $height_in_blocks
-                j = 0
-                while j < $width_in_blocks
-                    collision, axis, projection = @collision_detection.collide?($mouse_x, $mouse_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
-                    if collision
-                        begin
-                            $object_map[j + i*$width_in_blocks] = "."
-                        rescue
-                            length = $object_map.length
-                            iterations = -1
-                            index_of_change = j + i*$width_in_blocks
-                            while length + iterations < index_of_change
-                                $object_map += "."
-                                iterations += 1
+                if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                    j = 0
+                    while j < $width_in_blocks
+                        if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+                                begin
+                                    $object_map[j + i*$width_in_blocks] = "."
+                                rescue
+                                    length = $object_map.length
+                                    iterations = -1
+                                    index_of_change = j + i*$width_in_blocks
+                                    while length + iterations < index_of_change
+                                        $object_map += "."
+                                        iterations += 1
+                                    end
+                                end
+                                update_existing_objects
                             end
                         end
-                        update_existing_objects
+                        j += 1
                     end
-                    j += 1
                 end
                 i += 1
             end
@@ -211,23 +227,24 @@ class Map_editor
 
         i = 0
         while i < $height_in_blocks
-            j = 0
-            while j < $width_in_blocks
-                # if $floortiles[j + i*$width_in_blocks] == "#"
-                # @block_img.draw(j*$block_size, i*$block_size, 0)
-                # end
+            if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                j = 0
+                while j < $width_in_blocks
+                    if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
 
-                id = $tile_id.index($floortiles[j + i*$width_in_blocks])
+                        id = $tile_id.index($floortiles[j + i*$width_in_blocks])
 
-                unless $floortiles[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
-                    $tiles[id.to_i].draw(j*$block_size, i*$block_size, 0)
+                        unless $floortiles[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
+                            $tiles[id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
+                        end
+                        
+                        unless $object_map[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
+                            @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
+                        end
+                    end
+
+                    j += 1
                 end
-                
-                unless $object_map[j + i*$width_in_blocks] == "." || $object_map[j + i*$width_in_blocks] == nil
-                    @tree.draw(j*$block_size - 32, i*$block_size - 64, 1)
-                end
-
-                j += 1
             end
             i += 1
         end  
