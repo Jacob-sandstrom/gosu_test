@@ -249,10 +249,10 @@ class Map_editor
             i += 1
         end  
         
-        $font.draw("floor editing enabled:", 10, 10, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@floor_editing_enabled, 400, 10, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw("object editing enabled:", 10, 50, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@object_editing_enabled, 400, 50, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw("floor editing enabled:", 10, 10, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw(@floor_editing_enabled, 400, 10, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw("object editing enabled:", 10, 50, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw(@object_editing_enabled, 400, 50, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
         
     end
