@@ -87,7 +87,6 @@ class Game < Gosu::Window
         end
     end
 
-
     def update
         #
         #   get mouse location
@@ -146,13 +145,18 @@ class Game < Gosu::Window
 
 
     def draw
-        # draw_rect(0, 0, 1000, 700, Gosu::Color.argb(0xff_f0f0f0))
+        # draw_rect(0, 0, 5760, 3264, Gosu::Color.argb(0xf5_000000), 100)
+        # draw_rect($player_x-64 - $cam_x, $player_y-64 - $cam_y, 170, 170, Gosu::Color.argb(0x2f_ffffff), 100)
+
+
         @player.draw
         @enemy.draw
 
         @map_editor.draw
 
         @camera.draw
+
+
 
         # @testbox.draw
     end

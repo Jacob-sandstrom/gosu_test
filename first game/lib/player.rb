@@ -6,6 +6,8 @@ class Player
         @basic_atk = Gosu::Image.new("../img/slash.png")
         @shield_img = Gosu::Image.new("../img/shield.png")
 
+        @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
+
 
         $player_x, $player_y = $spawnpoint
         @face_dir_angle = 0
@@ -206,6 +208,10 @@ class Player
             if @shielding
                 @shield_img.draw_rot($player_x + 16 - $cam_x, $player_y + 16 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5)
             end
+
+
+            # @light.draw($player_x - 32 - $cam_x, $player_y - 32 - $cam_y, 100, 1, 1, color = 0x7f_ffffff)
+
 
         end
 

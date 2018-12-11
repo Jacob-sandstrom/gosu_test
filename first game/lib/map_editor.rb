@@ -21,6 +21,7 @@ class Map_editor
 
 
         @tree = Gosu::Image.new("../img/dead_tree.png", tileable: true)
+        @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
 
 
         $block_size = 32
@@ -240,6 +241,7 @@ class Map_editor
                         
                         unless $object_map[j + i*$width_in_blocks] == "." 
                             @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
+                            @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
                         end
                     end
 
