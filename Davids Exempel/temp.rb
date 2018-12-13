@@ -24,6 +24,13 @@ end
 class Enemy < GameObject
 end
 
+class Enemy_flying < Enemy
+end
+
+class Enemy_grounded < Enemy
+end
+
+
 class Player < GameObject
 end
 
