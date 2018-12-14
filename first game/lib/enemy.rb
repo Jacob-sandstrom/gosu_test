@@ -33,7 +33,7 @@ class Enemy
     end
 
     def get_xy
-        return @enemy_x, @enemy_y
+        return [@enemy_x, @enemy_y]
     end
 
     def absolute_angle
