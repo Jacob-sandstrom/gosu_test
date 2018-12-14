@@ -2,6 +2,21 @@
 
 class Player
     def initialize
+        @animation_frames = Gosu::Image.load_tiles("../img/example sprite sheet.png", 64, 64, tileable: true)
+
+        @walk_down = @animation_frames[0..3]
+        @walk_left = @animation_frames[4..7]
+        @walk_right = @animation_frames[8..11]
+        @walk_up = @animation_frames[12..15]
+        @current_frame = @animation_frames[0]
+
+        @current_frames_dir = @walk_down
+
+        @frame_display_time = 100
+        @frame_display_start = 0
+        @frame_i = 0
+
+
         @character = Gosu::Image.new("../img/circle.png")
         @basic_atk = Gosu::Image.new("../img/slash.png")
         @shield_img = Gosu::Image.new("../img/shield.png")
@@ -52,7 +67,6 @@ class Player
         @y_direction = -1
     end
 
-
     def dont_move_x
         @x_direction = 0
     end
@@ -66,14 +80,18 @@ class Player
         case @x_direction 
         when 1
             @face_dir_angle = 90
+            @current_frames_dir = @walk_right
         when -1 
             @face_dir_angle = 270
+            @current_frames_dir = @walk_left
         when 0 
             case @y_direction
             when 1
                 @face_dir_angle = 180
+                @current_frames_dir = @walk_down
             when -1
                 @face_dir_angle = 0
+                @current_frames_dir = @walk_up
             end
         end
 
@@ -159,6 +177,19 @@ class Player
         end
     end
 
+    def update_frame
+        
+        if @frame_display_time <= Gosu.milliseconds - @frame_display_start
+            @frame_i += 1
+            @frame_i %= 4
+            @frame_display_start = Gosu.milliseconds
+            @current_frame = @current_frames_dir[@frame_i]
+        end
+        if @x_direction == 0 && @y_direction == 0
+            @current_frame = @current_frames_dir[0]
+            @frame_i = 0
+        end
+    end
 
     def move
         unless @health <= 0
@@ -192,17 +223,27 @@ class Player
             end
 
             dont_shield_if_attacking
+
+
+            update_frame
         end
     end
 
 
     def draw
         unless @health <= 0
-            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # i = 0
+            # while i < 16
+            #     @animation_frames[i].draw($player_x - $cam_x + i*64, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            #     i += 1
+            # end
+
+            @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
             
             if display_attack
-                @basic_atk.draw_rot($player_x + 16 - $cam_x, $player_y + 16 - $cam_y, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
+                @basic_atk.draw_rot($player_x + 32 - $cam_x, $player_y + 32 - $cam_y, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
             end
 
             if @shielding

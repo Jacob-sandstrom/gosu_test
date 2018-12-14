@@ -11,6 +11,17 @@ class Game_object
 
     end
 
+    def move
+
+
+    end
+
+    def face_direction
+
+
+
+    end
+
     
     
 
