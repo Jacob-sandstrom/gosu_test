@@ -104,7 +104,7 @@ class Enemy
     end
     
     def player_hit?
-        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, 16, (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64)), (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64)), 32, 32)
+        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x + 16, $player_y + 22, 16, (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64)), (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64)), 32, 32)
 
         if collision
             $player_hit = true
@@ -142,9 +142,9 @@ class Enemy
 
 
     def ai
-        angle = (Math.atan2(($player_y + 16 - (@enemy_y + 32)), ($player_x + 16 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
+        angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
         angle %= 360
-        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x-16, $player_y-16, @attack_range, @enemy_x, @enemy_y, 64, 64)
+        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, @attack_range, @enemy_x, @enemy_y, 64, 64)
         unless @charging_attack || on_cooldown_after_attack
             if collision
                 attack(angle)

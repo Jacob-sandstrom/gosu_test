@@ -179,15 +179,14 @@ class Player
 
     def update_frame
         
-        if @frame_display_time <= Gosu.milliseconds - @frame_display_start
+        if @x_direction == 0 && @y_direction == 0
+            @current_frame = @current_frames_dir[0]
+            @frame_i = 0
+        elsif @frame_display_time <= Gosu.milliseconds - @frame_display_start
             @frame_i += 1
             @frame_i %= 4
             @frame_display_start = Gosu.milliseconds
             @current_frame = @current_frames_dir[@frame_i]
-        end
-        if @x_direction == 0 && @y_direction == 0
-            @current_frame = @current_frames_dir[0]
-            @frame_i = 0
         end
     end
 

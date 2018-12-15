@@ -16,10 +16,10 @@ require_relative 'camera.rb'
 
 #     def draw
 
-#         @image.draw($player_x - 16, $player_y - 32, 5)
-#         @image.draw($player_x, $player_y - 16, 5)
-#         @image.draw($player_x - 16, $player_y, 5)
-#         @image.draw($player_x - 32, $player_y - 16, 5)
+#         @image.draw($player_x - $cam_x, $player_y - 16 - $cam_y, 5)
+#         @image.draw($player_x + 16 - $cam_x, $player_y - $cam_y, 5)
+#         @image.draw($player_x - $cam_x, $player_y + 16 - $cam_y, 5)
+#         @image.draw($player_x - 16 - $cam_x, $player_y - $cam_y, 5)
 #     end
 # end
 
@@ -61,16 +61,16 @@ class Game < Gosu::Window
         enemy_x, enemy_y = @enemy.get_xy
         case attack_dir
         when 0
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y - 32, 32, enemy_x, enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y - 16, 32, enemy_x, enemy_y, 64, 64)
             angle = 0
         when 90
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y - 16, 32, enemy_x, enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x + 16, $player_y, 32, enemy_x, enemy_y, 64, 64)
             angle = 90
         when 180
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y, 32, enemy_x, enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x, $player_y + 16, 32, enemy_x, enemy_y, 64, 64)
             angle = 180
         when 270
-            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 32, $player_y - 16, 32, enemy_x, enemy_y, 64, 64)
+            collision, projection_distance, angle = @collision_detection.circle_with_box_collison($player_x - 16, $player_y, 32, enemy_x, enemy_y, 64, 64)
             angle = 270
         end
         if collision
