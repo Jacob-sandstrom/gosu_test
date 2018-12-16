@@ -30,8 +30,8 @@ class Camera
 
     def draw
 
-        # $font.draw($cam_x, 10, 100, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        # $font.draw($cam_y, 10, 140, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw($cam_x + $mouse_x, 10, 100, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw($cam_y + $mouse_y, 10, 140, 0, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
     end
 
 end

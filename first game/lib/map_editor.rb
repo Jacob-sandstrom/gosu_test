@@ -239,9 +239,16 @@ class Map_editor
                             $tiles[id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
                         end
                         
-                        unless $object_map[j + i*$width_in_blocks] == "." 
-                            @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
-                            # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
+                        if i*$block_size - 32 > $player_y
+                            unless $object_map[j + i*$width_in_blocks] == "." 
+                                @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 11)
+                                # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
+                            end
+                        else
+                            unless $object_map[j + i*$width_in_blocks] == "." 
+                                @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
+                                # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
+                            end
                         end
                     end
 

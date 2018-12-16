@@ -35,7 +35,7 @@ class Game < Gosu::Window
 
 
         $spawnpoint = [$width_in_blocks * 32 /2, $height_in_blocks * 32 /2]
-        $enemy_spawn = [width/1.5, height/2]
+        $enemy_spawn = [1950, 3070]
 
         @camera = Camera.new
 

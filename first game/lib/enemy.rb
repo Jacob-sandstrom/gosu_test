@@ -8,7 +8,7 @@ class Enemy
         @attack_img = Gosu::Image.new("../img/block.png")
 
         @enemy_x, @enemy_y = $enemy_spawn
-        @health = 0
+        @health = 5
 
         @x_direction = 0
         @y_direction = 0
@@ -30,6 +30,9 @@ class Enemy
         
 
         @absolute_angle = 0
+
+        @activation_distance = 200
+        @activated = false
     end
 
     def get_xy
@@ -140,16 +143,31 @@ class Enemy
         @enemy_y += Gosu::offset_y(angle, @speed)
     end
 
+    def activate
+        half = @activation_distance/2
+        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x + 32 - half, $player_y + 32 - half, @activation_distance, @enemy_x, @enemy_y, 64, 64)
+
+        if collision
+            @activated = true
+        end
+    end
+
 
     def ai
-        angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
-        angle %= 360
-        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, @attack_range, @enemy_x, @enemy_y, 64, 64)
-        unless @charging_attack || on_cooldown_after_attack
-            if collision
-                attack(angle)
-            else
-                move(angle)
+        unless @activated
+            activate
+        end
+
+        if @activated
+            angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
+            angle %= 360
+            collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, @attack_range, @enemy_x, @enemy_y, 64, 64)
+            unless @charging_attack || on_cooldown_after_attack
+                if collision
+                    attack(angle)
+                else
+                    move(angle)
+                end
             end
         end
 
