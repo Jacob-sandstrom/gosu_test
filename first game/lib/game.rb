@@ -87,6 +87,31 @@ class Game < Gosu::Window
         end
     end
 
+    def check_collison
+
+        i = 0
+        while i < $height_in_blocks
+            if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                j = 0
+                while j < $width_in_blocks
+                    if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                        if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
+                            collision, axis, projection = @collision_detection.collide?($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
+                            if collision
+
+                                @player.project(collision, axis, projection)
+
+                            end
+                        end
+                    end
+                    j += 1
+                end
+            end
+            i += 1
+        end
+
+    end
+
     def update
         #
         #   get mouse location
@@ -140,6 +165,8 @@ class Game < Gosu::Window
         
         @map_editor.update
 
+        
+        check_collison
         @camera.update
     end
 

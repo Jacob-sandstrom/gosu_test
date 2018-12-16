@@ -8,7 +8,7 @@ class Enemy
         @attack_img = Gosu::Image.new("../img/block.png")
 
         @enemy_x, @enemy_y = $enemy_spawn
-        @health = 5
+        @health = 0
 
         @x_direction = 0
         @y_direction = 0

@@ -20,7 +20,8 @@ class Player
         @character = Gosu::Image.new("../img/circle.png")
         @basic_atk = Gosu::Image.new("../img/slash.png")
         @shield_img = Gosu::Image.new("../img/shield.png")
-
+        @shield_down = Gosu::Image.new("../img/shield_down.png")
+        
         @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
 
 
@@ -190,6 +191,18 @@ class Player
         end
     end
 
+    def project(collision, axis, projection)
+
+        if collision
+            if axis == "x"
+                $player_x -= projection
+            else
+                $player_y -= projection
+            end
+        end
+
+    end
+    
     def move
         unless @health <= 0
             if @x_direction == -1 && @y_direction == 1
@@ -246,7 +259,7 @@ class Player
             end
 
             if @shielding
-                @shield_img.draw_rot($player_x + 16 - $cam_x, $player_y + 16 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5)
+                @shield_down.draw_rot($player_x + 31 - $cam_x, $player_y + 64 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5, scale_x = 2, scale_y = 2)
             end
 
 

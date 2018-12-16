@@ -7,7 +7,6 @@ require_relative 'projectile.rb'
 #   ***TODO***
 #
 #
-#   MAKE COLLISION FOR PROJECTILE
 #
 #
 #   ***TODO***
