@@ -259,7 +259,7 @@ class Player
             end
 
             if @shielding
-                @shield_down.draw_rot($player_x + 31 - $cam_x, $player_y + 64 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5, scale_x = 2, scale_y = 2)
+                @shield_down.draw_rot($player_x + 31 - $cam_x, $player_y + 64 - $cam_y, 11, @sheild_dir, center_x = 0.5, center_y = 0.5, scale_x = 1.5, scale_y = 1.5)
             end
 
 
