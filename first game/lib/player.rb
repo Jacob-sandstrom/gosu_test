@@ -22,7 +22,7 @@ class Player
         @shield_img = Gosu::Image.new("../img/shield.png")
         @shield_down = Gosu::Image.new("../img/shield_down.png")
         
-        @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
+        # @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
 
 
         $player_x, $player_y = $spawnpoint
