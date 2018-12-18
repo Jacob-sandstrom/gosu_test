@@ -23,6 +23,10 @@ class Enemy
         @knockback_distance = 20
         @knockback = @knockback_distance
 
+
+        @attack_x = nil
+        @attack_y = nil
+
         @attack_lifetime = 200
         @display_attack = false
         @attack_start_life = 0
@@ -107,10 +111,12 @@ class Enemy
     end
     
     def player_hit?
-        collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x + 16, $player_y + 22, 16, (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64)), (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64)), 32, 32)
+        unless @attack_x == nil || @attack_y == nil
+            collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x + 16, $player_y + 22, 16, @attack_x, @attack_y, 32, 32)
 
-        if collision
-            $player_hit = true
+            if collision
+                $player_hit = true
+            end
         end
     end
 
@@ -118,46 +124,48 @@ class Enemy
         @attack_start_life = Gosu.milliseconds
         @display_attack = true
         @charging_attack = false
-        player_hit?
+        
+        @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
+        @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
     end
-
+    
     def charge_attack
         if @attack_charge_time <= Gosu.milliseconds - @attack_start_charge
             execute_attack
         end
-
-
+        
+        
     end
-
-
+    
+    
     def attack(angle)
         @charging_attack = true
         @absolute_angle = closest_angle(angle)
         @attack_start_charge = Gosu.milliseconds
         
     end
-
+    
     def move(angle)
         
         @enemy_x += Gosu::offset_x(angle, @speed)
         @enemy_y += Gosu::offset_y(angle, @speed)
     end
-
+    
     def activate
         half = @activation_distance/2
         collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x + 32 - half, $player_y + 32 - half, @activation_distance, @enemy_x, @enemy_y, 64, 64)
-
+        
         if collision
             @activated = true
         end
     end
-
-
+    
+    
     def ai
         unless @activated
             activate
         end
-
+        
         if @activated
             angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
             angle %= 360
@@ -170,13 +178,29 @@ class Enemy
                 end
             end
         end
-
+        
     end
-
-
+    
+    def update_attack
+        case @absolute_angle
+        when 0
+            @attack_x -= 5
+        when 90
+            @attack_y -= 5
+        when 180
+            @attack_x += 5
+        when 270
+            @attack_y += 5
+        end
+            
+    end
+    
     def update
         unless @health <= 0
-
+            if @display_attack
+                player_hit?
+                update_attack
+            end
 
 
             ai
@@ -196,7 +220,7 @@ class Enemy
             @image.draw(@enemy_x - $cam_x, @enemy_y - $cam_y, 8)
             
             if @display_attack
-                @attack_img.draw(@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64) - $cam_x, @enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64) - $cam_y, 8)
+                @attack_img.draw(@attack_x - $cam_x, @attack_y - $cam_y, 8)
             end
             
         end

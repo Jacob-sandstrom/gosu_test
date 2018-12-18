@@ -38,6 +38,9 @@ class Player
         @y_direction = 0
         @speed = 5
 
+        @invulnarable = false
+        @invulnarability_time = 200
+        @invulnarability_start_time = 0
 
         @knockback_angle = 0
         @knockback_distance = 20
@@ -155,20 +158,23 @@ class Player
 
 
     def hit(angle)
+        unless @invulnarable
+            @invulnarability_start_time = Gosu::milliseconds
 
-        @knockback_angle = angle
-        needed_blocking_angle = angle - 180
-        needed_blocking_angle %= 360
-        
-        if @perfect_shielding && needed_blocking_angle == @sheild_dir
-            damage(0)
-            @knockback = 0
-        elsif @shielding && needed_blocking_angle == @sheild_dir
-            damage(0.5)
-            @knockback = @knockback_distance / 2
-        else
-            damage(1)
-            @knockback = @knockback_distance
+            @knockback_angle = angle
+            needed_blocking_angle = angle - 180
+            needed_blocking_angle %= 360
+            
+            if @perfect_shielding && needed_blocking_angle == @sheild_dir
+                damage(0)
+                @knockback = 0
+            elsif @shielding && needed_blocking_angle == @sheild_dir
+                damage(0.5)
+                @knockback = @knockback_distance / 2
+            else
+                damage(1)
+                @knockback = @knockback_distance
+            end
         end
     end
 
@@ -202,9 +208,19 @@ class Player
         end
 
     end
+
+    def invulnarability
+        if @invulnarability_time > Gosu::milliseconds - @invulnarability_start_time
+            @invulnarable = true
+        else 
+            @invulnarable = false
+        end
+    end
     
     def move
         unless @health <= 0
+            invulnarability
+
             if @x_direction == -1 && @y_direction == 1
                 $player_x += Gosu.offset_x(225, @speed)
                 $player_y += Gosu.offset_y(225, @speed)
