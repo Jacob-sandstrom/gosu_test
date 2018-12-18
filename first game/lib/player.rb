@@ -42,6 +42,11 @@ class Player
         @invulnarability_time = 200
         @invulnarability_start_time = 0
 
+        @fullblock_perfect = false
+        @fullblock = false
+        @fullblock_duration = 100
+        @fullblock_start = 0 
+
         @knockback_angle = 0
         @knockback_distance = 20
         @knockback = @knockback_distance
@@ -156,11 +161,19 @@ class Player
         @knockback *= 0.8
     end
 
+    def fullblock
+        if @fullblock_duration > Gosu::milliseconds - @fullblock_start
+            @fullblock = true
+        else
+            @fullblock = false
+            @fullblock_perfect = false
+        end
+    end
+
 
     def hit(angle)
-        unless @invulnarable
-            @invulnarability_start_time = Gosu::milliseconds
-
+        unless @invulnarable || @fullblock
+            
             @knockback_angle = angle
             needed_blocking_angle = angle - 180
             needed_blocking_angle %= 360
@@ -168,14 +181,28 @@ class Player
             if @perfect_shielding && needed_blocking_angle == @sheild_dir
                 damage(0)
                 @knockback = 0
+                @fullblock_perfect = true
+                @fullblock_start = Gosu::milliseconds
             elsif @shielding && needed_blocking_angle == @sheild_dir
                 damage(0.5)
                 @knockback = @knockback_distance / 2
+                @fullblock_start = Gosu::milliseconds                
             else
                 damage(1)
                 @knockback = @knockback_distance
+                @invulnarability_start_time = Gosu::milliseconds
             end
         end
+    end
+
+    #   stun enemy if enemy attack hits player directly after a perfect block on another attack
+    def stun_if_blocked
+        if @fullblock_perfect
+            should_stun = true
+        else
+            should_stun = false
+        end
+        return should_stun
     end
 
     def dont_shield_if_attacking
@@ -184,6 +211,7 @@ class Player
         end
     end
 
+    #   switch between frames
     def update_frame
         
         if @x_direction == 0 && @y_direction == 0
@@ -220,6 +248,7 @@ class Player
     def move
         unless @health <= 0
             invulnarability
+            fullblock
 
             if @x_direction == -1 && @y_direction == 1
                 $player_x += Gosu.offset_x(225, @speed)

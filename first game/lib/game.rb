@@ -84,6 +84,7 @@ class Game < Gosu::Window
             absolute_angle = @enemy.absolute_angle
             @player.hit(absolute_angle)
             $player_hit = false
+            should_stun = @player.stun_if_blocked
         end
     end
 
