@@ -125,8 +125,22 @@ class Enemy
         @display_attack = true
         @charging_attack = false
         
-        @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
-        @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
+        # @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
+        # @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
+        case @absolute_angle
+        when 0
+            @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64)) + 32
+            @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
+        when 90
+            @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
+            @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64)) + 32
+        when 180
+            @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64)) - 32
+            @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
+        when 270
+            @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
+            @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64)) - 32
+        end
     end
     
     def charge_attack
