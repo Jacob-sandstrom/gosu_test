@@ -44,7 +44,7 @@ class Player
 
         @fullblock_perfect = false
         @fullblock = false
-        @fullblock_duration = 100
+        @fullblock_duration = 300
         @fullblock_start = 0 
 
         @knockback_angle = 0

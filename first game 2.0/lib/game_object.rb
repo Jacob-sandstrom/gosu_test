@@ -2,26 +2,38 @@
 
 
 class Game_object
-    attr_accessor :x, :y, :type, :shape
+    attr_accessor :x, :y, :shape, :size, :type, :static, :solid
     def initialize
         @x = x
         @y = y
-        @type = type
         @shape = shape
+        @type = type
+        @static = static
+        @solid = solid
+
+        case @shape
+        when "circle"
+            @radius = size
+        when "rectangle"
+            @width, @height = size
+        else
+            @width, @height = size
+        end        
+
+        
 
     end
 
-    def is_solid?
 
 
+    #   moves the object with the current speed at an angle
+    def move(angle, speed)
+        @x += Gosu::offset_x(angle, speed)
+        @y += Gosu::offset_y(angle, speed)
     end
 
-    def move
-
-
-    end
-
-    def face_direction
+    #   calculates angle of attacks and movement
+    def facing_direction
 
 
 
