@@ -38,7 +38,10 @@ class Map_editor
     end
 
     def update_existing_floor
-
+        # File.open("path/to/file", "w") do |file| 
+        #     file.write("values")
+        # end
+        
         File.open("maps/floortiles.txt", 'w') { |file| file.write($floortiles)}
 
     end
