@@ -88,6 +88,30 @@ class Game < Gosu::Window
         end
     end
 
+    def check_adjacence
+
+        i = 0
+        while i < $height_in_blocks
+            if i*$block_size >= $cam_y - 64 && i*$block_size <= $cam_y + 1080 + 64
+                j = 0
+                while j < $width_in_blocks
+                    if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
+                        if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
+                            adjacent = @collision_detection.is_adjacent($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
+                        
+                            @player.stop_if_adjacent(adjacent)
+                            
+                        end
+                    end
+                    j += 1
+                end
+            end
+            i += 1
+        end
+
+
+    end
+
     def check_collison
 
         i = 0
@@ -97,12 +121,17 @@ class Game < Gosu::Window
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
                         if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
-                            collision, axis, projection = @collision_detection.collide?($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
-                            if collision
+                            collision, projection, angle = @collision_detection.aabb_collision($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
+                            @player.project(collision, projection, angle)
 
-                                @player.project(collision, axis, projection)
-
-                            end
+                        elsif $floortiles[j + i*$width_in_blocks] == "3" 
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
+                            @player.project(collision, projection, angle)
+                            
+                            # unless !collision 
+                            @draw_collision = projection
+                            # end
+                            
                         end
                     end
                     j += 1
@@ -112,6 +141,8 @@ class Game < Gosu::Window
         end
 
     end
+
+
 
     def update
         #
@@ -157,8 +188,10 @@ class Game < Gosu::Window
             @player.attack
             attack
         end
+
+        @player.facing_direction
         
-        
+        check_adjacence
         
         @player.move
         @enemy.update
@@ -184,7 +217,7 @@ class Game < Gosu::Window
 
         @camera.draw
 
-
+        $font.draw(@draw_collision, 20, 100, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
         # @testbox.draw
     end

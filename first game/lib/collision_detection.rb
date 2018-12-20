@@ -66,44 +66,44 @@ class Collision_detection
         y_difference = object1_bottom_y - object2_y
 
         if x_difference <= y_difference
-            out = "x"
+            angle = 270
         else
-            out = "y"
+            angle = 0
         end
-        return out
+        return angle
     end
     def up_or_right_projektion?(object1_x, object1_bottom_y, object2_right_x, object2_y)
         x_difference = object2_right_x - object1_x
         y_difference = object1_bottom_y - object2_y
         
         if x_difference <= y_difference
-            out = "x"
+            angle = 90
         else
-            out = "y"
+            angle = 0
         end
-        return out
+        return angle
     end
     def down_or_left_projektion?(object1_right_x, object1_y, object2_x, object2_bottom_y)
         x_difference = object1_right_x - object2_x
         y_difference = object2_bottom_y - object1_y
         
         if x_difference <= y_difference
-            out = "x"
+            angle = 270
         else
-            out = "y"
+            angle = 180
         end
-        return out
+        return angle
     end
     def down_or_right_projektion?(object1_x, object1_y, object2_right_x, object2_bottom_y)
         x_difference = object2_right_x - object1_x
         y_difference = object2_bottom_y - object1_y
         
         if x_difference <= y_difference
-            out = "x"
+            angle = 90
         else
-            out = "y"
+            angle = 180
         end
-        return out
+        return angle
     end
 
     #   Projection
@@ -128,7 +128,7 @@ class Collision_detection
     #
     #   Main collision function
     #
-    def collide?(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+    def aabb_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
 
         #   intermediate storage
         object1_center_x = object1_x + object1_width / 2
@@ -171,39 +171,42 @@ class Collision_detection
         #   Find out wich direction to project and how much to project
         case true
         when up_left_collision
-            x_or_y = up_or_left_projektion?(object1_right_x, object1_bottom_y, object2_x, object2_y)
-            if x_or_y == "x"
+            angle = up_or_left_projektion?(object1_right_x, object1_bottom_y, object2_x, object2_y)
+            if angle == 270
                 projection = project_left(object1_right_x, object2_x)
             else
                 projection = project_up(object1_bottom_y, object2_y)
             end
         when up_right_collision
-            x_or_y = up_or_right_projektion?(object1_x, object1_bottom_y, object2_right_x, object2_y)
-            if x_or_y == "x"
+            angle = up_or_right_projektion?(object1_x, object1_bottom_y, object2_right_x, object2_y)
+            if angle == 90
                 projection = project_right(object1_x, object2_right_x)
             else
                 projection = project_up(object1_bottom_y, object2_y)
             end
         when down_left_collision
-            x_or_y = down_or_left_projektion?(object1_right_x, object1_y, object2_x, object2_bottom_y)
-            if x_or_y == "x"
+            angle = down_or_left_projektion?(object1_right_x, object1_y, object2_x, object2_bottom_y)
+            if angle == 270
                 projection = project_left(object1_right_x, object2_x)
             else
                 projection = project_down(object1_y, object2_bottom_y)
             end
         when down_right_collision
-            x_or_y = down_or_right_projektion?(object1_x, object1_y, object2_right_x, object2_bottom_y)
-            if x_or_y == "x"
+            angle = down_or_right_projektion?(object1_x, object1_y, object2_right_x, object2_bottom_y)
+            if angle == 90
                 projection = project_right(object1_x, object2_right_x)
             else
                 projection = project_down(object1_y, object2_bottom_y)
             end
         else
             collision = false
+            projection = 0
         end
         
+        absolute_projection = projection.abs
+
         #   Returns if a collision has happened, on which axis it should be projected and how much is should be projected
-        return collision, x_or_y, projection
+        return collision, absolute_projection, angle
         
     end
 
@@ -400,6 +403,87 @@ class Collision_detection
     end
 
 
+
+    def aabb_triangle_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height, hypotenuse_side)
+        #   intermediate storage
+        object1_center_x = object1_x + object1_width / 2
+        object1_center_y = object1_y + object1_height / 2
+        object2_center_x = object2_x + object2_width / 2
+        object2_center_y = object2_y + object2_height / 2
+
+        #   intermediate storage
+        object1_right_x = object1_x + object1_width
+        object1_bottom_y = object1_y + object1_height
+        object2_right_x = object2_x + object2_width
+        object2_bottom_y = object2_y + object2_height
+
+        to_left = to_left?(object1_center_x, object2_center_x)
+        above = above?(object1_center_y, object2_center_y)
+
+
+        case hypotenuse_side
+        when "up_left" 
+            if above && to_left
+
+            else
+                #aabb
+            end
+            
+        when "up_right" 
+            if above && !to_left
+
+                delta_y1 = object2_bottom_y - object2_y
+                delta_x1 = object2_right_x - object2_x
+                k1 = delta_y1 / delta_x1
+                m1 = object2_bottom_y - (k1 * object2_right_x)
+
+                k2 = -1/k1
+
+                m2 = object1_bottom_y - (k2 * object1_x)
+
+                intersect_x = (m2 - m1) / (k1 - k2)
+                intersect_y = k1 * intersect_x + m1
+
+
+                if intersect_x > object2_x && intersect_x < object2_right_x && intersect_y > object2_y && intersect_y < object2_bottom_y
+
+                    if intersect_x > object1_x && intersect_y < object1_bottom_y
+                        collision = true
+                    else
+                        collision = false
+                    end
+                end
+
+                distance = (((intersect_x - object1_x) ** 2 + (intersect_y - object1_bottom_y) ** 2) ** (0.5))
+
+                projection_distance = distance
+                # projection_distance = 0.01
+
+                #   change to allow multiple angles
+                #   calculate angle instead
+                angle = 45
+
+                
+            else
+                #aabb
+                collision, projection_distance, angle = aabb_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+            end
+
+
+        when "down_left" && !above && to_left
+
+        when "down_right" && !above && !to_left
+
+        else
+
+        end
+
+
+        return collision, projection_distance, angle
+
+    end
+
+
     def up_left_adjacent(object1_right_x, object1_bottom_y, object2_x, object2_y)
         if object1_right_x > object2_x && object1_bottom_y == object2_y
             adjacent = "down_adjacent"
@@ -440,6 +524,7 @@ class Collision_detection
         end
         return adjacent
     end
+
 
     def is_adjacent(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
 

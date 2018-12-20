@@ -59,7 +59,6 @@ class Player
     end
 
 
-
     def go_left
         @x_direction = -1
     end
@@ -146,6 +145,7 @@ class Player
         @shielding = true
         
     end
+
     def dont_shield
         @shielding = false
     end
@@ -169,7 +169,6 @@ class Player
             @fullblock_perfect = false
         end
     end
-
 
     def hit(angle)
         unless @invulnarable || @fullblock
@@ -225,14 +224,31 @@ class Player
         end
     end
 
-    def project(collision, axis, projection)
+    def project(collision, projection, angle)
 
         if collision
-            if axis == "x"
-                $player_x -= projection
-            else
-                $player_y -= projection
-            end
+            # if axis == "x"
+            #     $player_x -= projection
+            # else
+            #     $player_y -= projection
+            # end
+
+
+            $player_x += Gosu::offset_x(angle, projection)
+            $player_y += Gosu::offset_y(angle, projection)
+           
+
+        end
+
+    end
+
+    def stop_if_adjacent(adjacent)
+
+        if (adjacent == "left_adjacent" && @x_direction == -1) || (adjacent == "right_adjacent" && @x_direction == 1) 
+            @x_direction = 0        
+        end
+        if (adjacent == "up_adjacent" && @y_direction == -1) || (adjacent == "down_adjacent" && @y_direction == 1) 
+            @y_direction = 0        
         end
 
     end
@@ -285,7 +301,6 @@ class Player
             update_frame
         end
     end
-
 
     def draw
         unless @health <= 0

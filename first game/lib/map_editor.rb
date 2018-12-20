@@ -16,7 +16,8 @@ class Map_editor
         @floor_gold = Gosu::Image.new("../img/floor_gold.png", tileable: true)
         @floor_blue = Gosu::Image.new("../img/floor_blue.png", tileable: true)
         @floor_green = Gosu::Image.new("../img/floor_green.png", tileable: true)
-        @floor_purple = Gosu::Image.new("../img/floor_purple.png", tileable: true)
+        # @floor_purple = Gosu::Image.new("../img/floor_purple.png", tileable: true)
+        @floor_purple = Gosu::Image.new("../img/top_right_triangle.png", tileable: true)
 
 
 
@@ -54,7 +55,7 @@ class Map_editor
                     j = 0
                     while j < $width_in_blocks
                         if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
-                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                             if collision
                                 begin
                                     $floortiles[j + i*$width_in_blocks] = $current_tile_id
@@ -84,7 +85,7 @@ class Map_editor
                     j = 0
                     while j < $width_in_blocks
                         if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
-                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                             if collision
                                 begin
                                     $floortiles[j + i*$width_in_blocks] = "."
@@ -123,7 +124,7 @@ class Map_editor
                     j = 0
                     while j < $width_in_blocks
                         if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
-                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                             if collision
                                 begin
                                     $object_map[j + i*$width_in_blocks] = "#"
@@ -153,7 +154,7 @@ class Map_editor
                     j = 0
                     while j < $width_in_blocks
                         if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
-                            collision, axis, projection = @collision_detection.collide?($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                             if collision
                                 begin
                                     $object_map[j + i*$width_in_blocks] = "."
