@@ -97,7 +97,7 @@ class Game < Gosu::Window
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
                         if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
-                            adjacent = @collision_detection.is_adjacent($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
+                            adjacent = @collision_detection.is_adjacent($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size)
                         
                             @player.stop_if_adjacent(adjacent)
                             
@@ -121,11 +121,11 @@ class Game < Gosu::Window
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
                         if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
-                            collision, projection, angle = @collision_detection.aabb_collision($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size)
                             @player.project(collision, projection, angle)
 
                         elsif $floortiles[j + i*$width_in_blocks] == "3" 
-                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x + 14, $player_y + 12 + 25, 34, 25, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
                             @player.project(collision, projection, angle)
                             
                             # unless !collision 
@@ -218,6 +218,11 @@ class Game < Gosu::Window
         @camera.draw
 
         $font.draw(@draw_collision, 20, 100, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+
+        $font.draw($player_x, 20, 200, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw($player_y + 16, 20, 230, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+
+        @collision_detection.draw
 
         # @testbox.draw
     end
