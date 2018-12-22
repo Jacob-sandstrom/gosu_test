@@ -404,7 +404,8 @@ class Collision_detection
 
 
 
-    def aabb_triangle_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height, hypotenuse_side)
+    def aabb_triangle_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height, hypotenuse_side)    
+                
         #   intermediate storage
         object1_center_x = object1_x + object1_width / 2
         object1_center_y = object1_y + object1_height / 2
@@ -423,25 +424,49 @@ class Collision_detection
         
         case hypotenuse_side
         when "up_left" 
-            if above && to_left
+                if object1_right_x <= object2_right_x && object1_bottom_y <= object2_bottom_y + 1
                 
-            else
-                #aabb
-            end
+
+                    delta_y1 = object2_bottom_y - object2_y
+                    delta_x1 = object2_x - object2_right_x
+
+                    k1 = delta_y1 / delta_x1
+                    m1 = object2_bottom_y - (k1 * object2_x)
+        
+                    k2 = -1/k1
+        
+                    m2 = object1_bottom_y - (k2 * object1_right_x)
+        
+                    intersect_x = (m2 - m1) / (k1 - k2)
+                    intersect_y = k1 * intersect_x + m1
+    
+                    if intersect_x < object1_right_x && intersect_y < object1_bottom_y
+                        collision = true
+                        distance = (((object1_right_x - intersect_x) ** 2 + (object1_bottom_y - intersect_y) ** 2) ** (0.5))
+        
+                        projection_distance = distance 
+                        # projection_distance = 0.01
+                        
+                        #   change to allow multiple angles
+                        #   calculate angle instead
+                        angle = 315
+                    else
+                        collision = false
+                        projection_distance = 0
+                        angle = 0
+                    end
+                
+    
+    
+                    
+                else
+                    #aabb
+                    collision, projection_distance, angle = aabb_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+                end
             
         when "up_right" 
-            # to_left = to_left?(object1_x, object2_x)
-            # above = above?(object1_bottom_y, object2_bottom_y)
-            # @aboveright = above && !to_left
-            @aboveright = object1_x >= object2_x && object1_bottom_y <= object2_bottom_y
-
-            @object1_x = object1_x
-            @object2_x = object2_x
-            @object1_bottom_y = object1_bottom_y
-            @object2_bottom_y = object2_bottom_y
-
-            # above && !to_left
-            if object1_x >= object2_x && object1_bottom_y <= object2_bottom_y
+            
+            if object1_x >= object2_x && object1_bottom_y <= object2_bottom_y + 1
                 
 
                 delta_y1 = object2_bottom_y - object2_y
@@ -457,24 +482,24 @@ class Collision_detection
                 intersect_y = k1 * intersect_x + m1
 
 
-                #if intersect_x > object2_x && intersect_x < object2_right_x && intersect_y > object2_y && intersect_y < object2_bottom_y
+            
 
-                    if intersect_x > object1_x && intersect_y < object1_bottom_y
-                        collision = true
-                        distance = (((intersect_x - object1_x) ** 2 + (object1_bottom_y - intersect_y) ** 2) ** (0.5))
-        
-                        projection_distance = distance 
-                        # projection_distance = 0.01
-                        
-                        #   change to allow multiple angles
-                        #   calculate angle instead
-                        angle = 45
-                    else
-                        collision = false
-                        projection_distance = 0
-                        angle = 0
-                    end
-                # end
+                if intersect_x > object1_x && intersect_y < object1_bottom_y
+                    collision = true
+                    distance = (((intersect_x - object1_x) ** 2 + (object1_bottom_y - intersect_y) ** 2) ** (0.5))
+    
+                    projection_distance = distance 
+                    # projection_distance = 0.01
+                    
+                    #   change to allow multiple angles
+                    #   calculate angle instead
+                    angle = 45
+                else
+                    collision = false
+                    projection_distance = 0
+                    angle = 0
+                end
+            
 
 
                 
@@ -484,19 +509,86 @@ class Collision_detection
             end
 
 
-        when "down_left" && !above && to_left
+        when "down_left"
+                if object1_right_x <= object2_right_x + 1 && object1_y >= object2_y 
+                
 
-        when "down_right" && !above && !to_left
+                    delta_y1 = object2_bottom_y - object2_y
+                    delta_x1 = object2_right_x - object2_x
+                    k1 = delta_y1 / delta_x1
+                    m1 = object2_bottom_y - (k1 * object2_right_x)
+        
+                    k2 = -1/k1
+        
+                    m2 = object1_y - (k2 * object1_right_x)
+        
+                    intersect_x = (m2 - m1) / (k1 - k2)
+                    intersect_y = k1 * intersect_x + m1
+
+    
+                    if intersect_x < object1_right_x && intersect_y > object1_y
+                        collision = true
+                        distance = (((object1_right_x - intersect_x) ** 2 + (object1_y - intersect_y) ** 2) ** (0.5))
+        
+                        projection_distance = distance 
+                        # projection_distance = 0.01
+                        
+                        #   change to allow multiple angles
+                        #   calculate angle instead
+                        angle = 225
+                    else
+                        collision = false
+                        projection_distance = 0
+                        angle = 0
+                    end
+                
+    
+    
+                    
+                else
+                    #aabb
+                    collision, projection_distance, angle = aabb_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+                end
+        when "down_right"
+            if object1_x >= object2_x - 1 && object1_y >= object2_y
+                
+
+                delta_y1 = object2_bottom_y - object2_y
+                delta_x1 = object2_x - object2_right_x
+                k1 = delta_y1 / delta_x1
+                m1 = object2_bottom_y - (k1 * object2_x)
+
+                k2 = -1/k1
+
+                m2 = object1_y - (k2 * object1_x)
+
+                intersect_x = (m2 - m1) / (k1 - k2)
+                intersect_y = k1 * intersect_x + m1
+
+                if intersect_x > object1_x && intersect_y > object1_y
+                    collision = true
+                    distance = (((intersect_x - object1_x) ** 2 + (object1_y - intersect_y) ** 2) ** (0.5))
+    
+                    projection_distance = distance 
+                    # projection_distance = 0.01
+                    
+                    #   change to allow multiple angles
+                    #   calculate angle instead
+                    angle = 135
+                else
+                    collision = false
+                    projection_distance = 0
+                    angle = 0
+                end
+       
+            else
+                #aabb
+                collision, projection_distance, angle = aabb_collision(object1_x, object1_y, object1_width, object1_height, object2_x, object2_y, object2_width, object2_height)
+            end
 
         else
 
         end
-
-        unless intersect_x == nil
-        @intersect_x = intersect_x
-        @intersect_y = intersect_y
-        end
-
 
         return collision, projection_distance, angle
 
@@ -504,14 +596,14 @@ class Collision_detection
 
     def draw
 
-        $font.draw(@intersect_x, 20, 130, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@intersect_y, 20, 160, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@aboveright, 1800, 600, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@intersect_x, 20, 130, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@intersect_y, 20, 160, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@aboveright, 1800, 600, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
   
-        $font.draw(@object1_x, 1400, 0, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@object2_x, 1400, 30, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@object1_bottom_y, 1800, 0, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw(@object2_bottom_y, 1800, 30, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@object1_x, 1400, 0, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@object2_x, 1400, 30, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@object1_bottom_y, 1800, 0, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        # $font.draw(@object2_bottom_y, 1800, 30, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
     end
 

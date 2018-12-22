@@ -16,8 +16,12 @@ class Map_editor
         @floor_gold = Gosu::Image.new("../img/floor_gold.png", tileable: true)
         @floor_blue = Gosu::Image.new("../img/floor_blue.png", tileable: true)
         @floor_green = Gosu::Image.new("../img/floor_green.png", tileable: true)
-        # @floor_purple = Gosu::Image.new("../img/floor_purple.png", tileable: true)
-        @floor_purple = Gosu::Image.new("../img/top_right_triangle.png", tileable: true)
+        @floor_purple = Gosu::Image.new("../img/floor_purple.png", tileable: true)
+
+        @top_left_triangle = Gosu::Image.new("../img/top_left_triangle.png", tileable: true)
+        @top_right_triangle = Gosu::Image.new("../img/top_right_triangle.png", tileable: true)
+        @bottom_left_triangle = Gosu::Image.new("../img/bottom_left_triangle.png", tileable: true)
+        @bottom_right_triangle = Gosu::Image.new("../img/bottom_right_triangle.png", tileable: true)
 
 
 
@@ -29,8 +33,8 @@ class Map_editor
 
         $current_tile_id = "0"
 
-        $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple]
-        $tile_id = ["0", "1", "2", "3"]
+        $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle]
+        $tile_id = ["0", "1", "2", "3", "4", "5", "6", "7"]
 
 
         $floortiles =  File.read('maps/floortiles.txt')
@@ -223,6 +227,14 @@ class Map_editor
             $current_tile_id = "2"
         elsif (Gosu.button_down? Gosu::KB_3)
             $current_tile_id = "3"
+        elsif (Gosu.button_down? Gosu::KB_4)
+            $current_tile_id = "4"
+        elsif (Gosu.button_down? Gosu::KB_5)
+            $current_tile_id = "5"
+        elsif (Gosu.button_down? Gosu::KB_6)
+            $current_tile_id = "6"
+        elsif (Gosu.button_down? Gosu::KB_7)
+            $current_tile_id = "7"
         end
 
     end

@@ -36,7 +36,7 @@ class Player
 
         @x_direction = 0
         @y_direction = 0
-        @speed = 0.5
+        @speed = 5
 
         @invulnarable = false
         @invulnarability_time = 200
@@ -282,6 +282,13 @@ class Player
                 $player_x += @x_direction * @speed
                 $player_y += @y_direction * @speed
             end
+
+            # $player_x = $player_x.to_i
+            # $player_y = $player_y.to_i
+            # $player_x = $player_x.round(6)
+            # $player_y = $player_y.round(6)
+
+
             
             # $player_x %= 1000
             # $player_y %= 700

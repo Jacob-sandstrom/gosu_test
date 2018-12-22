@@ -97,7 +97,7 @@ class Game < Gosu::Window
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
                         if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
-                            adjacent = @collision_detection.is_adjacent($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size)
+                            adjacent = @collision_detection.is_adjacent($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size)
                         
                             @player.stop_if_adjacent(adjacent)
                             
@@ -121,16 +121,21 @@ class Game < Gosu::Window
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
                         if $object_map[j + i*$width_in_blocks] == "#" || $floortiles[j + i*$width_in_blocks] == "1" 
-                            collision, projection, angle = @collision_detection.aabb_collision($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size)
+                            collision, projection, angle = @collision_detection.aabb_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size)
                             @player.project(collision, projection, angle)
 
-                        elsif $floortiles[j + i*$width_in_blocks] == "3" 
-                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 16, 16, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
+                        elsif $floortiles[j + i*$width_in_blocks] == "4" 
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "up_left")
                             @player.project(collision, projection, angle)
-                            
-                            # unless !collision 
-                            @draw_collision = projection
-                            # end
+                        elsif $floortiles[j + i*$width_in_blocks] == "5" 
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
+                            @player.project(collision, projection, angle)
+                        elsif $floortiles[j + i*$width_in_blocks] == "6" 
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "down_left")
+                            @player.project(collision, projection, angle)
+                        elsif $floortiles[j + i*$width_in_blocks] == "7" 
+                            collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "down_right")
+                            @player.project(collision, projection, angle)
                             
                         end
                     end
