@@ -33,14 +33,14 @@ class Enemy
         @charging_attack = false
         @attack_launch_speed = 15
         @attack_launch = @attack_launch_speed
+        @launch = false
+        @launch_angle = 0
 
         @absolute_angle = 0
 
         @activation_distance = 200
         @activated = false
-
-
-        @angle = 0
+       
     end
 
     def get_xy
@@ -129,6 +129,8 @@ class Enemy
         @display_attack = true
         @charging_attack = false
         @attack_launch = @attack_launch_speed
+        @launch = true
+        @launch_angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
         # @attack_x = (@enemy_x + 16 + Gosu::offset_x(@absolute_angle, 64))
         # @attack_y = (@enemy_y + 16 + Gosu::offset_y(@absolute_angle, 64))
         case @absolute_angle
@@ -188,7 +190,7 @@ class Enemy
         if @activated
             angle = (Math.atan2(($player_y + 32 - (@enemy_y + 32)), ($player_x + 32 - (@enemy_x + 32))) * 180 / Math::PI - 90) -180
             angle %= 360
-            @angle = angle
+            
             collision, projection_distance, a = @collision_detection.circle_with_box_collison($player_x, $player_y, @attack_range, @enemy_x, @enemy_y, 64, 64)
             unless @charging_attack || on_cooldown_after_attack
                 if collision
@@ -231,8 +233,12 @@ class Enemy
             end
 
             knocked_back
-            @enemy_x += Gosu::offset_x(@angle, @attack_launch)
-            @enemy_y += Gosu::offset_y(@angle, @attack_launch)
+            @enemy_x += Gosu::offset_x(@launch_angle, @attack_launch)
+            @enemy_y += Gosu::offset_y(@launch_angle, @attack_launch)
+            unless @attack_x == nil || @attack_y == nil
+                @attack_x += Gosu::offset_x(@launch_angle, @attack_launch)
+                @attack_y += Gosu::offset_y(@launch_angle, @attack_launch)
+            end
             @attack_launch *= 0.8
 
             
