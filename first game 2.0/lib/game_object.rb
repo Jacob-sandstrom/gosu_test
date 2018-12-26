@@ -24,7 +24,12 @@ class Game_object
 
     end
 
-
+    def project(collision, projection_distance, angle)
+        if collision
+            @x += Gosu::offset_x(angle, projection_distance)
+            @y += Gosu::offset_y(angle, projection_distance)
+        end
+    end
 
     #   moves the object with the current speed at an angle
     def move(angle, speed)
