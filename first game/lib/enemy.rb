@@ -21,7 +21,7 @@ class Enemy
 
         @knockback_angle = 0
         @knockback_distance = 20
-        @knockback = @knockback_distance
+        @knockback = 0
 
 
         @attack_x = nil
@@ -39,7 +39,7 @@ class Enemy
         @absolute_angle = 0
 
         @activation_distance = 200
-        @activated = false
+        @activated = true
        
     end
 

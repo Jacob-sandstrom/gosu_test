@@ -38,9 +38,9 @@ class Player
         @y_direction = 0
         @speed = 5
 
-        @invulnarable = false
+        @invulnarable = true
         @invulnarability_time = 200
-        @invulnarability_start_time = 0
+        @invulnarability_start_time = Gosu::milliseconds
 
         @fullblock_perfect = false
         @fullblock = false
@@ -49,7 +49,7 @@ class Player
 
         @knockback_angle = 0
         @knockback_distance = 20
-        @knockback = @knockback_distance
+        @knockback = 0
 
         @shielding = false
         @perfect_shielding_duration = 200

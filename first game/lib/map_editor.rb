@@ -37,8 +37,10 @@ class Map_editor
         $tile_id = ["0", "1", "2", "3", "4", "5", "6", "7"]
 
 
-        $floortiles =  File.read('maps/floortiles.txt')
-        $object_map = File.read('maps/object_map.txt')
+        $floortiles =  File.read('maps/arena_floor.txt')
+        $object_map = File.read('maps/arena_objects.txt')
+        # $floortiles =  File.read('maps/floortiles.txt')
+        # $object_map = File.read('maps/object_map.txt')
 
     end
 
@@ -47,7 +49,8 @@ class Map_editor
         #     file.write("values")
         # end
         
-        File.open("maps/floortiles.txt", 'w') { |file| file.write($floortiles)}
+        File.open("maps/arena_floor.txt", 'w') { |file| file.write($floortiles)}
+        # File.open("maps/floortiles.txt", 'w') { |file| file.write($floortiles)}
 
     end
 
@@ -116,7 +119,8 @@ class Map_editor
 
     def update_existing_objects
 
-        File.open("maps/object_map.txt", 'w') { |file| file.write($object_map)}
+        File.open("maps/arena_objects.txt", 'w') { |file| file.write($object_map)}
+        # File.open("maps/object_map.txt", 'w') { |file| file.write($object_map)}
 
     end
 
@@ -255,7 +259,7 @@ class Map_editor
                             $tiles[id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
                         end
                         
-                        if i*$block_size - 32 > $player_y
+                        if i*$block_size  > $player_y
                             unless $object_map[j + i*$width_in_blocks] == "." 
                                 @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 11)
                                 # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
