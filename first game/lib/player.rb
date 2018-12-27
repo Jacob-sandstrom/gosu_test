@@ -17,7 +17,11 @@ class Player
         @frame_i = 0
 
 
-        @character = Gosu::Image.new("../img/CharacterSquare.png")
+        @character = Gosu::Image.new("../img/player_front.png")
+        # @character = Gosu::Image.new("../img/CharacterSquare.png")
+
+
+
         @basic_atk = Gosu::Image.new("../img/slash.png")
         @shield_img = Gosu::Image.new("../img/shield.png")
         @shield_down = Gosu::Image.new("../img/shield_down.png")
@@ -318,7 +322,7 @@ class Player
             #     i += 1
             # end
 
-            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 0.3, scale_y = 0.3)
 
             # @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             

@@ -32,10 +32,14 @@ class Map_editor
         $block_size = 32
 
         $current_tile_id = "0"
+        $current_object_id = "0"
 
-        $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle]
-        $tile_id = ["0", "1", "2", "3", "4", "5", "6", "7"]
 
+        $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple]
+        $tile_id = ["0", "1", "2", "3"]
+
+        $objects = [@tree, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle]
+        $object_id = ["0", "1", "2", "3", "4"]
 
         $floortiles =  File.read('maps/arena_floor.txt')
         $object_map = File.read('maps/arena_objects.txt')
@@ -135,7 +139,7 @@ class Map_editor
                             collision, projection, angle = @collision_detection.aabb_collision($mouse_x + $cam_x, $mouse_y + $cam_y, 0, 0, j*$block_size, i*$block_size, $block_size, $block_size)
                             if collision
                                 begin
-                                    $object_map[j + i*$width_in_blocks] = "#"
+                                    $object_map[j + i*$width_in_blocks] = $current_object_id
                                 rescue
                                     length = $object_map.length
                                     iterations = -1
@@ -225,20 +229,28 @@ class Map_editor
 
         if (Gosu.button_down? Gosu::KB_0)
             $current_tile_id = "0"
+            $current_object_id = "0"
         elsif (Gosu.button_down? Gosu::KB_1)
             $current_tile_id = "1"
+            $current_object_id = "1"
         elsif (Gosu.button_down? Gosu::KB_2)
             $current_tile_id = "2"
+            $current_object_id = "2"
         elsif (Gosu.button_down? Gosu::KB_3)
             $current_tile_id = "3"
+            $current_object_id = "3"
         elsif (Gosu.button_down? Gosu::KB_4)
             $current_tile_id = "4"
+            $current_object_id = "4"
         elsif (Gosu.button_down? Gosu::KB_5)
             $current_tile_id = "5"
+            $current_object_id = "5"
         elsif (Gosu.button_down? Gosu::KB_6)
             $current_tile_id = "6"
+            $current_object_id = "6"
         elsif (Gosu.button_down? Gosu::KB_7)
             $current_tile_id = "7"
+            $current_object_id = "7"
         end
 
     end
@@ -253,20 +265,30 @@ class Map_editor
                 while j < $width_in_blocks
                     if j*$block_size >= $cam_x - 64 && j*$block_size <= $cam_x + 1920 + 64
 
-                        id = $tile_id.index($floortiles[j + i*$width_in_blocks])
+                        tile_id = $tile_id.index($floortiles[j + i*$width_in_blocks])
 
                         unless $floortiles[j + i*$width_in_blocks] == "." 
-                            $tiles[id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
+                            $tiles[tile_id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 0)
                         end
+
+                        object_id = $object_id.index($object_map[j + i*$width_in_blocks])
                         
                         if i*$block_size  > $player_y
                             unless $object_map[j + i*$width_in_blocks] == "." 
-                                @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 11)
+                                if object_id.to_i == "0"
+                                    $objects[object_id.to_i].draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 11)
+                                else  
+                                    $objects[object_id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 11)
+                                end
                                 # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
                             end
                         else
                             unless $object_map[j + i*$width_in_blocks] == "." 
-                                @tree.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
+                                if object_id.to_i == "0"
+                                    $objects[object_id.to_i].draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1)
+                                else  
+                                    $objects[object_id.to_i].draw(j*$block_size - $cam_x, i*$block_size - $cam_y, 1)
+                                end
                                 # @light.draw(j*$block_size - 32 - $cam_x, i*$block_size - 64 - $cam_y, 1, 1, 1, color = 0x7f_ffffff)
                             end
                         end

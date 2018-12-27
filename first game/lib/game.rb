@@ -126,16 +126,16 @@ class Game < Gosu::Window
                             collision, projection, angle = @collision_detection.aabb_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size)
                             @player.project(collision, projection, angle)
 
-                        elsif $floortiles[j + i*$width_in_blocks] == "4" 
+                        elsif $object_map[j + i*$width_in_blocks] == "1" 
                             collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "up_left")
                             @player.project(collision, projection, angle)
-                        elsif $floortiles[j + i*$width_in_blocks] == "5" 
+                        elsif $object_map[j + i*$width_in_blocks] == "2" 
                             collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "up_right")
                             @player.project(collision, projection, angle)
-                        elsif $floortiles[j + i*$width_in_blocks] == "6" 
+                        elsif $object_map[j + i*$width_in_blocks] == "3" 
                             collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "down_left")
                             @player.project(collision, projection, angle)
-                        elsif $floortiles[j + i*$width_in_blocks] == "7" 
+                        elsif $object_map[j + i*$width_in_blocks] == "4" 
                             collision, projection, angle = @collision_detection.aabb_triangle_collision($player_x, $player_y, 32, 32, j*$block_size, i*$block_size, $block_size, $block_size, "down_right")
                             @player.project(collision, projection, angle)
                             
