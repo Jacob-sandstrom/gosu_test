@@ -24,6 +24,11 @@ class Game_object
 
     end
 
+    def hitbox
+        
+
+    end
+
     def project(collision, projection_distance, angle)
         if collision
             @x += Gosu::offset_x(angle, projection_distance)
