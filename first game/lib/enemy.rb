@@ -39,7 +39,7 @@ class Enemy
         @absolute_angle = 0
 
         @activation_distance = 200
-        @activated = true
+        @activated = false
        
     end
 
