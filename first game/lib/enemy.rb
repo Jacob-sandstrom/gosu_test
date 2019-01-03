@@ -14,7 +14,7 @@ class Enemy
         @y_direction = 0
         @speed = 10
         # @wait_between_moves = 2000
-        @attack_charge_time = 500
+        @attack_charge_time = 0
         @attack_charge_start = 0
         @attack_range = 32
         @cooldown_after_attacking = 500
@@ -39,7 +39,7 @@ class Enemy
         @absolute_angle = 0
 
         @activation_distance = 200
-        @activated = false
+        @activated = true
        
     end
 
