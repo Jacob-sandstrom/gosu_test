@@ -227,7 +227,7 @@ class Game < Gosu::Window
         $font.draw(@draw_collision, 20, 100, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
         $font.draw($player_x, 20, 200, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw($player_y + 16, 20, 230, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw($player_y, 20, 230, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
         @collision_detection.draw
 
