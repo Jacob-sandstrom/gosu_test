@@ -42,7 +42,7 @@ spear goblin
 slingshot goblin
 
 weak goblin king 
-intence buildup (music, camera shake...)
+intence buildup (music, sound, camera shake, controller vibration...)
 ally after fight
 
 real boss after fake boss
