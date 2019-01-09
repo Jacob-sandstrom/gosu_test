@@ -17,7 +17,7 @@ class Player
         @frame_i = 0
 
 
-        @character = Gosu::Image.new("../img/player_front.png")
+        @character = Gosu::Image.new("../img/player_front_300x150.png")
         @character2 = Gosu::Image.new("../img/player_front_2.0.png")
         @hitbox = Gosu::Image.new("../img/CharacterSquare.png")
 
@@ -324,7 +324,7 @@ class Player
             # end
 
             # @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 0.3, scale_y = 0.3)
-            @character2.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
 
             # @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
