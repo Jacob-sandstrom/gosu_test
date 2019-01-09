@@ -41,6 +41,8 @@ goblins?                weak and cute
 spear goblin
 slingshot goblin
 
+weak goblin king
+
 ****************
 
 
