@@ -41,7 +41,12 @@ goblins?                weak and cute
 spear goblin
 slingshot goblin
 
-weak goblin king
+weak goblin king 
+intence buildup (music, camera shake...)
+ally after fight
+
+real boss after fake boss
+
 
 ****************
 
