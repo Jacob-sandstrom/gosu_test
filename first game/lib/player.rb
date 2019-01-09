@@ -17,7 +17,7 @@ class Player
         @frame_i = 0
 
 
-        @character = Gosu::Image.new("../img/player_front_300x150.png")
+        @character = Gosu::Image.new("../img/playerfront_230x115.png")
         @character2 = Gosu::Image.new("../img/player_front_2.0.png")
         @hitbox = Gosu::Image.new("../img/CharacterSquare.png")
 
