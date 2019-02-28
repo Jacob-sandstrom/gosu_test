@@ -13,10 +13,10 @@ class Map_editor
 
         # @block_img = Gosu::Image.new("../img/Block.png", tileable: true)
 
-        @floor_gold = Gosu::Image.new("../img/floor_gold.png", tileable: true)
+        @floor_gold = Gosu::Image.new("../img/green.png", tileable: true)
         @floor_blue = Gosu::Image.new("../img/floor_blue.png", tileable: true)
-        @floor_green = Gosu::Image.new("../img/floor_green.png", tileable: true)
-        @floor_purple = Gosu::Image.new("../img/floor_purple.png", tileable: true)
+        @floor_green = Gosu::Image.new("../img/grass.png", tileable: true)
+        @floor_purple = Gosu::Image.new("../img/grass_top.png", tileable: true)
 
         @top_left_triangle = Gosu::Image.new("../img/top_left_triangle.png", tileable: true)
         @top_right_triangle = Gosu::Image.new("../img/top_right_triangle.png", tileable: true)
