@@ -44,7 +44,7 @@ class Game < Gosu::Window
         @collision_detection = Collision_detection.new 
         @player = Player.new
         @enemy = Enemy.new
-        @enemies = []
+        @enemies =[]
 
         @map_editor = Map_editor.new
 
