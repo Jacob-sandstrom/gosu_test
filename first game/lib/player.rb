@@ -2,12 +2,12 @@
 
 class Player
     def initialize
-        @animation_frames = Gosu::Image.load_tiles("../img/example sprite sheet.png", 64, 64, tileable: true)
+        @animation_frames = Gosu::Image.load_tiles("../img/SpriteSheet.png", 230, 460, tileable: true)
 
-        @walk_down = @animation_frames[0..3]
-        @walk_left = @animation_frames[4..7]
-        @walk_right = @animation_frames[8..11]
-        @walk_up = @animation_frames[12..15]
+        # @walk_down = @animation_frames[0..3]
+        # @walk_left = @animation_frames[4..7]
+        # @walk_right = @animation_frames[8..11]
+        # @walk_up = @animation_frames[12..15]
         @current_frame = @animation_frames[0]
 
         @current_frames_dir = @walk_down
@@ -15,6 +15,7 @@ class Player
         @frame_display_time = 100
         @frame_display_start = 0
         @frame_i = 0
+        @next_frame = true
 
 
         @character = Gosu::Image.new("../img/playerfront_230x115.png")
@@ -218,15 +219,25 @@ class Player
     #   switch between frames
     def update_frame
         
-        if @x_direction == 0 && @y_direction == 0
-            @current_frame = @current_frames_dir[0]
-            @frame_i = 0
-        elsif @frame_display_time <= Gosu.milliseconds - @frame_display_start
+        # if @x_direction == 0 && @y_direction == 0
+        #     @current_frame = @current_frames_dir[0]
+        #     @frame_i = 0
+        # elsif @frame_display_time <= Gosu.milliseconds - @frame_display_start
+        #     @frame_i += 1
+        #     @frame_i %= 4
+        #     @frame_display_start = Gosu.milliseconds
+        #     @current_frame = @current_frames_dir[@frame_i]
+        # end
+        if @next_frame
+            @current_frame = @animation_frames[@frame_i]
             @frame_i += 1
-            @frame_i %= 4
-            @frame_display_start = Gosu.milliseconds
-            @current_frame = @current_frames_dir[@frame_i]
+            @frame_i %= 33
+            @next_frame = false
+        else 
+            @next_frame = true
         end
+        
+
     end
 
     def project(collision, projection, angle)
@@ -323,11 +334,11 @@ class Player
             #     i += 1
             # end
 
-            @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
-            @character2.draw($player_x - $cam_x + 150, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
-            @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # @character2.draw($player_x - $cam_x + 150, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
 
-            # @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
             
             if display_attack
