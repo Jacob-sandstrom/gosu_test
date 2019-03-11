@@ -1,0 +1,828 @@
+---
+  attack_down:
+    name: attack_down
+    spritesheet: ../animations/player animations/sprite.png
+    size:
+      - 230
+      - 460
+    offset:
+      - 0
+      - 0
+    frames: 
+      - name: frame_0
+        image: nil
+        display_time: 3
+        x_movement: 0
+        y_movement: 1
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_1
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 10
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_2
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 4
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_3
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 10
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_4
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 2
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_5
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+      - name: frame_6
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_7
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_8
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_9
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_10
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_11
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_12
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_13
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_14
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_15
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_16
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_17
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_18
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_19
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_20
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_21
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_22
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_23
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_24
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_25
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_26
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_27
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_28
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_29
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_30
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_31
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+      - name: frame_32
+        image: nil
+        display_time: 1
+        x_movement: 0
+        y_movement: 0
+        interruptible: false
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+          - type: attack 
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 1
+            x_knockback: 0
+            y_knockback: 30
+
+  attack_up:
+    name: attack_up
+    
+  attack_left:
+    name: attack_left
+  
+  attack_right:
+    name: attack_right
+
+  block_down:
+    name: block_down
+
+  block_up:
+    name: block_up
+    
+  block_left:
+    name: block_left
+  
+  block_right:
+    name: block_right
+
+
+  walk_down:
+
+  walk_up:
+
+  walk_left:
+
+  walk_right:
+
+  run_down:
+
+  run_up:
+
+  run_left:
+
+  run_right:
+  
+  
+
+
+
+
+
+

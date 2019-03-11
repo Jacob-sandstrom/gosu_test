@@ -4,6 +4,7 @@ require_relative 'player.rb'
 require_relative 'enemy.rb'
 require_relative 'map_editor.rb'
 require_relative 'camera.rb'
+require_relative 'animation_handler.rb'
 
 
 
@@ -224,10 +225,10 @@ class Game < Gosu::Window
 
         @camera.draw
 
-        $font.draw(@draw_collision, 20, 100, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw_text(@draw_collision, 20, 100, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
-        $font.draw($player_x, 20, 200, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
-        $font.draw($player_y, 20, 230, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw_text($player_x, 20, 200, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
+        $font.draw_text($player_y, 20, 230, 10, scale_x = 2, scale_y = 2, color = 0xff_ffffff)
 
         @collision_detection.draw
 

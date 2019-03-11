@@ -336,7 +336,7 @@ class Player
 
             # @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             # @character2.draw($player_x - $cam_x + 150, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
-            # @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
 
             @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
