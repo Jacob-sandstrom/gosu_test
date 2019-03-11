@@ -2,7 +2,7 @@
 
 class Player
     def initialize
-        @animation_frames = Gosu::Image.load_tiles("../img/SpriteSheet.png", 230, 460, tileable: true)
+        @animation_frames = Gosu::Image.load_tiles("../img/sprite.png", 230, 460, tileable: true)
 
         # @walk_down = @animation_frames[0..3]
         # @walk_left = @animation_frames[4..7]
