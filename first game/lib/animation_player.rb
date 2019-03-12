@@ -2,6 +2,7 @@ require 'yaml'
 require 'Gosu'
 
 class Animation_player < Gosu::Window
+    attr_accessor :current_frame_index
     def initialize(x, y, z, meta_data)
         begin
             width = 400
@@ -34,7 +35,7 @@ class Animation_player < Gosu::Window
 
             @x_offset, @y_offset = @meta_data["offset"]
         rescue
-
+            puts "error"
         end
     end
     
