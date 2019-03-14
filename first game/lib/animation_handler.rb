@@ -1,10 +1,15 @@
 require 'yaml'
+require 'gosu'
 require_relative 'animation_player.rb'
 
-class Animation_handler
+class Animation_handler < Gosu::Window
     attr_accessor :current_animation
 
     def initialize
+        width = 400
+        height = 1000
+        super width, height
+
         player_animations = YAML.load(File.read("../animations/player animations/player_animations.yaml"))
 
         player_animations.keys.each do |key|
@@ -15,20 +20,17 @@ class Animation_handler
 
     def update
         @attack_down.update
-        @attack_up.update
     end
     
     def draw
         @attack_down.draw
-        @attack_up.draw
-
     end
 
 end
 
 if __FILE__==$0
 
-    Animation_handler.new
+    Animation_handler.new.show
 end
 =begin
 
