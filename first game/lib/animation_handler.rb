@@ -1,15 +1,10 @@
 require 'yaml'
-require 'gosu'
 require_relative 'animation_player.rb'
 
-class Animation_handler < Gosu::Window
+class Animation_handler
     attr_accessor :current_animation
 
     def initialize
-        width = 400
-        height = 1000
-        super width, height
-
         player_animations = YAML.load(File.read("../animations/player animations/player_animations.yaml"))
 
         player_animations.keys.each do |key|
@@ -19,42 +14,13 @@ class Animation_handler < Gosu::Window
     end
 
     def update
-        @attack_down.update
+        @attack_down_first.update
+        @attack_down_second.update
     end
     
-    def draw
-        @attack_down.draw
+    def draw(x, y)
+        @attack_down_first.draw(x, y)
+        @attack_down_second.draw(x, y)
     end
 
 end
-
-if __FILE__==$0
-
-    Animation_handler.new.show
-end
-=begin
-
-animations =
-[
-    {
-        "name" => attack_down, "frames" => 
-        [
-            {"name" => frame_0, "image" => Gosu::image, "x_offset" => 0, "y_offset" => 0, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0}],[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_1, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_2, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_3, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-        ]
-    }
-    {
-        "name" => attack_up, "frames" => 
-        [
-            {"name" => frame_0, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_1, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_2, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-            {"name" => frame_3, "image" => Gosu::image, "x_movement" => 0, "y_movement" => 0, "interuptable" => false, "hitboxes" => [{"type" => "hittable", "bounds" => [player_x, y, width, height], "damage" => 0, "knockback_x" => 0, "knockback_y" => 0},[{"type" => "attack", "bounds" => [player_x + 30, y + 100, 100, 30], "damage" => 2, "knockback_x" => 0, "knockback_y" => 30}]]}
-        ]
-    }
-]
-
-
-=end

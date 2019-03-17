@@ -1,13 +1,10 @@
 require 'yaml'
-require 'Gosu'
 
-class Animation_player < Gosu::Window
+class Animation_player
     attr_accessor :current_frame_index
     def initialize(x, y, z, meta_data)
         begin
-            width = 400
-            height = 800
-            super width, height
+            
 
             @meta_data = meta_data
             @x = x
@@ -66,10 +63,10 @@ class Animation_player < Gosu::Window
         end
     end
     
-    def draw
+    def draw(x, y)
         begin
             if @animation_playing                
-                @meta_data["frames"][@current_frame_index]["image"].draw(@x + @x_offset, @y + @y_offset, @z)
+                @meta_data["frames"][@current_frame_index]["image"].draw(x, y, 10)
             end
         rescue
         end
@@ -89,7 +86,7 @@ end
 if __FILE__==$0
 
     data = YAML.load(File.read("../animations/player animations/player_animations.yaml"))
-    meta_data = data["attack_down"]
+    meta_data = data["attack_down_first"]
     sprite = meta_data["spritesheet"]
     
     p data.keys

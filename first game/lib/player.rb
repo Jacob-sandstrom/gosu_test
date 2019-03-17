@@ -1,14 +1,15 @@
-
+require_relative 'animation_handler.rb'
 
 class Player
     def initialize
-        @animation_frames = Gosu::Image.load_tiles("../img/sprite.png", 230, 460, tileable: true)
+        # @animation_frames = Gosu::Image.load_tiles("../img/sprite.png", 230, 460, tileable: true)
+
+        @animation_handler = Animation_handler.new
 
         # @walk_down = @animation_frames[0..3]
         # @walk_left = @animation_frames[4..7]
         # @walk_right = @animation_frames[8..11]
         # @walk_up = @animation_frames[12..15]
-        @current_frame = @animation_frames[0]
 
         @current_frames_dir = @walk_down
 
@@ -321,7 +322,8 @@ class Player
             dont_shield_if_attacking
 
 
-            update_frame
+            # update_frame
+            @animation_handler.update
         end
     end
 
@@ -338,8 +340,9 @@ class Player
             # @character2.draw($player_x - $cam_x + 150, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             @hitbox.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
 
-            @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            # @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
+            @animation_handler.draw($player_x - $cam_x, $player_y - $cam_y)
             
             if display_attack
                 @basic_atk.draw_rot($player_x + 32 - $cam_x, $player_y + 32 - $cam_y, 9, @attack_dir, center_x = 0.5, center_y = 0.75)
