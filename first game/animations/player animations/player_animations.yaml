@@ -1,6 +1,7 @@
 ---
   attack_down_first:
     name: attack_down_first
+    type: attack
     spritesheet: ../animations/player animations/attack_down_first.png
     size:
       - 230
@@ -610,6 +611,7 @@
 
   attack_down_second:
       name: attack_down_second
+      type: attack
       spritesheet: ../animations/player animations/attack_down_second.png
       size:
         - 230

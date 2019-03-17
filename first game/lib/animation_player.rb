@@ -2,14 +2,11 @@ require 'yaml'
 
 class Animation_player
     attr_accessor :current_frame_index
-    def initialize(x, y, z, meta_data)
+    def initialize(meta_data)
         begin
             
 
             @meta_data = meta_data
-            @x = x
-            @y = y
-            @z = z
 
             spritesheet = meta_data["spritesheet"]
             img_width = @meta_data["size"][0]
@@ -28,7 +25,7 @@ class Animation_player
             @current_frame_index = 0
             @frames_delayed = 0
 
-            @animation_playing = true
+            @animation_playing = false
 
             @x_offset, @y_offset = @meta_data["offset"]
         rescue
