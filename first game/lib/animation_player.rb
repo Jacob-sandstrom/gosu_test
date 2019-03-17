@@ -56,8 +56,6 @@ class Animation_player
                     @frames_delayed = 0
                 end
                 @current_frame_index %= @number_of_frames 
-                @x += @meta_data["frames"][@current_frame_index]["x_movement"]
-                @y += @meta_data["frames"][@current_frame_index]["y_movement"]
             end
         rescue
         end
