@@ -217,46 +217,11 @@ class Player
         end
     end
 
-    #   switch between frames
-    def update_frame
-        
-        # if @x_direction == 0 && @y_direction == 0
-        #     @current_frame = @current_frames_dir[0]
-        #     @frame_i = 0
-        # elsif @frame_display_time <= Gosu.milliseconds - @frame_display_start
-        #     @frame_i += 1
-        #     @frame_i %= 4
-        #     @frame_display_start = Gosu.milliseconds
-        #     @current_frame = @current_frames_dir[@frame_i]
-        # end
-        if @next_frame
-            @current_frame = @animation_frames[@frame_i]
-            @frame_i += 1
-            @frame_i %= 33
-            @next_frame = false
-        else 
-            @next_frame = true
-        end
-        
-
-    end
-
     def project(collision, projection, angle)
-
         if collision
-            # if axis == "x"
-            #     $player_x -= projection
-            # else
-            #     $player_y -= projection
-            # end
-
-
             $player_x += Gosu::offset_x(angle, projection)
-            $player_y += Gosu::offset_y(angle, projection)
-           
-
+            $player_y += Gosu::offset_y(angle, projection)    
         end
-
     end
 
     def stop_if_adjacent(adjacent)
@@ -277,12 +242,9 @@ class Player
             @invulnarable = false
         end
     end
-    
-    def move
-        unless @health <= 0
-            invulnarability
-            fullblock
 
+    def move 
+        if @animation_handler.current_animation.meta_data["allow_movement"]
             if @x_direction == -1 && @y_direction == 1
                 $player_x += Gosu.offset_x(225, @speed)
                 $player_y += Gosu.offset_y(225, @speed)
@@ -299,16 +261,22 @@ class Player
                 $player_x += @x_direction * @speed
                 $player_y += @y_direction * @speed
             end
+        end
+    end
 
-            # $player_x = $player_x.to_i
-            # $player_y = $player_y.to_i
-            # $player_x = $player_x.round(6)
-            # $player_y = $player_y.round(6)
-
+    def try_attacking
+        if (Gosu.button_down? Gosu::KB_SPACE or Gosu::button_down? Gosu::GP_BUTTON_0)
+            @animation_handler.switch_animation("attack", @face_dir_angle)
+        end
+    end
+    
+    def update
+        unless @health <= 0
+            invulnarability
+            fullblock
 
             
-            # $player_x %= 1000
-            # $player_y %= 700
+            move
 
             knocked_back
             is_shielding
@@ -321,9 +289,8 @@ class Player
 
             dont_shield_if_attacking
 
-
-            # update_frame
             @animation_handler.update
+            try_attacking
         end
     end
 

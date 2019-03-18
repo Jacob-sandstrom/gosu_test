@@ -3,6 +3,7 @@
     name: attack_down_first
     type: attack
     loop: false
+    allow_movement: false
     spritesheet: ../animations/player animations/attack_down_first.png
     size:
       - 230
@@ -640,6 +641,7 @@
       name: attack_down_second
       type: attack
       loop: false
+      allow_movement: false
       spritesheet: ../animations/player animations/attack_down_second.png
       size:
         - 230
@@ -1178,6 +1180,37 @@
   
   # attack_right:
   #   name: attack_right
+
+  idle_down:
+    name: idle_down
+    type: idle
+    loop: true
+    allow_movement: true
+    spritesheet: ../animations/player animations/idle_down_still.png
+    size:
+      - 230
+      - 460
+    offset:
+      - 0
+      - 0
+    frames: 
+      - name: frame_0
+        image: nil
+        display_time: 1
+        combo: false
+        x_movement: 0
+        y_movement: 0
+        interruptible: true
+        hitboxes:
+          - type: hittable
+            bounds:
+              - x
+              - yy
+              - width
+              - height
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
 
   # block_down:
   #   name: block_down

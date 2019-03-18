@@ -201,7 +201,7 @@ class Game < Gosu::Window
         
         check_adjacence
         
-        @player.move
+        @player.update
         @enemy.update
         has_player_been_hit
         

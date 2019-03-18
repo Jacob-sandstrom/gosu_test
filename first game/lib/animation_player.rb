@@ -1,11 +1,11 @@
 require 'yaml'
 
 class Animation_player
-    attr_accessor :current_frame_index
-    def initialize(meta_data)
+    attr_accessor :current_frame, :meta_data, :done
+    def initialize(meta_data, done=false)
         begin
             
-
+            @done = done
             @meta_data = meta_data
 
             begin
@@ -29,46 +29,43 @@ class Animation_player
                 puts "Error: Unable to load animation #{@meta_data["name"]}"
                 @number_of_frames = @meta_data["frames"].length
             end
-            
-            @current_frame_index = 0
+
+            @current_frame = 0
             @frames_delayed = 0
-            @animation_playing = false
             @x_offset, @y_offset = @meta_data["offset"]
         rescue
             puts "Error: Unable to initialize #{meta_data["name"]}"
         end
     end
     
-    def play
-        @current_frame_index = 0
+    def reset
+        @current_frame = 0
         @frames_delayed = 0
-        @animation_playing = true
-    end
-    
-    def stop
-        @animation_playing = false
+        @done = false
     end
 
     def update
         begin
-            if @animation_playing
-                if @frames_delayed < @meta_data["frames"][@current_frame_index]["display_time"]
-                    @frames_delayed += 1
+            if @frames_delayed < @meta_data["frames"][@current_frame]["display_time"]
+                @frames_delayed += 1
+            else
+                @current_frame += 1
+                @frames_delayed = 0
+            end
+            if @current_frame >= @number_of_frames 
+                if @meta_data["loop"] == true
+                    reset
                 else
-                    @current_frame_index += 1
-                    @frames_delayed = 0
+                    @done = true
                 end
-                @current_frame_index %= @number_of_frames 
             end
         rescue
         end
     end
     
     def draw(x, y)
-        begin
-            if @animation_playing                
-                @meta_data["frames"][@current_frame_index]["image"].draw(x, y, 10)
-            end
+        begin               
+            @meta_data["frames"][@current_frame]["image"].draw(x, y, 10)      
         rescue
         end
     end
