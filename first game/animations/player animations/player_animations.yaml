@@ -2,6 +2,7 @@
   attack_down_first:
     name: attack_down_first
     type: attack
+    loop: false
     spritesheet: ../animations/player animations/attack_down_first.png
     size:
       - 230
@@ -13,6 +14,7 @@
       - name: frame_0
         image: nil
         display_time: 3
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -30,6 +32,7 @@
       - name: frame_1
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 10
         interruptible: false
@@ -47,6 +50,7 @@
       - name: frame_2
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 4
         interruptible: false
@@ -63,6 +67,7 @@
       - name: frame_3
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 10
         interruptible: false
@@ -79,6 +84,7 @@
       - name: frame_4
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 2
         interruptible: false
@@ -95,6 +101,7 @@
       - name: frame_5
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -111,6 +118,7 @@
       - name: frame_6
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -136,6 +144,7 @@
       - name: frame_7
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -161,6 +170,7 @@
       - name: frame_8
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -186,6 +196,7 @@
       - name: frame_9
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -211,6 +222,7 @@
       - name: frame_10
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -236,6 +248,7 @@
       - name: frame_11
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -261,6 +274,7 @@
       - name: frame_12
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -286,6 +300,7 @@
       - name: frame_13
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -311,6 +326,7 @@
       - name: frame_14
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -336,6 +352,7 @@
       - name: frame_15
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -361,6 +378,7 @@
       - name: frame_16
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -386,6 +404,7 @@
       - name: frame_17
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -411,6 +430,7 @@
       - name: frame_18
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -436,6 +456,7 @@
       - name: frame_19
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -461,6 +482,7 @@
       - name: frame_20
         image: nil
         display_time: 1
+        combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -486,6 +508,7 @@
       - name: frame_21
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -511,6 +534,7 @@
       - name: frame_22
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -536,6 +560,7 @@
       - name: frame_23
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -561,6 +586,7 @@
       - name: frame_24
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -586,6 +612,7 @@
       - name: frame_25
         image: nil
         display_time: 1
+        combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -612,6 +639,7 @@
   attack_down_second:
       name: attack_down_second
       type: attack
+      loop: false
       spritesheet: ../animations/player animations/attack_down_second.png
       size:
         - 230
@@ -623,6 +651,7 @@
         - name: frame_0
           image: nil
           display_time: 3
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -640,6 +669,7 @@
         - name: frame_1
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 10
           interruptible: false
@@ -657,6 +687,7 @@
         - name: frame_2
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 4
           interruptible: false
@@ -673,6 +704,7 @@
         - name: frame_3
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 10
           interruptible: false
@@ -689,6 +721,7 @@
         - name: frame_4
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 2
           interruptible: false
@@ -705,6 +738,7 @@
         - name: frame_5
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -721,6 +755,7 @@
         - name: frame_6
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -746,6 +781,7 @@
         - name: frame_7
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -771,6 +807,7 @@
         - name: frame_8
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -796,6 +833,7 @@
         - name: frame_9
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -821,6 +859,7 @@
         - name: frame_10
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -846,6 +885,7 @@
         - name: frame_11
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -871,6 +911,7 @@
         - name: frame_12
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -896,6 +937,7 @@
         - name: frame_13
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -921,6 +963,7 @@
         - name: frame_14
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -946,6 +989,7 @@
         - name: frame_15
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -971,6 +1015,7 @@
         - name: frame_16
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -996,6 +1041,7 @@
         - name: frame_17
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1021,6 +1067,7 @@
         - name: frame_18
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1046,6 +1093,7 @@
         - name: frame_19
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1071,6 +1119,7 @@
         - name: frame_20
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1096,6 +1145,7 @@
         - name: frame_21
           image: nil
           display_time: 1
+          combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1123,40 +1173,48 @@
     name: attack_up
     loop: false
     
-  attack_left:
-    name: attack_left
+  # attack_left:
+  #   name: attack_left
   
-  attack_right:
-    name: attack_right
+  # attack_right:
+  #   name: attack_right
 
-  block_down:
-    name: block_down
+  # block_down:
+  #   name: block_down
 
-  block_up:
-    name: block_up
+  # block_up:
+  #   name: block_up
     
-  block_left:
-    name: block_left
+  # block_left:
+  #   name: block_left
   
-  block_right:
-    name: block_right
+  # block_right:
+  #   name: block_right
 
 
-  walk_down:
+  # walk_down:
+  #   name: walk_down
 
-  walk_up:
+  # walk_up:
+  #   name: walk_up
 
-  walk_left:
+  # walk_left:
+  #   name: walk_left
 
-  walk_right:
+  # walk_right:
+  #   name: walk_right
 
-  run_down:
+  # run_down:
+  #   name: run_down
 
-  run_up:
+  # run_up:
+  #   name: run_up
 
-  run_left:
+  # run_left:
+  #   name: run_left
 
-  run_right:
+  # run_right:
+  #   name: run_right
   
   
 

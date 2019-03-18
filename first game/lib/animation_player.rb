@@ -8,28 +8,34 @@ class Animation_player
 
             @meta_data = meta_data
 
-            spritesheet = meta_data["spritesheet"]
-            img_width = @meta_data["size"][0]
-            img_height = @meta_data["size"][1]
-            animation_frames = Gosu::Image.load_tiles(spritesheet, img_width, img_height, tileable: true)
-
-            animation_frames.each_with_index do |image, index|
-                if @meta_data["frames"][index] == nil
-                    puts "error: @meta_data[frames][#{index}] does not exist"
-                    break
+            begin
+                
+                spritesheet = meta_data["spritesheet"]
+                img_width = @meta_data["size"][0]
+                img_height = @meta_data["size"][1]
+                animation_frames = Gosu::Image.load_tiles(spritesheet, img_width, img_height, tileable: true)
+                
+                animation_frames.each_with_index do |image, index|
+                    if @meta_data["frames"][index] == nil
+                        puts "error: @meta_data[frames][#{index}] does not exist"
+                        break
+                    end
+                    @meta_data["frames"][index]["image"] = animation_frames[index]
                 end
-                @meta_data["frames"][index]["image"] = animation_frames[index]
+                
+                @number_of_frames = animation_frames.length
+
+            rescue 
+                puts "Error: Unable to load animation #{@meta_data["name"]}"
+                @number_of_frames = @meta_data["frames"].length
             end
             
-            @number_of_frames = animation_frames.length
             @current_frame_index = 0
             @frames_delayed = 0
-
             @animation_playing = false
-
             @x_offset, @y_offset = @meta_data["offset"]
         rescue
-            puts "error"
+            puts "Error: Unable to initialize #{meta_data["name"]}"
         end
     end
     
