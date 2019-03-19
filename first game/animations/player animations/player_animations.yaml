@@ -342,7 +342,7 @@
         image: nil
         display_time: 1
         queue_combo: true
-        execute_combo: false
+        execute_combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -368,8 +368,8 @@
       - name: frame_15
         image: nil
         display_time: 1
-        queue_combo: true
-        execute_combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false

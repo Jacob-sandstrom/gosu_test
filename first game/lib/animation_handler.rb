@@ -17,18 +17,39 @@ class Animation_handler
             @current_animation = Animation_player.new(nil)
             print "animation no exist"
         end
+
+        @attack_queued = false
     end
 
     def switch_animation(animation, dir)
         animation_changed = false
         data = @current_animation.meta_data
         current_frame = data["frames"][@current_animation.current_frame]
+        if current_frame["queue_combo"] == true
+            @current_animation.queue_attack = true
+            @attack_queued = true
+        end
         if animation == "attack" && data["type"] == "attack"
 
-            if current_frame["queue_combo"] == true
-                @current_animation.queue_attack = true
-            end
+        else
+            
+        end 
 
+        if current_frame["interruptible"] == true
+            @current_animation = @attack_down_first
+            animation_changed = true
+        end
+        
+        if animation_changed
+            @current_animation.reset
+        end
+    end
+
+    def switch_to_queued
+        if @attack_queued
+            animation_changed = false
+            data = @current_animation.meta_data
+            current_frame = data["frames"][@current_animation.current_frame]
             if current_frame["execute_combo"] == true && @current_animation.queue_attack
                 case @current_animation
                 when @attack_down_first
@@ -36,16 +57,9 @@ class Animation_handler
                 end
                 animation_changed = true
             end
-
-        else
-            if current_frame["interruptible"] == true
-                @current_animation = @attack_down_first
-                animation_changed = true
+            if animation_changed
+                @current_animation.reset
             end
-
-        end
-        if animation_changed
-            @current_animation.reset
         end
     end
 
@@ -56,6 +70,7 @@ class Animation_handler
     end
 
     def update
+        switch_to_queued
         @current_animation.update
         animation_done
     end
