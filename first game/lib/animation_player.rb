@@ -1,10 +1,11 @@
 require 'yaml'
 
 class Animation_player
-    attr_accessor :current_frame, :meta_data, :done
-    def initialize(meta_data, done=false)
+    attr_accessor :current_frame, :meta_data, :done, :queue_attack
+    def initialize(meta_data, done=false, queue_attack=false)
         begin
             
+            @queue_attack = queue_attack
             @done = done
             @meta_data = meta_data
 
@@ -42,6 +43,7 @@ class Animation_player
         @current_frame = 0
         @frames_delayed = 0
         @done = false
+        @queue_attack = false
     end
 
     def update

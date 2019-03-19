@@ -15,7 +15,8 @@
       - name: frame_0
         image: nil
         display_time: 3
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -33,7 +34,8 @@
       - name: frame_1
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 10
         interruptible: false
@@ -51,7 +53,8 @@
       - name: frame_2
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 4
         interruptible: false
@@ -68,7 +71,8 @@
       - name: frame_3
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 10
         interruptible: false
@@ -85,7 +89,8 @@
       - name: frame_4
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 2
         interruptible: false
@@ -102,7 +107,8 @@
       - name: frame_5
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -119,7 +125,8 @@
       - name: frame_6
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -145,7 +152,8 @@
       - name: frame_7
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -171,7 +179,8 @@
       - name: frame_8
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -197,7 +206,8 @@
       - name: frame_9
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -223,7 +233,8 @@
       - name: frame_10
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: true
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -249,7 +260,8 @@
       - name: frame_11
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: true
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -275,7 +287,8 @@
       - name: frame_12
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: true
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -301,7 +314,8 @@
       - name: frame_13
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: true
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -327,7 +341,8 @@
       - name: frame_14
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: true
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -353,7 +368,8 @@
       - name: frame_15
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: true
+        execute_combo: true
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -379,7 +395,8 @@
       - name: frame_16
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -405,7 +422,8 @@
       - name: frame_17
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -431,7 +449,8 @@
       - name: frame_18
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -457,7 +476,8 @@
       - name: frame_19
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -483,7 +503,8 @@
       - name: frame_20
         image: nil
         display_time: 1
-        combo: true
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -509,7 +530,8 @@
       - name: frame_21
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -535,7 +557,8 @@
       - name: frame_22
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -561,7 +584,8 @@
       - name: frame_23
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -587,7 +611,8 @@
       - name: frame_24
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -613,7 +638,8 @@
       - name: frame_25
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: false
@@ -653,7 +679,8 @@
         - name: frame_0
           image: nil
           display_time: 3
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -671,7 +698,8 @@
         - name: frame_1
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 10
           interruptible: false
@@ -689,7 +717,8 @@
         - name: frame_2
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 4
           interruptible: false
@@ -706,7 +735,8 @@
         - name: frame_3
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 10
           interruptible: false
@@ -723,7 +753,8 @@
         - name: frame_4
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 2
           interruptible: false
@@ -740,7 +771,8 @@
         - name: frame_5
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -757,7 +789,8 @@
         - name: frame_6
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -783,7 +816,8 @@
         - name: frame_7
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -809,7 +843,8 @@
         - name: frame_8
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -835,7 +870,8 @@
         - name: frame_9
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -861,7 +897,8 @@
         - name: frame_10
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -887,7 +924,8 @@
         - name: frame_11
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -913,7 +951,8 @@
         - name: frame_12
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -939,7 +978,8 @@
         - name: frame_13
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -965,7 +1005,8 @@
         - name: frame_14
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -991,7 +1032,8 @@
         - name: frame_15
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1017,7 +1059,8 @@
         - name: frame_16
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1043,7 +1086,8 @@
         - name: frame_17
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1069,7 +1113,8 @@
         - name: frame_18
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1095,7 +1140,8 @@
         - name: frame_19
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1121,7 +1167,8 @@
         - name: frame_20
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1147,7 +1194,8 @@
         - name: frame_21
           image: nil
           display_time: 1
-          combo: false
+          queue_combo: false
+          execute_combo: false
           x_movement: 0
           y_movement: 0
           interruptible: false
@@ -1197,7 +1245,8 @@
       - name: frame_0
         image: nil
         display_time: 1
-        combo: false
+        queue_combo: false
+        execute_combo: false
         x_movement: 0
         y_movement: 0
         interruptible: true

@@ -25,13 +25,18 @@ class Animation_handler
         current_frame = data["frames"][@current_animation.current_frame]
         if animation == "attack" && data["type"] == "attack"
 
-            if current_frame["combo"] == true
+            if current_frame["queue_combo"] == true
+                @current_animation.queue_attack = true
+            end
+
+            if current_frame["execute_combo"] == true && @current_animation.queue_attack
                 case @current_animation
                 when @attack_down_first
                     @current_animation = @attack_down_second
                 end
                 animation_changed = true
             end
+
         else
             if current_frame["interruptible"] == true
                 @current_animation = @attack_down_first
