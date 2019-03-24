@@ -1,15 +1,15 @@
-require_relative 'animation_handler.rb'
+require_relative 'action_handler.rb'
 
 class Player
     def initialize
-        # @animation_frames = Gosu::Image.load_tiles("../img/sprite.png", 230, 460, tileable: true)
+        # @action_frames = Gosu::Image.load_tiles("../img/sprite.png", 230, 460, tileable: true)
 
-        @animation_handler = Animation_handler.new
+        @action_handler = Action_handler.new
 
-        # @walk_down = @animation_frames[0..3]
-        # @walk_left = @animation_frames[4..7]
-        # @walk_right = @animation_frames[8..11]
-        # @walk_up = @animation_frames[12..15]
+        # @walk_down = @action_frames[0..3]
+        # @walk_left = @action_frames[4..7]
+        # @walk_right = @action_frames[8..11]
+        # @walk_up = @action_frames[12..15]
 
         @current_frames_dir = @walk_down
 
@@ -244,7 +244,7 @@ class Player
     end
 
     def move 
-        if @animation_handler.current_animation.meta_data["allow_movement"]
+        if @action_handler.current_action.meta_data["allow_movement"]
             if @x_direction == -1 && @y_direction == 1
                 $player_x += Gosu.offset_x(225, @speed)
                 $player_y += Gosu.offset_y(225, @speed)
@@ -266,7 +266,7 @@ class Player
 
     def try_attacking
         if (Gosu.button_down? Gosu::KB_SPACE or Gosu::button_down? Gosu::GP_BUTTON_0)
-            @animation_handler.switch_animation("attack", @face_dir_angle)
+            @action_handler.switch_action("attack", @face_dir_angle)
         end
     end
     
@@ -289,7 +289,7 @@ class Player
 
             dont_shield_if_attacking
 
-            @animation_handler.update
+            @action_handler.update($player_x, $player_y)
             try_attacking
         end
     end
@@ -299,7 +299,7 @@ class Player
             # @character.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             # i = 0
             # while i < 16
-            #     @animation_frames[i].draw($player_x - $cam_x + i*64, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
+            #     @action_frames[i].draw($player_x - $cam_x + i*64, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             #     i += 1
             # end
 
@@ -309,7 +309,7 @@ class Player
 
             # @current_frame.draw($player_x - $cam_x, $player_y - $cam_y, 10, scale_x = 1, scale_y = 1)
             
-            @animation_handler.draw($player_x - $cam_x, $player_y - $cam_y)
+            @action_handler.draw($player_x - $cam_x, $player_y - $cam_y)
             
             if display_attack
                 @basic_atk.draw_rot($player_x + 32 - $cam_x, $player_y + 32 - $cam_y, 9, @attack_dir, center_x = 0.5, center_y = 0.75)

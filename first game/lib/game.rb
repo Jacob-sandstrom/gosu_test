@@ -4,10 +4,6 @@ require_relative 'player.rb'
 require_relative 'enemy.rb'
 require_relative 'map_editor.rb'
 require_relative 'camera.rb'
-require_relative 'animation_handler.rb'
-
-
-
 
 # class Test_box
 #     def initialize
@@ -214,7 +210,7 @@ class Game < Gosu::Window
 
 
     def draw
-        # draw_rect(0, 0, 5760, 3264, Gosu::Color.argb(0xf5_000000), 100)
+        # draw_rect(0, 0, 400, 400, Gosu::Color.argb(0xf5_f0f0f0), 100)
         # draw_rect($player_x-64 - $cam_x, $player_y-64 - $cam_y, 170, 170, Gosu::Color.argb(0x2f_ffffff), 100)
 
 
