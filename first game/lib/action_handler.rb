@@ -1,5 +1,6 @@
 require 'yaml'
 require_relative 'action_player.rb'
+require_relative 'animation_player.rb'
 
 class Action_handler
     attr_accessor :current_action, :x_move, :y_move
@@ -9,12 +10,15 @@ class Action_handler
 
         player_actions.keys.each do |key|
             instance_variable_set("@#{key}", Action_player.new(player_actions[key]))
+            instance_variable_set("@#{key}_animation", Animation_player.new(player_actions[key]))
         end
         begin
             # @current_action = @attack_down_first
             @current_action = @idle_down
+            @current_animation = @idle_down_animation
         rescue
             @current_action = Action_player.new(nil)
+            @current_animation = Animation_player.new(nil)
             print "action no exist"
         end
 
@@ -37,11 +41,13 @@ class Action_handler
 
         if current_frame["interruptible"] == true
             @current_action = @attack_down_first
+            @current_animation = @attack_down_first_animation
             action_changed = true
         end
         
         if action_changed
             @current_action.reset
+            @current_animation.reset
         end
     end
 
@@ -54,11 +60,13 @@ class Action_handler
                 case @current_action
                 when @attack_down_first
                     @current_action = @attack_down_second
+                    @current_animation = @attack_down_second_animation
                 end
                 action_changed = true
             end
             if action_changed
                 @current_action.reset
+                @current_animation.reset
             end
         end
     end
@@ -66,17 +74,19 @@ class Action_handler
     def action_done
         if @current_action.done == true
             @current_action = @idle_down
+            @current_animation = @idle_down_animation
         end
     end
 
     def update(x, y)
         switch_to_queued
         @current_action.update
+        @current_animation.update
         action_done
     end
     
     def draw(x, y)
-        @current_action.draw(x, y)
+        @current_animation.draw(x, y)
     end
 
 end

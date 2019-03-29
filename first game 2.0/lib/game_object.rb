@@ -2,23 +2,12 @@
 
 
 class Game_object
-    attr_accessor :x, :y, :shape, :size, :type, :static, :solid
+    attr_accessor :x, :y
     def initialize
         @x = x
         @y = y
-        @shape = shape
-        @type = type
-        @static = static
-        @solid = solid
 
-        case @shape
-        when "circle"
-            @radius = size
-        when "rectangle"
-            @width, @height = size
-        else
-            @width, @height = size
-        end        
+
 
         
 

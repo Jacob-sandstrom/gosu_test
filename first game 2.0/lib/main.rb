@@ -15,7 +15,6 @@ class Main < Gosu::Window
         true
     end
 
-
     def update
 
     end

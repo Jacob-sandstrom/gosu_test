@@ -8,29 +8,8 @@ class Action_player
             @queue_attack = queue_attack
             @done = done
             @meta_data = meta_data
-
-            begin
-                
-                spritesheet = meta_data["spritesheet"]
-                img_width = @meta_data["size"][0]
-                img_height = @meta_data["size"][1]
-                action_frames = Gosu::Image.load_tiles(spritesheet, img_width, img_height, tileable: true)
-                
-                action_frames.each_with_index do |image, index|
-                    if @meta_data["frames"][index] == nil
-                        puts "error: @meta_data[frames][#{index}] does not exist"
-                        break
-                    end
-                    @meta_data["frames"][index]["image"] = action_frames[index]
-                end
-                
-                @number_of_frames = action_frames.length
-
-            rescue 
-                puts "Error: Unable to load action #{@meta_data["name"]}"
-                @number_of_frames = @meta_data["frames"].length
-            end
-
+            
+            @number_of_frames = @meta_data["frames"].length
             @current_frame = 0
             @frames_delayed = 0
             @x_offset, @y_offset = @meta_data["offset"]
@@ -65,12 +44,12 @@ class Action_player
         end
     end
     
-    def draw(x, y)
-        begin               
-            @meta_data["frames"][@current_frame]["image"].draw(x, y, 10)      
-        rescue
-        end
-    end
+    # def draw(x, y)
+    #     begin               
+    #         @meta_data["frames"][@current_frame]["image"].draw(x, y, 10)      
+    #     rescue
+    #     end
+    # end
 
     def button_down(id) 
         if id == Gosu::KB_ESCAPE
