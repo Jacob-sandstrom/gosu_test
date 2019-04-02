@@ -3,17 +3,16 @@ require_relative 'action_player.rb'
 require_relative 'animation_player.rb'
 
 class Action_handler
-    attr_accessor :current_action, :allow_move, :x_move, :y_move
+    attr_accessor :file, :current_action, :allow_move, :x_move, :y_move
 
-    def initialize
-        player_actions = YAML.load(File.read("../actions/player actions/player_action_data.yaml"))
+    def initialize(file)
+        player_actions = YAML.load(File.read(file))
 
         player_actions.keys.each do |key|
             instance_variable_set("@#{key}", Action_player.new(player_actions[key]))
             instance_variable_set("@#{key}_animation", Animation_player.new(player_actions[key]))
         end
         begin
-            # @current_action = @attack_down_first
             @current_action = @idle_down
             @current_animation = @idle_down_animation
         rescue

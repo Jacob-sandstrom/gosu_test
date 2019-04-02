@@ -1,21 +1,14 @@
-
+require_relative 'action_handler.rb'
 
 
 class Game_object
-    attr_accessor :x, :y
-    def initialize
+    attr_accessor :action_data, :x, :y
+    def initialize(action_data, x=0, y=0)
         @x = x
         @y = y
 
-
-
+        @action_handler = Action_handler.new(action_data)
         
-
-    end
-
-    def hitbox
-        
-
     end
 
     def project(collision, projection_distance, angle)
@@ -36,6 +29,14 @@ class Game_object
 
 
 
+    end
+
+    def update
+        @action_handler.update(@x, @y)
+    end
+
+    def draw
+        @action_handler.draw(@x, @y)
     end
 
     

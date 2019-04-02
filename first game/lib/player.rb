@@ -244,7 +244,7 @@ class Player
     end
 
     def move 
-        if @action_handler.current_action.meta_data["allow_movement"]
+        if @action_handler.allow_move
             if @x_direction == -1 && @y_direction == 1
                 $player_x += Gosu.offset_x(225, @speed)
                 $player_y += Gosu.offset_y(225, @speed)
@@ -262,6 +262,8 @@ class Player
                 $player_y += @y_direction * @speed
             end
         end
+        $player_x += @action_handler.x_move
+        $player_y += @action_handler.y_move
     end
 
     def try_attacking

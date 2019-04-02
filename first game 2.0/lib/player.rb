@@ -2,12 +2,23 @@ require_relative 'game_object.rb'
 
 
 class Player < Game_object
-    attr_reader :x, :y, :width, :height
+    # attr_reader 
     
-    def initialize
+    def initialize(file)
+        super(file)
+
 
     end
 
+    def update
+        super
+
+    end
+
+    def draw
+        super
+
+    end
 
 
 end
