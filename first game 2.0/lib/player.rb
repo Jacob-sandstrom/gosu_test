@@ -12,7 +12,7 @@ class Player < Game_object
 
     def check_inputs
         if (Gosu.button_down? Gosu::KB_SPACE or Gosu::button_down? Gosu::GP_BUTTON_1)
-            
+            @action_handler.switch_action(nil, nil)
         end
         if (Gosu.button_down? Gosu::KB_W or Gosu::button_down? Gosu::GP_UP)
             #   do stuff

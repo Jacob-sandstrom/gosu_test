@@ -23,7 +23,6 @@ class Main < Gosu::Window
             object.update
         end
 
-        @input_handler.check_inputs
     end
 
     def draw
