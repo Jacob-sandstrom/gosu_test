@@ -1,6 +1,6 @@
 require 'gosu'
 require_relative 'player.rb'
-require_relative 'input_handler.rb'
+
 
 
 class Main < Gosu::Window
@@ -12,7 +12,6 @@ class Main < Gosu::Window
 
         @game_objects = [Player.new("../actions/player actions/player_action_data.yaml")]
 
-        @input_handler = Input_handler.new(@game_objects[0])
     end
 
     def needs_cursor?
