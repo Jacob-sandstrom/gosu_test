@@ -6,7 +6,11 @@ class Game_object
     def initialize(action_data, x=0, y=0)
         @x = x
         @y = y
-
+        @move_angle = 0
+        @move_speed = 10
+        @x_vel = 0
+        @y_vel = 0
+        
         @action_handler = Action_handler.new(action_data)
         
     end
@@ -25,13 +29,22 @@ class Game_object
     end
 
     #   calculates angle of attacks and movement
-    def facing_direction
-
-
+    def direction
+        @move_angle = Math.atan2(@y_vel, @x_vel) * 180 / Math::PI
 
     end
 
+    def move
+        @x += Gosu::offset_x(@move_angle, @move_speed)
+        @y += Gosu::offset_y(@move_angle, @move_speed)
+    end
+
     def update
+        @x_vel = 0
+        @y_vel = 0
+
+        direction
+        move
         @action_handler.update(@x, @y)
     end
 
