@@ -10,10 +10,14 @@ class Game_object
         @move_speed = 10
         @x_vel = 0
         @y_vel = 0
+        @x_dir = 0
+        @y_dir = 0
         
         @action_handler = Action_handler.new(action_data)
         
     end
+
+
 
     def project(collision, projection_distance, angle)
         if collision
@@ -22,21 +26,23 @@ class Game_object
         end
     end
 
-    #   moves the object with the current speed at an angle
-    def move(angle, speed)
-        @x += Gosu::offset_x(angle, speed)
-        @y += Gosu::offset_y(angle, speed)
-    end
 
     #   calculates angle of attacks and movement
     def direction
-        @move_angle = Math.atan2(@y_vel, @x_vel) * 180 / Math::PI
+        if @x_dir == 0 && @y_dir == 0
+            @y_vel = 0
+            @x_vel = 0
+        else
+            @move_angle = Math.atan2(@y_dir, @x_dir)
+            @y_vel = Math.sin(@move_angle)
+            @x_vel = Math.cos(@move_angle)
+        end
 
     end
 
     def move
-        @x += Gosu::offset_x(@move_angle, @move_speed)
-        @y += Gosu::offset_y(@move_angle, @move_speed)
+        @x += @x_vel
+        @y += @y_vel
     end
 
     def update

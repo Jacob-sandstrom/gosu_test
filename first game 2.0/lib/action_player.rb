@@ -1,12 +1,10 @@
 require 'yaml'
 
 class Action_player
-    attr_accessor :current_frame, :meta_data, :done, :queue_attack
-    def initialize(meta_data, done=false, queue_attack=false)
+    attr_accessor :current_frame, :meta_data, :done
+    def initialize(meta_data)
         begin
-            
-            @queue_attack = queue_attack
-            @done = done
+            @done = false
             @meta_data = meta_data
             
             @number_of_frames = @meta_data["frames"].length
@@ -22,7 +20,6 @@ class Action_player
         @current_frame = 0
         @frames_delayed = 0
         @done = false
-        @queue_attack = false
     end
 
     def update

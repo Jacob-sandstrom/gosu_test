@@ -32,7 +32,6 @@ class Action_handler
         data = @current_action.meta_data
         current_frame = data["frames"][@current_action.current_frame]
         if current_frame["queue_combo"] == true
-            @current_action.queue_attack = true
             @attack_queued = true
         end
         if action == "attack" && data["type"] == "attack"
@@ -58,12 +57,13 @@ class Action_handler
             action_changed = false
             data = @current_action.meta_data
             current_frame = data["frames"][@current_action.current_frame]
-            if current_frame["execute_combo"] == true && @current_action.queue_attack
+            if current_frame["execute_combo"] == true && @attack_queued
                 case @current_action
                 when @attack_down_first
                     @current_action = @attack_down_second
                     @current_animation = @attack_down_second_animation
                 end
+                @attack_queued = false
                 action_changed = true
             end
             if action_changed
