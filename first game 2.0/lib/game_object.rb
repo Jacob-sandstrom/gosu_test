@@ -1,4 +1,5 @@
 require_relative 'action_handler.rb'
+require_relative 'hitbox_shower.rb'
 
 
 class Game_object
@@ -7,13 +8,14 @@ class Game_object
         @x = x
         @y = y
         @move_angle = 0
-        @move_speed = 10
+        @move_speed = 2
         @x_vel = 0
         @y_vel = 0
         @x_dir = 0
         @y_dir = 0
         
         @action_handler = Action_handler.new(action_data)
+        @hitbox_shower = Hitbox_shower.new(@action_handler)
         
     end
 
@@ -34,10 +36,15 @@ class Game_object
             @x_vel = 0
         else
             @move_angle = Math.atan2(@y_dir, @x_dir)
-            @y_vel = Math.sin(@move_angle)
-            @x_vel = Math.cos(@move_angle)
+            @y_vel += Math.sin(@move_angle) * @move_speed
+            @x_vel += Math.cos(@move_angle) * @move_speed
         end
 
+    end
+
+    def action_move
+        @x_vel += @action_handler.x_move
+        @y_vel += @action_handler.y_move
     end
 
     def move
@@ -50,12 +57,14 @@ class Game_object
         @y_vel = 0
 
         direction
+        action_move
         move
         @action_handler.update(@x, @y)
     end
 
-    def draw
-        @action_handler.draw(@x, @y)
+    def draw(window)
+        @action_handler.draw(window, @x, @y)
+        @hitbox_shower.draw(window)
     end
 
     

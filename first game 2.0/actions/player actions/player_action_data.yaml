@@ -560,7 +560,7 @@
         queue_combo: false
         execute_combo: false
         x_movement: 0
-        y_movement: 0
+        y_movement: -2
         interruptible: false
         hitboxes:
           - type: hittable
@@ -587,7 +587,7 @@
         queue_combo: false
         execute_combo: false
         x_movement: 0
-        y_movement: 0
+        y_movement: -4
         interruptible: false
         hitboxes:
           - type: hittable
@@ -614,7 +614,7 @@
         queue_combo: false
         execute_combo: false
         x_movement: 0
-        y_movement: 0
+        y_movement: -6
         interruptible: false
         hitboxes:
           - type: hittable
@@ -641,7 +641,7 @@
         queue_combo: false
         execute_combo: false
         x_movement: 0
-        y_movement: 0
+        y_movement: -2
         interruptible: false
         hitboxes:
           - type: hittable

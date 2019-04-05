@@ -40,32 +40,5 @@ class Action_player
         rescue
         end
     end
-    
-    # def draw(x, y)
-    #     begin               
-    #         @meta_data["frames"][@current_frame]["image"].draw(x, y, 10)      
-    #     rescue
-    #     end
-    # end
 
-    def button_down(id) 
-        if id == Gosu::KB_ESCAPE
-            close
-        else
-            super
-        end
-    end
-
-end
-
-
-if __FILE__==$0
-
-    data = YAML.load(File.read("../actions/player actions/player_actions.yaml"))
-    meta_data = data["attack_down_first"]
-    sprite = meta_data["spritesheet"]
-    
-    p data.keys
-    
-    Action_player.new(100, -100, 10, meta_data).show
 end

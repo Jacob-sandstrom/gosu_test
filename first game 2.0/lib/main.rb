@@ -14,10 +14,12 @@ class Main < Gosu::Window
 
     end
 
+    #   displays cursor on screen
     def needs_cursor?
         true
     end
 
+    #   call all update functions from other clases
     def update
         @game_objects.each do |object|
             object.update
@@ -25,12 +27,17 @@ class Main < Gosu::Window
 
     end
 
+    #   call all draw functions from other clases
     def draw
         @game_objects.each do |object|
-            object.draw
+            object.draw(Main)
         end
+        #   temporary placement move to hitbox_shower class
+        draw_rect(0,0,100,100, Gosu::Color.argb(0xa5_c0ffc0), 100)      #   color for hittable hitbox
+        draw_rect(100,0,100,100, Gosu::Color.argb(0xa5_ffc0c0), 100)    #   color for attack hitbox
     end
 
+    #   close game if esc is pressed
     def button_down(id)
         if id == Gosu::KB_ESCAPE
           close

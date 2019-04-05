@@ -90,8 +90,8 @@ class Action_handler
         @y_move = @current_action.meta_data["frames"][@current_action.current_frame]["y_movement"]
     end
     
-    def draw(x, y)
-        @current_animation.draw(x, y)
+    def draw(window, x, y)
+        @current_animation.draw(window, x, y)
     end
 
 end

@@ -53,31 +53,11 @@ class Animation_player
         end
     end
     
-    def draw(x, y)
+    def draw(window, x, y)
         begin               
             @animation_frames[@current_frame].draw(x, y, 10)      
         rescue
         end
     end
 
-    def button_down(id) 
-        if id == Gosu::KB_ESCAPE
-            close
-        else
-            super
-        end
-    end
-
-end
-
-
-if __FILE__==$0
-
-    data = YAML.load(File.read("../animations/player animations/player_animations.yaml"))
-    meta_data = data["attack_down_first"]
-    sprite = meta_data["spritesheet"]
-    
-    p data.keys
-    
-    Animation_player.new(100, -100, 10, meta_data).show
 end

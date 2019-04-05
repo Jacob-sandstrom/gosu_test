@@ -6,6 +6,7 @@ class Player < Game_object
     
     def initialize(file)
         super(file)
+        @move_speed = 4
 
 
     end
@@ -40,8 +41,8 @@ class Player < Game_object
 
     end
 
-    def draw
-        super
+    def draw(window)
+        super(window)
 
     end
 
