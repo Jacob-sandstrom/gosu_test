@@ -7,8 +7,6 @@ class Player < Game_object
     def initialize(file)
         super(file)
         @move_speed = 4
-
-
     end
 
     def check_inputs

@@ -6,8 +6,8 @@
     allow_movement: false
     spritesheet: ../actions/enemy actions/enemy.png
     size:
-      - 230
-      - 460
+      - 23
+      - 46
     offset:
       - 0
       - 0

@@ -13,8 +13,8 @@ class Action_handler
             instance_variable_set("@#{key}_animation", Animation_player.new(player_actions[key]))
         end
         begin
-            @current_action = @idle_down
-            @current_animation = @idle_down_animation
+            @current_action = @idle
+            @current_animation = @idle_animation
         rescue
             @current_action = Action_player.new(nil)
             @current_animation = Animation_player.new(nil)
