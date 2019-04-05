@@ -23,10 +23,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75  
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -42,10 +42,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -61,10 +61,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -79,10 +79,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -97,10 +97,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -115,10 +115,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
@@ -133,19 +133,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 270
+              - 10
+              - 10
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -160,19 +160,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -187,19 +187,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -214,19 +214,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -241,19 +241,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -268,19 +268,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -295,19 +295,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -322,19 +322,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -349,19 +349,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -376,19 +376,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -403,19 +403,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -430,19 +430,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -457,19 +457,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -484,19 +484,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -511,19 +511,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -538,19 +538,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -565,19 +565,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -592,19 +592,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -619,19 +619,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -646,19 +646,19 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0
           - type: attack 
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 1
             x_knockback: 0
             y_knockback: 30
@@ -687,10 +687,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -706,10 +706,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -725,10 +725,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -743,10 +743,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -761,10 +761,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -779,10 +779,10 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
@@ -797,19 +797,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -824,19 +824,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -851,19 +851,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -878,19 +878,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -905,19 +905,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -932,19 +932,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -959,19 +959,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -986,19 +986,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1013,19 +1013,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1040,19 +1040,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1067,19 +1067,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1094,19 +1094,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1121,19 +1121,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1148,19 +1148,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1175,19 +1175,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1202,19 +1202,19 @@
           hitboxes:
             - type: hittable
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 0
               x_knockback: 0
               y_knockback: 0
             - type: attack 
               bounds:
-                - x
-                - yy
-                - width
-                - height
+                - 75
+                - 130
+                - 80
+                - 200
               damage: 1
               x_knockback: 0
               y_knockback: 30
@@ -1253,10 +1253,10 @@
         hitboxes:
           - type: hittable
             bounds:
-              - x
-              - yy
-              - width
-              - height
+              - 75
+              - 130
+              - 80
+              - 200
             damage: 0
             x_knockback: 0
             y_knockback: 0

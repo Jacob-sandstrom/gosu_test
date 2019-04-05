@@ -36,8 +36,10 @@ class Game_object
             @x_vel = 0
         else
             @move_angle = Math.atan2(@y_dir, @x_dir)
-            @y_vel += Math.sin(@move_angle) * @move_speed
-            @x_vel += Math.cos(@move_angle) * @move_speed
+            if @action_handler.allow_move
+                @y_vel += Math.sin(@move_angle) * @move_speed
+                @x_vel += Math.cos(@move_angle) * @move_speed
+            end
         end
 
     end
@@ -64,7 +66,7 @@ class Game_object
 
     def draw(window)
         @action_handler.draw(window, @x, @y)
-        @hitbox_shower.draw(window)
+        @hitbox_shower.draw(window, @x, @y)
     end
 
     
