@@ -1,8 +1,42 @@
 ---
+  idle_down:
+    name: idle_down
+    type: idle
+    loop: true
+    next: nil
+    allow_movement: true
+    spritesheet: ../actions/player actions/idle_down_still.png
+    size:
+      - 230
+      - 460
+    offset:
+      - 0
+      - 0
+    frames: 
+      - name: frame_0
+        image: nil
+        display_time: 1
+        queue_combo: false
+        execute_combo: false
+        x_movement: 0
+        y_movement: 0
+        interruptible: true
+        hitboxes:
+          - type: hittable
+            bounds:
+              - 75
+              - 130
+              - 80
+              - 200
+            damage: 0
+            x_knockback: 0
+            y_knockback: 0
+
   attack_down_first:
     name: attack_down_first
     type: attack
     loop: false
+    next: attack_down_second
     allow_movement: false
     spritesheet: ../actions/player actions/attack_down_first.png
     size:
@@ -667,6 +701,7 @@
       name: attack_down_second
       type: attack
       loop: false
+      next: nil
       allow_movement: false
       spritesheet: ../actions/player actions/attack_down_second.png
       size:
@@ -1228,70 +1263,6 @@
   
   # attack_right:
   #   name: attack_right
-
-  idle_down:
-    name: idle_down
-    type: idle
-    loop: true
-    allow_movement: true
-    spritesheet: ../actions/player actions/idle_down_still.png
-    size:
-      - 230
-      - 460
-    offset:
-      - 0
-      - 0
-    frames: 
-      - name: frame_0
-        image: nil
-        display_time: 1
-        queue_combo: false
-        execute_combo: false
-        x_movement: 0
-        y_movement: 0
-        interruptible: true
-        hitboxes:
-          - type: hittable
-            bounds:
-              - 75
-              - 130
-              - 80
-              - 200
-            damage: 0
-            x_knockback: 0
-            y_knockback: 0
-  idle:
-    name: idle
-    type: idle
-    loop: true
-    allow_movement: true
-    spritesheet: ../actions/player actions/idle_down_still.png
-    size:
-      - 230
-      - 460
-    offset:
-      - 0
-      - 0
-    frames: 
-      - name: frame_0
-        image: nil
-        display_time: 1
-        queue_combo: false
-        execute_combo: false
-        x_movement: 0
-        y_movement: 0
-        interruptible: true
-        hitboxes:
-          - type: hittable
-            bounds:
-              - 75
-              - 130
-              - 80
-              - 200
-            damage: 0
-            x_knockback: 0
-            y_knockback: 0
-
 
   # block_down:
   #   name: block_down

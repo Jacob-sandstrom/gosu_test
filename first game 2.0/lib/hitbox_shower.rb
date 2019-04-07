@@ -13,8 +13,8 @@ class Hitbox_shower
     end
 
     def draw(window, pos_x, pos_y)
-        window.draw_rect(0,0,100,100, Gosu::Color.argb(0xa5_c0ffc0), 100)      #   color for hittable hitbox
-        window.draw_rect(100,0,100,100, Gosu::Color.argb(0xa5_ffc0c0), 100)    #   color for attack hitbox
+        # window.draw_rect(0,0,100,100, Gosu::Color.argb(0xa5_c0ffc0), 100)      #   color for hittable hitbox
+        # window.draw_rect(100,0,100,100, Gosu::Color.argb(0xa5_ffc0c0), 100)    #   color for attack hitbox
 
         @action_handler.current_action.meta_data["frames"][@action_handler.current_action.current_frame]["hitboxes"].each do |hitbox|
             begin

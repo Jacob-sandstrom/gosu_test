@@ -8,31 +8,39 @@ class Action_handler
     def initialize(file)
         player_actions = YAML.load(File.read(file))
 
+        @actions = {}
+        @animations = {}
+
         player_actions.keys.each do |key|
-            instance_variable_set("@#{key}", Action_player.new(player_actions[key]))
-            instance_variable_set("@#{key}_animation", Animation_player.new(player_actions[key]))
+            # instance_variable_set("@#{key}", Action_player.new(player_actions[key]))
+            # instance_variable_set("@#{key}_animation", Animation_player.new(player_actions[key]))
+            @actions[key] = Action_player.new(player_actions[key])
+            @animations[key] = Animation_player.new(player_actions[key])
+
         end
         begin
-            @current_action = @idle
-            @current_animation = @idle_animation
+            @current_action = @actions[@actions.keys[0]]
+            @current_animation = @animations[@animations.keys[0]]
         rescue
             @current_action = Action_player.new(nil)
             @current_animation = Animation_player.new(nil)
             print "action no exist"
         end
 
+        @queued_action = nil
         @attack_queued = false
         @allow_move = true
         @x_move = 0
         @y_move = 0
     end
 
-    def switch_action(action, dir)
+    def switch_action(action)
         action_changed = false
         data = @current_action.meta_data
         current_frame = data["frames"][@current_action.current_frame]
         if current_frame["queue_combo"] == true
             @attack_queued = true
+            @queued_action = @current_action.meta_data["next"]
         end
         if action == "attack" && data["type"] == "attack"
 
@@ -41,8 +49,10 @@ class Action_handler
         end 
 
         if current_frame["interruptible"] == true
-            @current_action = @attack_down_first
-            @current_animation = @attack_down_first_animation
+
+            @current_action = @actions[action]
+            @current_animation = @animations[action]
+
             action_changed = true
         end
         
@@ -58,11 +68,8 @@ class Action_handler
             data = @current_action.meta_data
             current_frame = data["frames"][@current_action.current_frame]
             if current_frame["execute_combo"] == true && @attack_queued
-                case @current_action
-                when @attack_down_first
-                    @current_action = @attack_down_second
-                    @current_animation = @attack_down_second_animation
-                end
+                @current_action = @actions[@queued_action]
+                @current_animation = @animations[@queued_action]
                 @attack_queued = false
                 action_changed = true
             end
@@ -75,8 +82,8 @@ class Action_handler
 
     def action_done
         if @current_action.done == true
-            @current_action = @idle_down
-            @current_animation = @idle_down_animation
+            @current_action = @actions[@actions.keys[0]]
+            @current_animation = @animations[@animations.keys[0]]
         end
     end
 

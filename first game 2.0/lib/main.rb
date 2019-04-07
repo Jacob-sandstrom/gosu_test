@@ -11,10 +11,13 @@ class Main < Gosu::Window
         super width, height, fullscreen:true
         self.caption = "Game"
 
-        @game_objects = [Player.new("../actions/player actions/player_action_data.yaml"),
+        @game_objects = [
+        Player.new("../actions/player actions/player_action_data.yaml"),
         Enemy.new("../actions/enemy actions/enemy_action_data.yaml")
         ]
 
+        @player = Player.new("../actions/player actions/player_action_data.yaml")
+        @enemies = [Enemy.new("../actions/enemy actions/enemy_action_data.yaml")]
     end
 
     #   displays cursor on screen
@@ -24,19 +27,25 @@ class Main < Gosu::Window
 
     #   call all update functions from other clases
     def update
-        @game_objects.each do |object|
-            object.update
+        @player.update
+
+        @enemies.each do |enemy|
+            enemy.update(@player)
         end
 
     end
 
     #   call all draw functions from other clases
     def draw
-        @game_objects.each do |object|
-            object.draw(self)
-        end
-        #   temporary placement move to hitbox_shower class
+        # @game_objects.each do |object|
+        #     object.draw(self)
+        # end
 
+        @player.draw(self)
+
+        @enemies.each do |enemy|
+            enemy.draw(self)
+        end
     end
 
     #   close game if esc is pressed

@@ -8,13 +8,13 @@ class Enemy < Game_object
 
     end
 
-    def update
-        super
+    def update(player)
+        super()
 
     end
 
     def draw(window)
-        super
+        super(window)
 
     end
 

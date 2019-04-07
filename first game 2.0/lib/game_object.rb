@@ -16,6 +16,7 @@ class Game_object
         
         @action_handler = Action_handler.new(action_data)
         @hitbox_shower = Hitbox_shower.new(@action_handler)
+        @show_hitboxes = false
         
     end
 
@@ -66,7 +67,10 @@ class Game_object
 
     def draw(window)
         @action_handler.draw(window, @x, @y)
-        @hitbox_shower.draw(window, @x, @y)
+
+        if @show_hitboxes
+            @hitbox_shower.draw(window, @x, @y)
+        end
     end
 
     
