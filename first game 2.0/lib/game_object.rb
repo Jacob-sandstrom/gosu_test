@@ -16,7 +16,7 @@ class Game_object
         
         @action_handler = Action_handler.new(action_data)
         @hitbox_shower = Hitbox_shower.new(@action_handler)
-        @show_hitboxes = false
+        @show_hitboxes = true
         
     end
 
