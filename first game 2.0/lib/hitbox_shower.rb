@@ -21,7 +21,7 @@ class Hitbox_shower
                 x, y, width, height = hitbox["bounds"]
                 case hitbox["type"]
                 when "hittable"
-                    window.draw_rect(x + pos_x, y + pos_y, width, height, Gosu::Color.argb(0xa5_c0ffc0), 100) 
+                    # window.draw_rect(x + pos_x, y + pos_y, width, height, Gosu::Color.argb(0xa5_c0ffc0), 100) 
                 when "attack"
                     window.draw_rect(x + pos_x, y + pos_y, width, height, Gosu::Color.argb(0xa5_ffa0a0), 100) 
 
