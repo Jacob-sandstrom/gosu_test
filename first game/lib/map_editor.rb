@@ -28,6 +28,10 @@ class Map_editor
         @tree = Gosu::Image.new("../img/dead_tree.png", tileable: true)
         @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
 
+        @bush = Gosu::Image.new("../img/Bush-1.png", tileable: true)
+        @tree_W_leaves = Gosu::Image.new("../img/Tree-2.png", tileable: true)
+        @rock = Gosu::Image.new("../img/Rock-1.png", tileable: true)
+
 
         $block_size = 32
 
@@ -38,8 +42,8 @@ class Map_editor
         $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple]
         $tile_id = ["0", "1", "2", "3"]
 
-        $objects = [@tree, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle]
-        $object_id = ["0", "1", "2", "3", "4"]
+        $objects = [@tree, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle, @tree_W_leaves, @rock, @bush]
+        $object_id = ["0", "1", "2", "3", "4", "5", "6", "7"]
 
         $floortiles =  File.read('maps/arena_floor.txt')
         $object_map = File.read('maps/arena_objects.txt')
