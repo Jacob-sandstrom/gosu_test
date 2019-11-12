@@ -228,6 +228,8 @@ class Game < Gosu::Window
 
         @collision_detection.draw
 
+        draw_rect(0,0, 400, 50, Gosu::Color.argb(0xff_ff0000), 10)
+
         # @testbox.draw
     end
 
