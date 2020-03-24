@@ -28,9 +28,20 @@ class Map_editor
         @tree = Gosu::Image.new("../img/dead_tree.png", tileable: true)
         @light = Gosu::Image.new("../img/lighttest.png", tileable: true)
 
-        @bush = Gosu::Image.new("../img/Bush-1.png", tileable: true)
-        @tree_W_leaves = Gosu::Image.new("../img/Tree-2.png", tileable: true)
-        @rock = Gosu::Image.new("../img/Rock-1.png", tileable: true)
+        # @bush = Gosu::Image.new("../img/Bush-1.png", tileable: true)
+        @bush = Gosu::Image.new("../img/Bush 1(NEW).png", tileable: true)
+
+        # @tree_W_leaves = Gosu::Image.new("../img/Tree-2.png", tileable: true)
+        @tree_W_leaves = Gosu::Image.new("../img/Tree-3.png", tileable: true)
+
+        # @rock = Gosu::Image.new("../img/Rock-1.png", tileable: true)
+        @rock = Gosu::Image.new("../img/Rock-1(NEW).png", tileable: true)
+
+        @rock2 = Gosu::Image.new("../img/Rock-2(NEW).png", tileable: true)
+
+        @gob = Gosu::Image.new("../img/Club Goblin front(final).png", tileable: true)
+
+        @sit_log = Gosu::Image.new("../img/sitting log.png", tileable: true)
 
 
         $block_size = 32
@@ -42,8 +53,8 @@ class Map_editor
         $tiles = [@floor_gold, @floor_blue, @floor_green, @floor_purple]
         $tile_id = ["0", "1", "2", "3"]
 
-        $objects = [@tree, @top_left_triangle, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle, @tree_W_leaves, @rock, @bush]
-        $object_id = ["0", "1", "2", "3", "4", "5", "6", "7"]
+        $objects = [@tree, @sit_log, @top_right_triangle, @bottom_left_triangle, @bottom_right_triangle, @tree_W_leaves, @rock, @bush, @rock2, @gob]
+        $object_id = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
         $floortiles =  File.read('maps/arena_floor.txt')
         $object_map = File.read('maps/arena_objects.txt')
@@ -255,6 +266,12 @@ class Map_editor
         elsif (Gosu.button_down? Gosu::KB_7)
             $current_tile_id = "7"
             $current_object_id = "7"
+        elsif (Gosu.button_down? Gosu::KB_8)
+            $current_tile_id = "8"
+            $current_object_id = "8"
+        elsif (Gosu.button_down? Gosu::KB_9)
+            $current_tile_id = "9"
+            $current_object_id = "9"
         end
 
     end
